@@ -1,0 +1,17 @@
+let body = $response.body;
+body=JSON.parse(body);
+body['launch']['ads'] = [];
+body['launch']['mobile_experiment']['ad_backPlugin'] = "0";
+body['launch']['mobile_experiment']['ad_bannerShow'] = "0";
+body['launch']['mobile_experiment']['ad_bannerView'] = "0";
+body['launch']['mobile_experiment']['ad_ht'] = "0";
+body['launch']['mobile_experiment']['ad_markPlugin'] = "0";
+body['launch']['mobile_experiment']['ad_new_rt'] = "0";
+body['launch']['mobile_experiment']['ad_pausePlugin'] = "0";
+body['launch']['mobile_experiment']['ad_pre_web'] = "0";
+body['launch']['mobile_experiment']['ad_resume_ab'] = "0";
+body['launch']['mobile_experiment']['new_ad_logo'] = "0";
+
+
+body=JSON.stringify(body);
+$done({body});
