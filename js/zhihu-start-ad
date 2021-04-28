@@ -1,18 +1,17 @@
-let body = $response.body;
-body=JSON.parse(body);
-body['launch']['ads'] = [];
-body['launch']['mobile_experiment']['ad_backPlugin'] = "0";
-body['launch']['mobile_experiment']['ad_bannerShow'] = "0";
-body['launch']['mobile_experiment']['ad_bannerView'] = "0";
-body['launch']['mobile_experiment']['ad_ht'] = "0";
-body['launch']['mobile_experiment']['ad_markPlugin'] = "0";
-body['launch']['mobile_experiment']['ad_new_rt'] = "0";
-body['launch']['mobile_experiment']['ad_pausePlugin'] = "0";
-body['launch']['mobile_experiment']['ad_pre_web'] = "0";
-body['launch']['mobile_experiment']['ad_resume_ab'] = "0";
-body['launch']['mobile_experiment']['new_ad_logo'] = "0";
+let body = JSON.parse($response.body);
+let launch = JSON.parse(body['launch']);
 
+launch['ads'] = [];
+launch['mobile_experiment']['ad_backPlugin'] = "0";
+launch['mobile_experiment']['ad_bannerShow'] = "0";
+launch['mobile_experiment']['ad_bannerView'] = "0";
+launch['mobile_experiment']['ad_ht'] = "0";
+launch['mobile_experiment']['ad_markPlugin'] = "0";
+launch['mobile_experiment']['ad_new_rt'] = "0";
+launch['mobile_experiment']['ad_pausePlugin'] = "0";
+launch['mobile_experiment']['ad_pre_web'] = "0";
+launch['mobile_experiment']['ad_resume_ab'] = "0";
+launch['mobile_experiment']['new_ad_logo'] = "0";
 
-body=JSON.stringify(body);
-console.log(body);
+body = JSON.stringify({launch:JSON.stringify(launch)});
 $done({body});
