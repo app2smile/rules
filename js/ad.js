@@ -1,6 +1,19 @@
+/*
+
+贴吧正则 
+^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|mobads\.baidu\.com\/cpro\/ui\/mads\.php)
+知乎正则
+^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
+起点正则
+^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
+
+
+*/
+
 let url = $request.url;
 let body;
 
+console.log("url:"+url);
 if(url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
 	console.log('贴吧-进入mobads');
 	body = $response.body;
