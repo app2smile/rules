@@ -1,4 +1,6 @@
 /*
+多合一正则:
+^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|mobads\.baidu\.com\/cpro\/ui\/mads\.php|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen)
 
 贴吧正则 
 ^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|mobads\.baidu\.com\/cpro\/ui\/mads\.php)
@@ -6,8 +8,6 @@
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 起点正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
-
-
 */
 
 let url = $request.url;
