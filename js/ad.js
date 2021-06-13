@@ -45,7 +45,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     });
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1) {
     //console.log('进入qidian');
-    body = $response.body;
+    body = JSON.parse($response.body);
     body['Data']['List'] = null;
     body = JSON.stringify(body);
 } else {
