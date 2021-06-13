@@ -45,8 +45,7 @@ if(url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
 } else if(url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1) {
 	console.log('进入qidian');
 	body = $response.body;
-	console.log("原始body:"+body);
-	body['Data']['List'] = null;
+	console.log("data:"+body['Data']);
 	body = JSON.stringify(body);
 } else {
   console.log("去广告脚本:error");
