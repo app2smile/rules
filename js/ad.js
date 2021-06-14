@@ -16,26 +16,23 @@ let notifiTitle = "去广告脚本错误";
 //console.log("url:" + url);
 if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     //console.log('贴吧-进入mobads');
-    body = $response.body;
-    console.log("body类型:");
-    console.log(typeof body);
-    if (body['ad'] == undefined) {
+    body = JSON.parse($response.body);
+    //console.log("$response.body的类型为string");
+    if (body.ad == undefined) {
         console.log("贴吧mobads-body:" + body);
         $notification.post(notifiTitle, "贴吧-mobads", "ad字段为undefined");
     } else {
-        body['ad'] = [];
+        body.ad = [];
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     //console.log('贴吧-进入qq');
-    body = $response.body;
-    console.log("body类型:");
-    console.log(typeof body);
-    if (body['data'] == undefined) {
+    body = JSON.parse($response.body);
+    if (bod.data == undefined) {
         console.log("贴吧qq-body:" + body);
         $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
     } else {
-        body['data'] = null;
+        body.data = null;
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
@@ -86,7 +83,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     console.log("去广告脚本:error");
 }
 
-//console.log(body);
+console.log("修改后body:" + body);
 $done({
     body
 });
