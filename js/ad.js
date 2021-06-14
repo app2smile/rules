@@ -28,7 +28,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
 } else if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     //console.log('贴吧-进入qq');
     body = JSON.parse($response.body);
-    if (bod.data == undefined) {
+    if (body.data == undefined) {
         console.log("贴吧qq-body:" + body);
         $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
     } else {
