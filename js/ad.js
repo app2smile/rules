@@ -1,8 +1,8 @@
 /*
 多合一正则:
-^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|mobads\.baidu\.com\/cpro\/ui\/mads\.php|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen)
+^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen)
 贴吧正则 
-^https\:\/\/(mi\.gdt\.qq\.com\/gdt_mview\.fcg|mobads\.baidu\.com\/cpro\/ui\/mads\.php)
+^https\:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg
 知乎正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 起点正则
@@ -64,10 +64,10 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     }
     body = JSON.stringify(body);
 } else {
-    console.log("去广告脚本匹配路径:error");
+    $notification.post(notifiTitle, "路径匹配错误", url);
 }
 
-console.log("修改后body:" + body);
+//console.log("修改后body:" + body);
 $done({
     body
 });
