@@ -11,34 +11,54 @@
 
 let url = $request.url;
 let body;
+let notifiTitle = "去广告脚本错误";
 
 //console.log("url:" + url);
 if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     //console.log('贴吧-进入mobads');
     body = $response.body;
-    body['ad'] = [];
+    if (body['ad'] == undefined) {
+        console.log("body:" + body);
+        $notification.post(notifiTitle, "贴吧-mobads", "ad字段为undefined");
+    } else {
+        body['ad'] = [];
+    }
     body = JSON.stringify(body);
 } else if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     //console.log('贴吧-进入qq');
     body = $response.body;
-    body['data'] = null;
+    if (body['data'] == undefined) {
+        console.log("body:" + body);
+        $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
+    } else {
+        body['data'] = null;
+    }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
     //console.log('进入zhihu');
     body = JSON.parse($response.body);
-    let launch = JSON.parse(body['launch']);
-
-    launch['ads'] = [];
-    //launch['mobile_experiment']['ad_backPlugin'] = "0";
-    //launch['mobile_experiment']['ad_bannerShow'] = "0";
-    //launch['mobile_experiment']['ad_bannerView'] = "0";
-    //launch['mobile_experiment']['ad_ht'] = "0";
-    //launch['mobile_experiment']['ad_markPlugin'] = "0";
-    //launch['mobile_experiment']['ad_new_rt'] = "0";
-    //launch['mobile_experiment']['ad_pausePlugin'] = "0";
-    //launch['mobile_experiment']['ad_pre_web'] = "0";
-    //launch['mobile_experiment']['ad_resume_ab'] = "0";
-    //launch['mobile_experiment']['new_ad_logo'] = "0";
+    let launch;
+    if (body['launch'] == undefined) {
+        console.log("body:" + body);
+        $notification.post(notifiTitle, "知乎", "launch字段为undefined");
+    } else {
+        launch = JSON.parse(body['launch']);
+    }
+    if (launch['ads'] == undefined) {
+        $notification.post(notifiTitle, "知乎", "launch-ads字段为undefined");
+    } else {
+        launch['ads'] = [];
+        //launch['mobile_experiment']['ad_backPlugin'] = "0";
+        //launch['mobile_experiment']['ad_bannerShow'] = "0";
+        //launch['mobile_experiment']['ad_bannerView'] = "0";
+        //launch['mobile_experiment']['ad_ht'] = "0";
+        //launch['mobile_experiment']['ad_markPlugin'] = "0";
+        //launch['mobile_experiment']['ad_new_rt'] = "0";
+        //launch['mobile_experiment']['ad_pausePlugin'] = "0";
+        //launch['mobile_experiment']['ad_pre_web'] = "0";
+        //launch['mobile_experiment']['ad_resume_ab'] = "0";
+        //launch['mobile_experiment']['new_ad_logo'] = "0";
+    }
 
     body = JSON.stringify({
         launch: JSON.stringify(launch)
@@ -46,7 +66,13 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1) {
     //console.log('进入qidian');
     body = JSON.parse($response.body);
-    body['Data']['List'] = null;
+    if (body['Data'] == undefined || body['Data']['List'] == undefined) {
+        console.log("body:" + body);
+        $notification.post(notifiTitle, "起点", "Data/List字段为undefined");
+    } else {
+        body['Data']['List'] = null;
+    }
+
     body = JSON.stringify(body);
 } else {
     console.log("去广告脚本:error");
