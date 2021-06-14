@@ -18,7 +18,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     //console.log('贴吧-进入mobads');
     body = $response.body;
     if (body['ad'] == undefined) {
-        console.log("body:" + body);
+        console.log("贴吧mobads-body:" + body);
         $notification.post(notifiTitle, "贴吧-mobads", "ad字段为undefined");
     } else {
         body['ad'] = [];
@@ -28,7 +28,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     //console.log('贴吧-进入qq');
     body = $response.body;
     if (body['data'] == undefined) {
-        console.log("body:" + body);
+        console.log("贴吧qq-body:" + body);
         $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
     } else {
         body['data'] = null;
@@ -39,7 +39,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     body = JSON.parse($response.body);
     let launch;
     if (body['launch'] == undefined) {
-        console.log("body:" + body);
+        console.log("知乎body:" + body);
         $notification.post(notifiTitle, "知乎", "launch字段为undefined");
     } else {
         launch = JSON.parse(body['launch']);
@@ -67,7 +67,7 @@ if (url.indexOf("mobads.baidu.com/cpro/ui/mads.php") != -1) {
     //console.log('进入qidian');
     body = JSON.parse($response.body);
     if (body['Data'] == undefined || body['Data']['List'] == undefined) {
-        console.log("body:" + body);
+        console.log("起点body:" + body);
         $notification.post(notifiTitle, "起点", "Data/List字段为undefined");
     } else {
         body['Data']['List'] = null;
