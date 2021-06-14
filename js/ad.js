@@ -1,6 +1,6 @@
 /*
 多合一正则:
-^https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|mi\.gdt\.qq\.com\/gdt_mview\.fcg|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen)
+^https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|mi\.gdt\.qq\.com\/gdt_mview\.fcg|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|news\.ssp\.qq\.com\/app)
 贴吧正则 
 ^https\:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg
 知乎正则
@@ -9,6 +9,8 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
+腾讯新闻正则
+^https\:\/\/news\.ssp\.qq\.com\/app
 */
 
 let url = $request.url;
@@ -66,13 +68,23 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/get_ads") != -1) {
-    //console.log('进入qidian');
+    //console.log('进入穿山甲');
     body = JSON.parse($response.body);
     if (body.message == undefined) {
         console.log("穿山甲body:" + body);
         $notification.post(notifiTitle, "穿山甲", "message字段为undefined");
     } else {
         body.message = null;
+    }
+    body = JSON.stringify(body);
+} else if (url.indexOf("news.ssp.qq.com/app") != -1) {
+    //console.log('进入腾讯新闻');
+    body = JSON.parse($response.body);
+    if (body.adList == undefined) {
+        console.log("腾讯新闻body:" + body);
+        $notification.post(notifiTitle, "腾讯新闻", "adList字段为undefined");
+    } else {
+        body.adList = null;
     }
     body = JSON.stringify(body);
 } else {
