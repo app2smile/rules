@@ -7,6 +7,7 @@
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 起点正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
+
 */
 
 let url = $request.url;
