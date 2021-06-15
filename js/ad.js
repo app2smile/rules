@@ -35,16 +35,19 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
         $notification.post(notifiTitle, "贴吧-afd", "res-ad字段为undefined");
     } else {
         let adArr = body.res.ad;
+        console.log("adArr:"+JSON.stringify(body.res.ad));
         for (var i = 0; i < adArr.length; i++) {
             if (adArr[i].adInfo == undefined) {
                 console.log("贴吧afd-body:" + body);
                 $notification.post(notifiTitle, "贴吧-afd", "adInfo字段为undefined");
             } else {
+                console.log("进入adArr循环");
                 for (var j = 0; j < adArr[i].adInfo.length; j++) {
                     if ((adArr[i].adInfo)[j].material == undefined) {
                         console.log("贴吧afd-body:" + body);
                         $notification.post(notifiTitle, "贴吧-afd", "material字段为undefined");
                     } else {
+                        console.log("adArr[i].adInfo循环");
                         for (var k = 0; k < (adArr[i].adInfo)[j].material.length; k++) {
                             if (((adArr[i].adInfo)[j].material)[k].info == undefined) {
                                 console.log("贴吧afd-body:" + body);
@@ -56,6 +59,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                     info.policy.expire_time.start = 1514736000;
                                     info.policy.expire_time.end = 1514736000;
                                     ((adArr[i].adInfo)[j].material)[k].info = JSON.stringify(info);
+
                                 }
                             }
                         }
