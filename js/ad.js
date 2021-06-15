@@ -21,12 +21,11 @@ let notifiTitle = "去广告脚本错误";
 if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     //console.log('贴吧-进入qq');
     body = JSON.parse($response.body);
-    if (body.data == undefined || body.last_ads == undefined) {
+    if (body.data == undefined) {
         console.log("贴吧qq-body:" + body);
-        $notification.post(notifiTitle, "贴吧-qq", "data/last_ads字段为undefined");
+        $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
     } else {
         body.data = null;
-        body.last_ads = null;
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
