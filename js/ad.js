@@ -59,6 +59,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                         v.policy.expire_time.end = 1514736000;
                                     } else if (v.adType != undefined) {
                                         info = [];
+                                        ((adArr[i].adInfo)[j].material)[k].advisible = 1;
                                     } else {
                                         console.log("贴吧afd-body:" + body);
                                         $notification.post(notifiTitle, "贴吧-afd", "出现未定义的字段");
