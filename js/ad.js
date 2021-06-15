@@ -11,11 +11,6 @@
 穿山甲正则
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
 
-
-
-
-
-
 */
 
 let url = $request.url;
