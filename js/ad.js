@@ -51,14 +51,15 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                 $notification.post(notifiTitle, "贴吧-afd", "info字段为undefined");
                             } else {
                                 let info = JSON.parse(((adArr[i].adInfo)[j].material)[k].info);
-                                console.log("info:"+JSON.stringify(info));
-                                if (info.policy != undefined && info.policy.expire_time != undefined) {
-                                    console.log("更改广告过期时间");
-                                    info.policy.expire_time.start = 1514736000;
-                                    info.policy.expire_time.end = 1514736000;
-                                    ((adArr[i].adInfo)[j].material)[k].info = JSON.stringify(info);
-
+                                for (var m = 0; m < info.length; m++) {
+                                    let v = info[m];
+                                    if (v.policy != undefined && v.policy.expire_time != undefined) {
+                                        console.log("更改广告过期时间");
+                                        v.policy.expire_time.start = 1514736000;
+                                        v.policy.expire_time.end = 1514736000;
+                                    }
                                 }
+                                ((adArr[i].adInfo)[j].material)[k].info = JSON.stringify(info);
                             }
                         }
 
