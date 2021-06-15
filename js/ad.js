@@ -1,8 +1,9 @@
 /*
 多合一正则:
-^https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|mi\.gdt\.qq\.com\/gdt_mview\.fcg|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|news\.ssp\.qq\.com\/app)
+^https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|mi\.gdt\.qq\.com\/gdt_mview\.fcg|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|news\.ssp\.qq\.com\/app)
 贴吧正则 
 ^https\:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg
+^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 起点正则
@@ -16,6 +17,7 @@
 let url = $request.url;
 let body;
 let notifiTitle = "去广告脚本错误";
+console.log("请求method:" + $request.method);
 
 //console.log("url:" + url);
 if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
@@ -26,6 +28,16 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
         $notification.post(notifiTitle, "贴吧-qq", "data字段为undefined");
     } else {
         body.data = null;
+    }
+    body = JSON.stringify(body);
+} else if (url.indexOf("afd.baidu.com/afd/entry") != -1) {
+    console.log('贴吧-进入afd');
+    body = JSON.parse($response.body);
+    if (body.res == undefined || body.res.ad == undefined) {
+        console.log("贴吧afd-body:" + body);
+        $notification.post(notifiTitle, "贴吧-afd", "res-ad字段为undefined");
+    } else {
+        body.res.ad = null;
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
