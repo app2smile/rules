@@ -69,7 +69,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
         body.message = null;
     }
     body = JSON.stringify(body);
-} else if (url.indexOf("app02.vgtime.com:8080/vgtime-app/api/v3/launch/cloud_parameters") != -1) {
+} else if (url.indexOf("app02.vgtime.com:8080/vgtime-app/api/v2/init/ad.json") != -1) {
     //console.log('进入vgtime');
     body = JSON.parse($response.body);
     if (body.data == undefined || body.data.ad == undefined) {
