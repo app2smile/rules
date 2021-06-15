@@ -27,7 +27,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
     //console.log('贴吧-进入afd');
     body = JSON.parse($response.body);
     if (body.res == undefined || body.res.splash == undefined) {
-        console.log("贴吧afd-body:" + body);
+        console.log("贴吧afd-body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-afd", "res-splash字段为undefined");
     } else {
         //body.res.ad = [];
@@ -39,7 +39,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
     body = JSON.parse($response.body);
     let launch;
     if (body.launch == undefined) {
-        console.log("知乎body:" + body);
+        console.log("知乎body:" + $response.body);
         $notification.post(notifiTitle, "知乎", "launch字段为undefined");
     } else {
         launch = JSON.parse(body.launch);
@@ -55,7 +55,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
     //console.log('进入起点');
     body = JSON.parse($response.body);
     if (body.Data == undefined || body.Data.List == undefined) {
-        console.log("起点body:" + body);
+        console.log("起点body:" + $response.body);
         $notification.post(notifiTitle, "起点", "Data/List字段为undefined");
     } else {
         body.Data.List = null;
@@ -65,7 +65,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
     //console.log('进入穿山甲');
     body = JSON.parse($response.body);
     if (body.message == undefined) {
-        console.log("穿山甲body:" + body);
+        console.log("穿山甲body:" + $response.body);
         $notification.post(notifiTitle, "穿山甲", "message字段为undefined");
     } else {
         body.message = null;
@@ -75,7 +75,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
     //console.log('进入vgtime');
     body = JSON.parse($response.body);
     if (body.data == undefined || body.data.ad == undefined) {
-        console.log("vgtime-body:" + body);
+        console.log("vgtime-body:" + $response.body);
         $notification.post(notifiTitle, "vgtime", "data/ad字段为undefined");
     } else {
         body.data.ad = null;
