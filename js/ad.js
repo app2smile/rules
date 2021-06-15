@@ -10,7 +10,6 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
-
 */
 
 let url = $request.url;
@@ -60,6 +59,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                         v.policy.expire_time.end = 1514736000;
                                     } else if (v.adType != undefined) {
                                         info = [];
+                                        
                                         (adArr[i].adInfo)[j].advisible = 1;
                                     } else {
                                         console.log("贴吧afd-body:" + body);
