@@ -1,6 +1,10 @@
 /*
+
+注意:
+1.vgtime开屏广告需要全新app没有缓存才可以,否则及时接口返回null,app也会加载之前的缓存
+
 多合一正则:
-^https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen)
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
 贴吧正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎正则
@@ -9,6 +13,8 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
+vgtime正则
+^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
 */
 
 let url = $request.url;
@@ -61,6 +67,16 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
         $notification.post(notifiTitle, "穿山甲", "message字段为undefined");
     } else {
         body.message = null;
+    }
+    body = JSON.stringify(body);
+} else if (url.indexOf("app02.vgtime.com:8080/vgtime-app/api/v3/launch/cloud_parameters") != -1) {
+    //console.log('进入vgtime');
+    body = JSON.parse($response.body);
+    if (body.data == undefined || body.data.ad == undefined) {
+        console.log("vgtime-body:" + body);
+        $notification.post(notifiTitle, "vgtime", "data/ad字段为undefined");
+    } else {
+        body.data.ad = null;
     }
     body = JSON.stringify(body);
 } else {
