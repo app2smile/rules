@@ -36,44 +36,6 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
         $notification.post(notifiTitle, "贴吧-afd", "res-ad字段为undefined");
     } else {
         body.res.splash = null;
-        // let adArr = body.res.ad;
-        // for (var i = 0; i < adArr.length; i++) {
-        //     if (adArr[i].adInfo == undefined) {
-        //         console.log("贴吧afd-body:" + body);
-        //         $notification.post(notifiTitle, "贴吧-afd", "adInfo字段为undefined");
-        //     } else {
-        //         for (var j = 0; j < adArr[i].adInfo.length; j++) {
-        //             if ((adArr[i].adInfo)[j].material == undefined) {
-        //                 console.log("贴吧afd-body:" + body);
-        //                 $notification.post(notifiTitle, "贴吧-afd", "material字段为undefined");
-        //             } else {
-        //                 for (var k = 0; k < (adArr[i].adInfo)[j].material.length; k++) {
-        //                     if (((adArr[i].adInfo)[j].material)[k].info == undefined) {
-        //                         console.log("贴吧afd-body:" + body);
-        //                         $notification.post(notifiTitle, "贴吧-afd", "info字段为undefined");
-        //                     } else {
-        //                         let info = JSON.parse(((adArr[i].adInfo)[j].material)[k].info);
-        //                         for (var m = 0; m < info.length; m++) {
-        //                             let v = info[m];
-        //                             if (v.policy != undefined && v.policy.expire_time != undefined) {
-        //                                 v.policy.expire_time.start = 1514736000;
-        //                                 v.policy.expire_time.end = 1514736000;
-        //                             } else if (v.adType != undefined) {
-        //                                 info = [];
-        //                                 (adArr[i].adInfo)[j].advisible = 1;
-        //                             } else {
-        //                                 console.log("贴吧afd-body:" + body);
-        //                                 $notification.post(notifiTitle, "贴吧-afd", "出现未定义的字段");
-        //                             }
-        //                         }
-        //                         ((adArr[i].adInfo)[j].material)[k].info = JSON.stringify(info);
-        //                     }
-        //                 }
-
-        //             }
-        //         }
-        //     }
-        // }
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
