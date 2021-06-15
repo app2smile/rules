@@ -35,7 +35,6 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
         console.log("贴吧afd-body:" + body);
         $notification.post(notifiTitle, "贴吧-afd", "res-ad字段为undefined");
     } else {
-        body.res.ad = [];
         body.res.splash = null;
         // let adArr = body.res.ad;
         // for (var i = 0; i < adArr.length; i++) {
