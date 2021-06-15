@@ -54,9 +54,13 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                 for (var m = 0; m < info.length; m++) {
                                     let v = info[m];
                                     if (v.policy != undefined && v.policy.expire_time != undefined) {
-                                        console.log("更改广告过期时间");
                                         v.policy.expire_time.start = 1514736000;
                                         v.policy.expire_time.end = 1514736000;
+                                    } else if (v.adType != undefined) {
+                                        v = {};
+                                    } else {
+                                        console.log("贴吧afd-body:" + body);
+                                        $notification.post(notifiTitle, "贴吧-afd", "出现未定义的字段");
                                     }
                                 }
                                 ((adArr[i].adInfo)[j].material)[k].info = JSON.stringify(info);
@@ -70,7 +74,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
-    //console.log('进入zhihu');
+    console.log('进入zhihu,body:' + $response.body);
     body = JSON.parse($response.body);
     let launch;
     if (body.launch == undefined) {
