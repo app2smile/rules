@@ -17,6 +17,7 @@ let body;
 let notifiTitle = "去广告脚本错误";
 
 //console.log("url:" + url);
+// ---------- 百度贴吧---------
 if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     //console.log('贴吧-进入qq');
     body = JSON.parse($response.body);
@@ -74,6 +75,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
+    // ---------- 知乎---------
     body = JSON.parse($response.body);
     let launch;
     if (body.launch == undefined) {
@@ -90,6 +92,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     body.launch = JSON.stringify(launch);
     body = JSON.stringify(body);
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1) {
+    // ---------- 起点---------
     //console.log('进入qidian');
     body = JSON.parse($response.body);
     if (body.Data == undefined || body.Data.List == undefined) {
@@ -100,6 +103,7 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
     }
     body = JSON.stringify(body);
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/get_ads") != -1) {
+    // ---------- 穿山甲---------
     //console.log('进入穿山甲');
     body = JSON.parse($response.body);
     if (body.message == undefined) {
