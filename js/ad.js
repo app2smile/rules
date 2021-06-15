@@ -17,7 +17,6 @@
 let url = $request.url;
 let body;
 let notifiTitle = "去广告脚本错误";
-console.log("请求method:" + $request.method);
 
 //console.log("url:" + url);
 if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
@@ -30,8 +29,8 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
         body.data = null;
     }
     body = JSON.stringify(body);
-} else if (url.indexOf("afd.baidu.com/afd/entry") != -1) {
-    console.log('贴吧-进入afd');
+} else if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
+    //console.log('贴吧-进入afd');
     body = JSON.parse($response.body);
     if (body.res == undefined || body.res.ad == undefined) {
         console.log("贴吧afd-body:" + body);
