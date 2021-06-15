@@ -1,7 +1,9 @@
 /*
 
+去广告surge脚本
+
 注意:
-1.vgtime开屏广告需要全新app没有缓存才可以,否则及时接口返回null,app也会加载之前的缓存
+1.vgtime开屏广告需要全新app没有缓存才可以,否则即使接口返回null,app也会加载之前的缓存
 
 多合一正则:
 ^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
