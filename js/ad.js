@@ -59,7 +59,6 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
                                         v.policy.expire_time.end = 1514736000;
                                     } else if (v.adType != undefined) {
                                         info = [];
-                                        
                                         (adArr[i].adInfo)[j].advisible = 1;
                                     } else {
                                         console.log("贴吧afd-body:" + body);
@@ -118,8 +117,6 @@ if (url.indexOf("mi.gdt.qq.com/gdt_mview.fcg") != -1) {
 } else {
     $notification.post(notifiTitle, "路径匹配错误", url);
 }
-
-//console.log("修改后body:" + body);
 $done({
     body
 });
