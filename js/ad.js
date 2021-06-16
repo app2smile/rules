@@ -6,11 +6,13 @@
 1.vgtime开屏广告需要全新app没有缓存才可以,否则即使接口返回null,app也会加载之前的缓存
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/commercial_api\/real_time_launch_v2|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
 贴吧正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
-知乎正则
+知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
+知乎推荐列表正则
+^https\:\/\/api\.zhihu\.com\/topstory\/recommend
 起点正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
@@ -33,10 +35,10 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
         body.res.splash = null;
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1) {
-    //console.log('进入知乎');
+    //console.log('进入知乎开屏页');
     let launch;
     if (body.launch == undefined) {
-        console.log("知乎body:" + $response.body);
+        console.log("知乎开屏页body:" + $response.body);
         $notification.post(notifiTitle, "知乎", "launch字段为undefined");
     } else {
         launch = JSON.parse(body.launch);
@@ -47,6 +49,16 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && $request.method == "GET") {
         launch.ads = [];
     }
     body.launch = JSON.stringify(launch);
+} else if (url.indexOf("api.zhihu.com/topstory/recommend") != -1) {
+    console.log('进入知乎推荐');
+    let dataArr = body.data;
+    if (dataArr == undefined) {
+        console.log("知乎推荐body:" + $response.body);
+        $notification.post(notifiTitle, "知乎推荐", "data字段为undefined");
+    } else {
+        body.data = dataArr.filter(item => item.type != 'feed_advert');
+    }
+    console.log("dataArr length:" + dataArr.length + ";body.data.length:" + body.data.length);
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1) {
     //console.log('进入起点');
     if (body.Data == undefined || body.Data.List == undefined) {
