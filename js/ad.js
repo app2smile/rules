@@ -63,7 +63,11 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "知乎推荐", "data字段为undefined");
     } else {
         body.data = dataArr.filter(item => item.type != 'feed_advert');
-        console.log('成功');
+        if (body.data.length == dataArr.length) {
+            console.log('列表数据无广告');
+        } else {
+            console.log('成功');
+        }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点开屏页去广告');
