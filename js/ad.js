@@ -37,6 +37,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     } else {
         //body.res.ad = [];
         body.res.splash = null;
+        console.log('成功');
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && method == getMethod) {
     console.log('知乎开屏页去广告');
@@ -51,6 +52,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "知乎", "launch-ads字段为undefined");
     } else {
         launch.ads = [];
+        console.log('成功');
     }
     body.launch = JSON.stringify(launch);
 } else if (url.indexOf("api.zhihu.com/topstory/recommend") != -1 && method == getMethod) {
@@ -61,6 +63,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "知乎推荐", "data字段为undefined");
     } else {
         body.data = dataArr.filter(item => item.type != 'feed_advert');
+        console.log('成功');
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点开屏页去广告');
@@ -69,6 +72,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "起点", "Data/List字段为undefined");
     } else {
         body.Data.List = null;
+        console.log('成功');
     }
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk/get_ads") != -1 && method == postMethod) {
     console.log('穿山甲get_ads去广告');
@@ -77,6 +81,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "穿山甲", "message字段为undefined");
     } else {
         body.message = null;
+        console.log('成功');
     }
 } else if (url.indexOf("app02.vgtime.com:8080/vgtime-app/api/v2/init/ad.json") != -1 && method == postMethod) {
     console.log('vgtime开屏页去广告');
@@ -85,6 +90,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "vgtime", "data/ad字段为undefined");
     } else {
         body.data.ad = null;
+        console.log('成功');
     }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
