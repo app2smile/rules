@@ -27,7 +27,7 @@ let notifiTitle = "去广告脚本错误";
 let method = $request.method;
 
 
-if (method != 'GET' || method != 'POST') {
+if (method != 'GET' && method != 'POST') {
     $notification.post(notifiTitle, "请求方法异常", method);
     $done({});
 } else {
