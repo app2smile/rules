@@ -6,7 +6,7 @@
 1.vgtime开屏广告需要全新app没有缓存才可以,否则即使接口返回null,app也会加载之前的缓存
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app)
 贴吧正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -19,6 +19,8 @@
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
 vgtime正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
+腾讯新闻正则
+^http\:\/\/news\.ssp\.qq\.com\/app
 */
 
 let url = $request.url;
@@ -94,6 +96,15 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "vgtime", "data/ad字段为undefined");
     } else {
         body.data.ad = null;
+        console.log('成功');
+    }
+} else if (url.indexOf("news.ssp.qq.com/app") != -1 && method == postMethod) {
+    console.log('腾讯新闻开屏页去广告');
+    if (body.adList === undefined) {
+        console.log("腾讯新闻开屏页-body:" + $response.body);
+        $notification.post(notifiTitle, "腾讯新闻", "adList字段为undefined");
+    } else {
+        body.adList = null;
         console.log('成功');
     }
 } else {
