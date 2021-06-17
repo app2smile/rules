@@ -2,25 +2,24 @@
 
 去广告surge脚本
 
-注意:
-1.vgtime开屏广告需要全新app没有缓存才可以,否则即使接口返回null,app也会加载之前的缓存
-
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app)
-贴吧正则 
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/getQQNewsUnreadList)
+贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
-起点正则
+起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
-vgtime正则
+vgtime开屏页正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
-腾讯新闻正则
+腾讯新闻开屏页正则
 ^http\:\/\/news\.ssp\.qq\.com\/app
+腾讯新闻要闻列表正则
+^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
 */
 
 let url = $request.url;
@@ -98,10 +97,10 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         body.data.ad = null;
         console.log('成功');
     }
-} else if (url.indexOf("news.ssp.qq.com/app") != -1 && method == postMethod) {
-    console.log('腾讯新闻开屏页去广告');
+} else if ((url.indexOf("news.ssp.qq.com/app") != -1 || url.indexOf("r.inews.qq.com/getQQNewsUnreadList") != -1) && method == postMethod) {
+    console.log('腾讯新闻开屏页/要闻列表');
     if (body.adList === undefined) {
-        console.log("腾讯新闻开屏页-body:" + $response.body);
+        console.log("腾讯新闻-body:" + $response.body);
         $notification.post(notifiTitle, "腾讯新闻", "adList字段为undefined");
     } else {
         body.adList = null;
