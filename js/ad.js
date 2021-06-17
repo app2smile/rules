@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/getQQNewsUnreadList)
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -20,6 +20,8 @@ vgtime开屏页正则
 ^http\:\/\/news\.ssp\.qq\.com\/app
 腾讯新闻新闻列表正则
 ^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
+腾讯新闻专题新闻列表正则
+^http\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
 */
 
 let url = $request.url;
@@ -31,7 +33,7 @@ let getMethod = "GET";
 let postMethod = "POST";
 
 if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
-    console.log('贴吧afd去广告');
+    console.log('贴吧afd');
     if (body.res == undefined || body.res.splash == undefined) {
         console.log("贴吧afd-body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-afd", "res-splash字段为undefined");
@@ -41,7 +43,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && method == getMethod) {
-    console.log('知乎开屏页去广告');
+    console.log('知乎开屏页');
     let launch;
     if (body.launch == undefined) {
         console.log("知乎开屏页body:" + $response.body);
@@ -57,7 +59,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     }
     body.launch = JSON.stringify(launch);
 } else if (url.indexOf("api.zhihu.com/topstory/recommend") != -1 && method == getMethod) {
-    console.log('知乎推荐列表去广告');
+    console.log('知乎推荐列表');
     let dataArr = body.data;
     if (dataArr == undefined) {
         console.log("知乎推荐body:" + $response.body);
@@ -71,7 +73,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
-    console.log('起点开屏页去广告');
+    console.log('起点开屏页');
     if (body.Data == undefined || body.Data.List == undefined) {
         console.log("起点body:" + $response.body);
         $notification.post(notifiTitle, "起点", "Data/List字段为undefined");
@@ -80,7 +82,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") != -1 && method == postMethod) {
-    console.log('穿山甲get_ads去广告');
+    console.log('穿山甲get_ads');
     if (body.message == undefined) {
         console.log("穿山甲body:" + $response.body);
         $notification.post(notifiTitle, "穿山甲", "message字段为undefined");
@@ -89,7 +91,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("app02.vgtime.com:8080/vgtime-app/api/v2/init/ad.json") != -1 && method == postMethod) {
-    console.log('vgtime开屏页去广告');
+    console.log('vgtime开屏页');
     if (body.data == undefined || body.data.ad === undefined) {
         console.log("vgtime-body:" + $response.body);
         $notification.post(notifiTitle, "vgtime", "data/ad字段为undefined");
@@ -98,7 +100,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("news.ssp.qq.com/app") != -1 && method == postMethod) {
-    console.log('腾讯新闻开屏页去广告');
+    console.log('腾讯新闻开屏页');
     if (body.adList === undefined) {
         console.log("腾讯新闻开屏页-body:" + $response.body);
         $notification.post(notifiTitle, "腾讯新闻开屏页", "adList字段为undefined");
@@ -107,10 +109,19 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("r.inews.qq.com/getQQNewsUnreadList") != -1 && method == postMethod) {
-    console.log('腾讯新闻列表去广告');
+    console.log('腾讯新闻列表(要闻/财经等)');
     if (body.adList === undefined) {
         console.log("腾讯新闻列表-body:" + $response.body);
         $notification.post(notifiTitle, "腾讯新闻列表", "adList字段为undefined");
+    } else {
+        body.adList = null;
+        console.log('成功');
+    }
+} else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") != -1 && method == postMethod) {
+    console.log('腾讯新闻专题列表');
+    if (body.adList === undefined) {
+        console.log("腾讯新闻专题列表-body:" + $response.body);
+        $notification.post(notifiTitle, "腾讯新闻专题列表", "adList字段为undefined");
     } else {
         body.adList = null;
         console.log('成功');
@@ -124,4 +135,3 @@ body = JSON.stringify(body);
 $done({
     body
 });
-
