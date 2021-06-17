@@ -1,6 +1,18 @@
 #!name=app去广告
-#!desc=知乎(首次启动推荐列表广告)/起点/贴吧/vgtime的启动页,穿山甲(如vgtime使用了).使用前请先打开surge的脚本开关,mitm开关(自行确认自己的mitm证书配置已生效). 已知问题:若知乎冷启动开屏广告可以去除,若在运行中只能抓到部分包,可能还会出现开屏广告的情况
+#!desc=请先用浏览器打开本模块的url链接查看支持的app/注意事项/更新日志
 
+
+# 1.使用前请自行确认surge的脚本开关 / mitm开关已打开,并且mitm证书配置已生效. 安装模块后确保本模块是加载状态
+
+# 2.个别app需要先删除,并重新在appStore下载新应用才可以去除广告,是因为app之前已经缓存有广告
+
+# 3.目前支持:腾讯新闻开屏广告(须全新应用),vgtime开屏页广告(须全新应用),贴吧开屏页广告,起点开屏页广告,知乎冷启动推荐列表广告,知乎冷启动开屏页广告(不含热启动开屏广告)
+
+# 4.本模块所涉及的app版本,均为appStore内下载的最新版本
+
+
+# 更新日志:
+# 2021-06-17 新增腾讯新闻开屏广告去除
 
 [MITM]
 hostname = %APPEND% magev6.if.qidian.com, api.zhihu.com, api-access.pangolin-sdk-toutiao.com, afd.baidu.com, news.ssp.qq.com
