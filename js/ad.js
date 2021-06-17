@@ -18,7 +18,7 @@ vgtime开屏页正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
 腾讯新闻开屏页正则
 ^http\:\/\/news\.ssp\.qq\.com\/app
-腾讯新闻要闻列表正则
+腾讯新闻新闻列表正则
 ^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
 */
 
@@ -97,11 +97,20 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         body.data.ad = null;
         console.log('成功');
     }
-} else if ((url.indexOf("news.ssp.qq.com/app") != -1 || url.indexOf("r.inews.qq.com/getQQNewsUnreadList") != -1) && method == postMethod) {
-    console.log('腾讯新闻开屏页/要闻列表');
+} else if (url.indexOf("news.ssp.qq.com/app") != -1 && method == postMethod) {
+    console.log('腾讯新闻开屏页去广告');
     if (body.adList === undefined) {
-        console.log("腾讯新闻-body:" + $response.body);
-        $notification.post(notifiTitle, "腾讯新闻", "adList字段为undefined");
+        console.log("腾讯新闻开屏页-body:" + $response.body);
+        $notification.post(notifiTitle, "腾讯新闻开屏页", "adList字段为undefined");
+    } else {
+        body.adList = null;
+        console.log('成功');
+    }
+} else if (url.indexOf("r.inews.qq.com/getQQNewsUnreadList") != -1 && method == postMethod) {
+    console.log('腾讯新闻列表去广告');
+    if (body.adList === undefined) {
+        console.log("腾讯新闻列表-body:" + $response.body);
+        $notification.post(notifiTitle, "腾讯新闻列表", "adList字段为undefined");
     } else {
         body.adList = null;
         console.log('成功');
