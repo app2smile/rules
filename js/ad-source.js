@@ -3,13 +3,15 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2))|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
+知乎launch_v2
+^https\:\/\/api\.zhihu\.com\/commercial_api\/launch_v2
 起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
@@ -45,21 +47,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && method == getMethod) {
-    console.log('知乎-开屏页');
-    let launch;
-    if (body.launch == undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "知乎", "launch字段为undefined");
-    } else {
-        launch = JSON.parse(body.launch);
-    }
-    if (launch.ads == undefined) {
-        $notification.post(notifiTitle, "知乎", "launch-ads字段为undefined");
-    } else {
-        launch.ads = [];
-        console.log('成功');
-    }
-    body.launch = JSON.stringify(launch);
+    zhihuAds(body, '知乎-冷启动开屏页');
 } else if (url.indexOf("api.zhihu.com/topstory/recommend") != -1 && method == getMethod) {
     console.log('知乎-推荐列表');
     let dataArr = body.data;
@@ -74,6 +62,8 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
             console.log('成功');
         }
     }
+} else if (url.indexOf("api.zhihu.com/commercial_api/launch_v2") != -1 && method == getMethod) {
+    zhihuAds(body, '知乎-launch_v2');
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点-开屏页');
     if (body.Data == undefined || body.Data.List == undefined) {
@@ -143,4 +133,27 @@ function qqNewsAdList(body, name) {
         body.adList = null;
         console.log('成功');
     }
+}
+
+/**
+ * 处理知乎ads广告
+ * @param {*} body body
+ * @param {*} name 日志名称
+ */
+function zhihuAds(body, name) {
+    console.log(name);
+    let launch;
+    if (body.launch == undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, name, "launch字段为undefined");
+    } else {
+        launch = JSON.parse(body.launch);
+    }
+    if (launch.ads == undefined) {
+        $notification.post(notifiTitle, name, "launch-ads字段为undefined");
+    } else {
+        launch.ads = [];
+        console.log('成功');
+    }
+    body.launch = JSON.stringify(launch);
 }
