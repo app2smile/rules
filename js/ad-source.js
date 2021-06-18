@@ -6,11 +6,11 @@
 ^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2))|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
-知乎开屏页正则
+知乎冷启动开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
-知乎launch_v2
+知乎launch_v2(热启动开屏页广告,非实时请求)
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/launch_v2
 起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
