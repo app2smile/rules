@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -22,6 +22,8 @@ vgtime开屏页正则
 ^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
 腾讯新闻专题新闻列表正则
 ^http\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
+腾讯新闻话题新闻列表正则
+^http\:\/\/r\.inews\.qq\.com\/getTopicSelectList
 */
 
 let url = $request.url;
@@ -100,23 +102,9 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("news.ssp.qq.com/app") != -1 && method == postMethod) {
-    console.log('腾讯新闻开屏页');
-    if (body.adList === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "腾讯新闻开屏页", "adList字段为undefined");
-    } else {
-        body.adList = null;
-        console.log('成功');
-    }
+    qqNewsAdList(body, '腾讯新闻开屏页');
 } else if (url.indexOf("r.inews.qq.com/getQQNewsUnreadList") != -1 && method == postMethod) {
-    console.log('腾讯新闻列表(要闻/财经等)');
-    if (body.adList === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "腾讯新闻列表", "adList字段为undefined");
-    } else {
-        body.adList = null;
-        console.log('成功');
-    }
+    qqNewsAdList(body, '腾讯新闻列表(要闻/财经等)');
 } else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") != -1 && method == postMethod) {
     console.log('腾讯新闻专题列表');
     if (body.adList === undefined) {
@@ -128,6 +116,8 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         body.adList = null;
         console.log('成功');
     }
+} else if (url.indexOf("r.inews.qq.com/getTopicSelectList") != -1 && method == postMethod) {
+    qqNewsAdList(body, '腾讯新闻话题列表');
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
@@ -137,3 +127,20 @@ body = JSON.stringify(body);
 $done({
     body
 });
+
+
+/**
+ * 处理腾讯新闻广告
+ * @param {*} body body
+ * @param {*} name 日志名称
+ */
+function qqNewsAdList(body, name) {
+    console.log(name);
+    if (body.adList === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, name, "adList字段为undefined");
+    } else {
+        body.adList = null;
+        console.log('成功');
+    }
+}
