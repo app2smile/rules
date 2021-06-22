@@ -83,7 +83,16 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "知乎-查询域名ip", "dns字段为undefined");
     } else {
-        body.dns = null;
+        let dnsArr = body.dns;
+        for (var i = 0; i < dnsArr.length; i++) {
+            if (dnsArr[i].ips === undefined) {
+                console.log('ips为undefined');
+                $notification.post(notifiTitle, "知乎-查询域名ip", "ips为undefined");
+            } else {
+                dnsArr[i].ips = [];
+            }
+        }
+        // body.dns = null;
         console.log('成功');
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
