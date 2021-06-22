@@ -6,11 +6,11 @@
 ^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
-知乎冷启动开屏页正则
+知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
-知乎launch_v2(热启动开屏页广告,非实时请求)
+知乎launch_v2
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/launch_v2
 知乎问题回答列表广告
 ^https\:\/\/api\.zhihu\.com\/v4\/questions\/[0-9]+\/answers
@@ -49,7 +49,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && method == getMethod) {
-    zhihuAds(body, '知乎-冷启动开屏页');
+    zhihuAds(body, '知乎-开屏页');
 } else if (url.indexOf("api.zhihu.com/topstory/recommend") != -1 && method == getMethod) {
     console.log('知乎-推荐列表');
     let dataArr = body.data;
