@@ -69,8 +69,8 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
 } else if (url.indexOf("api.zhihu.com/v4/questions") != -1 && method == getMethod) {
     console.log('知乎-问题回答列表');
     if (body.ad_info === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "知乎-问题回答列表", "ad_info字段为undefined");
+        // 个别问题回答列表无广告
+        console.log("问题回答列表无广告");
     } else {
         body.ad_info = null;
         console.log('成功');
