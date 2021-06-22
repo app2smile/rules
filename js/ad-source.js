@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|118.89.204.198\/resolv)
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎冷启动开屏页正则
@@ -14,6 +14,8 @@
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/launch_v2
 知乎问题回答列表广告
 ^https\:\/\/api\.zhihu\.com\/v4\/questions\/[0-9]+\/answers
+知乎查询域名ip
+^https\:\/\/118.89.204.198\/resolv
 起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
@@ -73,6 +75,15 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "知乎-问题回答列表", "ad_info字段为undefined");
     } else {
         body.ad_info = null;
+        console.log('成功');
+    }
+} else if (url.indexOf("118.89.204.198/resolv") != -1 && method == getMethod) {
+    console.log('知乎-查询域名ip');
+    if (body.dns === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "知乎-查询域名ip", "dns字段为undefined");
+    } else {
+        body.dns = [];
         console.log('成功');
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
