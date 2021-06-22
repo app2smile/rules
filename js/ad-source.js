@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2))|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎冷启动开屏页正则
@@ -12,6 +12,8 @@
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
 知乎launch_v2(热启动开屏页广告,非实时请求)
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/launch_v2
+知乎问题回答列表广告
+^https\:\/\/api\.zhihu\.com\/v4\/questions\/[0-9]+\/answers
 起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 穿山甲正则(如vgtime调用了)
@@ -64,6 +66,15 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/launch_v2") != -1 && method == getMethod) {
     zhihuAds(body, '知乎-launch_v2');
+} else if (url.indexOf("api.zhihu.com/v4/questions") != -1 && method == getMethod) {
+    console.log('知乎-问题回答列表');
+    if (body.ad_info === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "知乎-问题回答列表", "ad_info字段为undefined");
+    } else {
+        body.ad_info = null;
+        console.log('成功');
+    }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点-开屏页');
     if (body.Data == undefined || body.Data.List == undefined) {
