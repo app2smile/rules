@@ -19,7 +19,7 @@
 #   2021-06-17 新增腾讯新闻开屏页/新闻列表/专题新闻列表广告去除
 
 [Rule]
-RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/ad.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/ad.list,REJECT-DROP
 
 [MITM]
 hostname = %APPEND% magev6.if.qidian.com, api.zhihu.com, api-access.pangolin-sdk-toutiao.com, afd.baidu.com, news.ssp.qq.com, r.inews.qq.com
