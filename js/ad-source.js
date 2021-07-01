@@ -172,7 +172,8 @@ function zhihuAds(body, name) {
         launch = JSON.parse(body.launch);
     }
     if (launch.ads === undefined) {
-        // ads字段有时候为空
+        // ads字段有时候为空,有时候没有ads字段
+        console.log("body:" + $response.body);
         $notification.post(notifiTitle, name, "launch-ads字段为undefined");
     } else {
         launch.ads = [];
