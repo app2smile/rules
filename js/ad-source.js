@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|ad\.tencentmusic\.com\/posconfig)
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -23,15 +23,13 @@
 vgtime开屏页正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
 腾讯新闻开屏页正则
-^https\:\/\/news\.ssp\.qq\.com\/app
+^http\:\/\/news\.ssp\.qq\.com\/app
 腾讯新闻新闻列表正则
-^https\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
+^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
 腾讯新闻专题新闻列表正则
-^https\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
+^http\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
 腾讯新闻话题新闻列表正则
-^https\:\/\/r\.inews\.qq\.com\/getTopicSelectList
-QQ音乐
-^https\:\/\/ad\.tencentmusic\.com\/posconfig
+^http\:\/\/r\.inews\.qq\.com\/getTopicSelectList
 */
 
 let url = $request.url;
@@ -132,15 +130,6 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     }
 } else if (url.indexOf("r.inews.qq.com/getTopicSelectList") != -1 && method == postMethod) {
     qqNewsAdList(body, '腾讯新闻-话题新闻列表');
-} else if (url.indexOf("ad.tencentmusic.com/posconfig") != -1 && method == getMethod) {
-    console.log('qq音乐-posconfig');
-    if (body.pos === undefined || body.pos.requestAd === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "qq音乐", "pos/requestAd字段为undefined");
-    } else {
-        body.pos.requestAd = false;
-        console.log('成功');
-    }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
