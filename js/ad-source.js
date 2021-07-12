@@ -115,7 +115,9 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
             console.log("body:" + $response.body);
             $notification.post(notifiTitle, "起点-client/getconf", "ActivityIcon/EndTime字段为undefined");
         } else {
-            body.Data.ActivityIcon = null;
+            // 2000年
+            body.Data.ActivityIcon.StartTime = 946656000000;
+            body.Data.ActivityIcon.EndTime = 949334400000;
             console.log('ActivityIcon(右下角悬浮活动)成功');
         }
     }
