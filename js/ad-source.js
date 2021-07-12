@@ -117,6 +117,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         } else {
             body.Data.ActivityIcon.StartTime = 2711980800000;
             body.Data.ActivityIcon.EndTime = 2712067200000;
+            body.Data.ActivityIcon.Actionurl = "QDReader://ataru.qidian.com/noah/202107086";
             console.log('ActivityIcon(右下角悬浮活动)成功');
         }
     }
