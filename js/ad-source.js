@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/client\/getconf)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -18,18 +18,20 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 起点强制跳转精选页面修改为不跳转
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v2\/deeplink\/geturl
+起点客户端getconf
+^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/client\/getconf
 穿山甲正则(如vgtime调用了)
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
 vgtime开屏页正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
 腾讯新闻开屏页正则
-^http\:\/\/news\.ssp\.qq\.com\/app
+^https\:\/\/news\.ssp\.qq\.com\/app
 腾讯新闻新闻列表正则
-^http\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
+^https\:\/\/r\.inews\.qq\.com\/getQQNewsUnreadList
 腾讯新闻专题新闻列表正则
-^http\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
+^https\:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
 腾讯新闻话题新闻列表正则
-^http\:\/\/r\.inews\.qq\.com\/getTopicSelectList
+^https\:\/\/r\.inews\.qq\.com\/getTopicSelectList
 */
 
 let url = $request.url;
@@ -94,6 +96,20 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     } else {
         body.Data = null;
         console.log('成功');
+    }
+} else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/client/getconf") != -1 && method == postMethod) {
+    console.log('起点-client/getconf');
+    if (body.Data === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "起点-client/getconf", "Data字段为undefined");
+    } else {
+        if (body.Data.ActivityPopup === undefined || body.Data.ActivityPopup.Data == undefined) {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, "起点-client/getconf", "ActivityPopup/Data字段为undefined");
+        } else {
+            body.Data.ActivityPopup = null;
+            console.log('ActivityPopup(活动弹窗)成功');
+        }
     }
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") != -1 && method == postMethod) {
     console.log('穿山甲-get_ads');
