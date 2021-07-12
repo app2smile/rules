@@ -110,6 +110,14 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
             body.Data.ActivityPopup = null;
             console.log('ActivityPopup(活动弹窗)成功');
         }
+
+        if (body.Data.ActivityIcon === undefined || body.Data.ActivityIcon.EndTime === undefined) {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, "起点-client/getconf", "ActivityIcon/EndTime字段为undefined");
+        } else {
+            body.Data.ActivityIcon = null;
+            console.log('ActivityIcon(右下角悬浮活动)成功');
+        }
     }
 } else if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") != -1 && method == postMethod) {
     console.log('穿山甲-get_ads');
