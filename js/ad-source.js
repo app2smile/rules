@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/client\/getconf)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
+^(https|http)\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|launch_v2)|v4\/questions\/[0-9]+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab)|app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList))
 贴吧开屏页正则 
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
 知乎开屏页正则
@@ -20,6 +20,8 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v2\/deeplink\/geturl
 起点客户端getconf
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/client\/getconf
+起点去除下方(精选 发现 中间的)活动tab
+^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/adv\/getadvlistbatch\?positions=iOS_tab
 穿山甲正则(如vgtime调用了)
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
 vgtime开屏页正则
@@ -96,6 +98,19 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     } else {
         body.Data = null;
         console.log('成功');
+    }
+} else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/adv/getadvlistbatch?positions=iOS_tab") != -1 && method == getMethod) {
+    console.log('起点-iOS_tab');
+    if (body.Data === undefined || body.Data.iOS_tab === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "起点-iOS_tab", "Data/iOS_tab字段为undefined");
+    } else {
+        if (body.Data.iOS_tab.length == 0) {
+            console.log('返回配置空');
+        } else {
+            body.Data.iOS_tab = [];
+            console.log('成功');
+        }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/client/getconf") != -1 && method == postMethod) {
     console.log('起点-client/getconf');
