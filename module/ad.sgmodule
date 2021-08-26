@@ -1,0 +1,39 @@
+#!name=app去广告
+#!desc=使用前必看:请先用浏览器打开本模块的url链接查看支持的app/注意事项/更新日志
+
+# 1.使用前请自行确认surge的脚本开关 / mitm开关已打开,并且mitm证书配置已生效. 安装模块后确保本模块是加载状态
+# 2.个别app需要先删除,并重新在appStore下载新应用才可以去除广告,是因为app之前已经缓存有广告
+# 3.本模块所涉及的app版本,均为appStore内下载的最新版本
+# 4.更新本模块后,注意手动更新一下surge的外部资源,否则可能会出现广告无法正常去除的情况(去广告是通过js代码实现的,需要配合更新js文件)
+# 5.本模块的使用效果 仅在iphone未加载任何surge拦截规则/模块/脚本的情况下测试通过
+# 6.目前支持:
+#   -   腾讯新闻开屏广告(须全新应用),新闻列表(如点击要闻/财经等),专题新闻列表,话题新闻列表
+#   -   vgtime开屏页广告(须全新应用),vgtime新闻列表中的广告
+#   -   起点开屏页广告,冷启动强制跳转精选页去除,去除点击发现页弹出的活动弹窗,去除下方(精选 发现 中间的)活动tab,去除书架右下角的活动/广告的悬浮icon,搜索页可以搜索用户,最新章节看完后的页面广告弹窗去除
+#   -   知乎开屏页广告,推荐列表广告,问题回答列表广告,具体回答下广告,评论页广告
+#   -   穿山甲sdk广告(如vgtime使用了)
+#   -   哔哩哔哩开屏广告
+#   -   qq音乐开屏广告
+
+# 7.更新日志:
+#   2021-08-26 贴吧去广告独立成单独模块,从此模块删除
+#   2021-08-05 新增贴吧去除帖子看图模式最后展示的广告,去除看图模式下面出现的picbanner广告
+#   2021-07-17 新增起点最新章节看完后的页面广告弹窗去除,知乎评论广告去除,qq音乐开屏广告去除
+#   2021-07-16 新增bilibili开屏广告去除
+#   2021-07-15 新增知乎回答下广告去除
+#   2021-07-14 起点app功能增强:搜索页可以搜索用户
+#   2021-07-13 新增起点app去除书架右下角的活动/广告的悬浮icon
+#   2021-07-12 新增起点app去除点击发现页弹出的活动弹窗,去除下方(精选 发现 中间的)活动tab
+#   2021-06-28 新增起点app冷启动强制跳转精选页去除
+#   2021-06-22 新增知乎问题回答列表广告去除,知乎域名查询ip屏蔽(强制使用域名进行请求)
+#   2021-06-18 新增腾讯新闻-话题新闻列表广告去除, 知乎热启动开屏页广告
+#   2021-06-17 新增腾讯新闻开屏页/新闻列表/专题新闻列表广告去除
+
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/ad.list,REJECT-DROP
+
+[MITM]
+hostname = %APPEND% magev6.if.qidian.com, api.zhihu.com, www.zhihu.com, api-access.pangolin-sdk-toutiao.com, news.ssp.qq.com, r.inews.qq.com, us.l.qq.com, app.bilibili.com
+
+[Script]
+去广告 = type=http-response,pattern=^(https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|v4\/questions\/\d+\/answers|comment_v5\/answers\/\d+\/root_comment)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|popup\/getlist))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|app\.bilibili\.com\/x\/v2\/splash\/list|us\.l\.qq\.com\/exapp)|http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/ad.js,script-update-interval=0
