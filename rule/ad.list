@@ -2,9 +2,3 @@
 DOMAIN,118.89.204.198
 IP-CIDR,118.89.204.198/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
-
-# 贴吧屏蔽域名dns查询
-DOMAIN,180.76.76.200
-IP-CIDR,180.76.76.200/32,no-resolve
-# 贴吧屏蔽ws(副作用:消息通知功能失效,需手动进入查看),强制帖子接口走http
-DOMAIN,im.tieba.baidu.com
