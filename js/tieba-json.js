@@ -1,9 +1,7 @@
 /*
-^(http\:\/\/c\.tieba\.baidu\.com\/(c\/f\/pb\/picpage|tiebaads\/commonbatch)|https\:\/\/afd\.baidu\.com\/afd\/entry)
+^(http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch|https\:\/\/afd\.baidu\.com\/afd\/entry)
 * 贴吧开屏页正则
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
-贴吧帖子图片模式最后展示的广告
-^http\:\/\/c\.tieba\.baidu\.com\/c\/f\/pb\/picpage
 贴吧看图模式下面出现的picbanner广告
 ^http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch
 * */
@@ -23,17 +21,6 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     } else {
         body.res.splash = null;
         console.log('成功');
-    }
-} else if (url.indexOf("c.tieba.baidu.com/c/f/pb/picpage") != -1 && method == postMethod) {
-    console.log('贴吧-picpage');
-    if (body.app === undefined) {
-        // 有时候没有app字段
-        console.log("app字段为unundefined");
-    } else if (body.app.length === 0) {
-        console.log("app字段为空");
-    } else {
-        body.app = [];
-        console.log("成功");
     }
 } else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") != -1 && method == postMethod) {
     let adCmd = getUrlParamValue(url, "adcmd");
