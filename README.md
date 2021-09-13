@@ -47,6 +47,23 @@
 			</td>
 		</tr>
 		<tr>
+            <td>
+                <p>
+                    baidu-search-no-redirect
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/baidu-no-redirect.sgmodule
+                </p>
+            </td>
+            <td>
+                <p>
+                    Surge
+                </p>
+            </td>
+        </tr>
+		<tr>
 			<td>
 				<p>
 					app-ads
