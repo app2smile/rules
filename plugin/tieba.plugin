@@ -1,3 +1,4 @@
+# 贴吧去广告
 [Rule]
 DOMAIN,180.76.76.200,REJECT
 # no-resolve需在最后
