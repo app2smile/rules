@@ -1,4 +1,6 @@
-# 贴吧去广告
+# 贴吧去广告(ios15)
+# 1.开屏页广告 2.推荐页列表/吧内帖子列表的直播和其他广告去除 3.帖子详情页直播和关联商品及其他广告去除 4.帖子看图模式广告去除 5.首页/帖子详情页右下角悬浮广告去除
+# 副作用:新回复等通知功能不可用,需手动进入消息tab页点击查看
 [Rule]
 DOMAIN,180.76.76.200,REJECT
 # no-resolve需在最后
@@ -9,5 +11,5 @@ DOMAIN,im.tieba.baidu.com,REJECT
 hostname = afd.baidu.com
 
 [Script]
-http-response ^(http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch|https\:\/\/afd\.baidu\.com\/afd\/entry) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js, requires-body=true, timeout=10, tag=贴吧json
+http-response ^(http\:\/\/c\.tieba\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync)|https\:\/\/afd\.baidu\.com\/afd\/entry) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js, requires-body=true, timeout=10, tag=贴吧json
 http-response ^http\:\/\/c\.tieba\.baidu\.com\/c\/f\/((frs|pb)\/page|excellent\/personalized) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-proto.js, requires-body=true, binary-body-mode=true, timeout=10, tag=贴吧proto
