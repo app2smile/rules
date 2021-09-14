@@ -1,5 +1,5 @@
 #!name=贴吧部分去广告
-#!desc=1.开屏页广告 2.帖子看图模式广告去除
+#!desc=1.开屏页广告 2.帖子看图模式广告去除 3.首页/帖子详情页右下角悬浮广告去除
 
 
 [Rule]
@@ -9,5 +9,5 @@ RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad.
 hostname = %APPEND% afd.baidu.com
 
 [Script]
-贴吧json = type=http-response,pattern=^(http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch|https\:\/\/afd\.baidu\.com\/afd\/entry),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js,script-update-interval=0
+贴吧json = type=http-response,pattern=^(http\:\/\/c\.tieba\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync)|https\:\/\/afd\.baidu\.com\/afd\/entry),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js,script-update-interval=0
 
