@@ -45,6 +45,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         }
     }
 } else if (url.indexOf('c.tieba.baidu.com/c/s/sync') !== -1) {
+    // get post(贴吧使用了post)均可访问
     console.log('贴吧-sync');
     if (body.hasOwnProperty('floating_icon')) {
         console.log('右下角悬浮icon');
