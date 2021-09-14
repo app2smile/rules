@@ -1,17 +1,19 @@
 /*
-^(http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch|https\:\/\/afd\.baidu\.com\/afd\/entry)
+^(http\:\/\/c\.tieba\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync)|https\:\/\/afd\.baidu\.com\/afd\/entry)
 * 贴吧开屏页正则
 ^https\:\/\/afd\.baidu\.com\/afd\/entry
+贴吧sync正则
+^http\:\/\/c\.tieba\.baidu\.com\/c\/s\/sync
 贴吧看图模式下面出现的picbanner广告
 ^http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch
 * */
-let url = $request.url;
-let method = $request.method;
-let body = JSON.parse($response.body);
+const url = $request.url;
+const method = $request.method;
+const getMethod = "GET";
+const postMethod = "POST";
+const notifiTitle = "去广告脚本错误";
 
-let notifiTitle = "去广告脚本错误";
-let getMethod = "GET";
-let postMethod = "POST";
+let body = JSON.parse($response.body);
 
 if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
     console.log('贴吧-开屏页');
@@ -41,6 +43,35 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         } else {
             console.log('error_code不为0:' + body.error_code);
         }
+    }
+} else if (url.indexOf('c.tieba.baidu.com/c/s/sync') !== -1 && method === getMethod) {
+    console.log('贴吧-sync');
+    if (body.hasOwnProperty('floating_icon')) {
+        console.log('右下角悬浮icon');
+        if (body.floating_icon !== null) {
+            if (body.floating_icon.hasOwnProperty('homepage')
+                && body.floating_icon.homepage !== null
+                && body.floating_icon.homepage.hasOwnProperty('icon_url')
+                && body.floating_icon.homepage.icon_url !== null && body.floating_icon.homepage.icon_url !== '') {
+                console.log('homepage悬浮去除');
+            } else {
+                console.log('无需去除homepage悬浮-' + body.floating_icon.homepage);
+            }
+            if (body.floating_icon.hasOwnProperty('pb')
+                && body.floating_icon.pb !== null
+                && body.floating_icon.pb.hasOwnProperty('icon_url')
+                && body.floating_icon.pb.icon_url !== null && body.floating_icon.pb.icon_url !== '') {
+                console.log('pb悬浮去除');
+            } else {
+                console.log('无需去除pb悬浮-' + body.floating_icon.pb);
+            }
+            body.floating_icon = null;
+        } else {
+            console.log('floating_icon字段值为null,无需修改');
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
