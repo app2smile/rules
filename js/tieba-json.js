@@ -44,7 +44,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
             console.log('error_code不为0:' + body.error_code);
         }
     }
-} else if (url.indexOf('c.tieba.baidu.com/c/s/sync') !== -1 && method === getMethod) {
+} else if (url.indexOf('c.tieba.baidu.com/c/s/sync') !== -1) {
     console.log('贴吧-sync');
     if (body.hasOwnProperty('floating_icon')) {
         console.log('右下角悬浮icon');
