@@ -34,19 +34,6 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
                 console.log('outer_item去除');
                 post.outerItem = null;
             }
-            if(post.hasOwnProperty("content") && post.content != null){
-                for(let j = 0; j < post.content.length; j++){
-                    let item = post.content[j];
-                    if(item.hasOwnProperty('type') && item.type != null && item.type === 3
-                        && item.hasOwnProperty('originSize') &&  item.originSize != null && item.originSize === 170990
-                        && item.hasOwnProperty('originSrc') &&  item.originSrc != null && item.originSrc === "https://tiebapic.baidu.com/forum/pic/item/574e9258d109b3defcfad08389bf6c81810a4c97.jpg"){
-                        Object.keys(item).forEach(key => item[key] = null);
-                        item.type = 0;
-                        item.text = '傻逼';
-                        console.log('傻宝图片还原');
-                    }
-                }
-            }
         }
     }
     if(PbPageResIdlJsonObj.data.hasOwnProperty("recomAlaInfo")){
