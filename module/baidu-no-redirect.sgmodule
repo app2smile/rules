@@ -1,4 +1,6 @@
 #!name=百度搜索防跳转AppStore
+#!desc=使用网页版百度搜索,在搜索结果中点击关键词时防跳转AppStore
+
 
 [MITM]
 hostname = %APPEND% boxer.baidu.com
