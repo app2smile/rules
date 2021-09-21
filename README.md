@@ -1,52 +1,81 @@
 <table border="1">
-	<tbody>
-		<tr>
-			<td>
-				<p>
-					name
-				</p>
-			</td>
-			<td>
-				<p>
-					module
-				</p>
-			</td>
-			<td>
-				<p>
-					desc
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td rowspan="2">
-				<p>
-					tieba
-				</p>
-			</td>
-			<td>
-				<p>
-					https://raw.githubusercontent.com/app2smile/rules/master/module/tieba.sgmodule
-				</p>
-			</td>
-			<td>
-				<p>
-					iOS15 &amp; Surge TF
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>
-					https://raw.githubusercontent.com/app2smile/rules/master/plugin/tieba.plugin
-				</p>
-			</td>
-			<td>
-				<p>
-					iOS15 &amp; Loon
-				</p>
-			</td>
-		</tr>
-		<tr>
+    <tbody>
+        <tr>
+            <td>
+                <p>
+                    name
+                </p>
+            </td>
+            <td>
+                <p>
+                    module
+                </p>
+            </td>
+            <td>
+                <p>
+                    desc
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <p>
+                    tieba
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/tieba.sgmodule
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Surge TF
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/tieba.plugin
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Loon
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <p>
+                    weixin-external-links
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/weixin-external-links.sgmodule
+                </p>
+            </td>
+            <td>
+                <p>
+                    Surge
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/weixin-external-links.plugin
+                </p>
+            </td>
+            <td>
+                <p>
+                    Loon
+                </p>
+            </td>
+        </tr>
+        <tr>
             <td rowspan="2">
                 <p>
                     baidu-search-no-redirect
@@ -75,22 +104,22 @@
                 </p>
             </td>
         </tr>
-		<tr>
-			<td>
-				<p>
-					app-ads
-				</p>
-			</td>
-			<td>
-				<p>
-					https://raw.githubusercontent.com/app2smile/rules/master/module/ad.sgmodule
-				</p>
-			</td>
-			<td>
-				<p>
-					self use
-				</p>
-			</td>
-		</tr>
-	</tbody>
+        <tr>
+            <td>
+                <p>
+                    app-ads
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/ad.sgmodule
+                </p>
+            </td>
+            <td>
+                <p>
+                    self use
+                </p>
+            </td>
+        </tr>
+    </tbody>
 </table>
