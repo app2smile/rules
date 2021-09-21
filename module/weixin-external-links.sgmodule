@@ -1,0 +1,8 @@
+#!name=微信外链直接访问
+#!desc=微信内点击外链时,去除微信外链提示页面,直接访问外链
+
+[MITM]
+hostname = %APPEND% weixin110.qq.com
+
+[Script]
+微信外链 = type=http-response,pattern=https\:\/\/weixin110\.qq\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/weixin-external-links.js,script-update-interval=0
