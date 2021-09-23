@@ -2,29 +2,24 @@ const method = $request.method;
 const url = $request.url;
 const status = $response.status;
 let headers = $response.headers;
-let notifiTitle = "百度搜索防跳转AppStore错误";
-
+const notifiTitle = "百度搜索防跳转AppStore错误";
 
 if (method !== "GET" || status !== 302 || !headers.hasOwnProperty('Location')) {
-    console.log("method:" + method);
-    console.log("status:" + status);
+    console.log(`method:${method},status:${status},url:${url}`);
     $notification.post(notifiTitle, "百度防跳转AppStore", "method/status有误");
 } else {
-    let tokenData = getUrlParamValue(url, 'tokenData');
-    if (tokenData == null) {
-        $notification.post(notifiTitle, "getUrlParamValue", "未获取到tokenData");
-    } else {
-        let tokenDataObj = JSON.parse(decodeURIComponent(tokenData));
-        if (tokenDataObj.hasOwnProperty('url')) {
-            if (headers.Location.indexOf('apps.apple.com') !== -1) {
-                headers.Location = tokenDataObj.url;
-                console.log('成功');
-            } else {
-                console.log('无需修改Location');
-            }
+    if (headers.Location.indexOf('.apple.com') !== -1) {
+        let tokenData = getUrlParamValue(url, 'tokenData');
+        if (tokenData == null) {
+            console.log(`未获取到tokenData,url:${url}`);
+            $notification.post(notifiTitle, "getUrlParamValue", "未获取到tokenData");
         } else {
-            $notification.post(notifiTitle, "tokenDataObj", "无url属性");
+            let tokenDataObj = JSON.parse(decodeURIComponent(tokenData));
+            headers.Location = tokenDataObj.url;
+            console.log('成功');
         }
+    } else {
+        console.log('无需修改Location');
     }
 }
 $done({
