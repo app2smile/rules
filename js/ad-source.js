@@ -3,7 +3,7 @@
 去广告surge脚本
 
 多合一正则:
-^(https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|afd\.baidu\.com\/afd\/entry|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|v4\/questions\/\d+\/answers|comment_v5\/answers\/\d+\/root_comment)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|popup\/getlist))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|app\.bilibili\.com\/x\/v2\/splash\/list|us\.l\.qq\.com\/exapp)|http\:\/\/(app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json|c\.tieba\.baidu\.com\/(c\/f\/pb\/picpage|tiebaads\/commonbatch)))
+^(https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|v4\/questions\/\d+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|popup\/getlist))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|app\.bilibili\.com\/x\/v2\/splash\/list|us\.l\.qq\.com\/exapp)|http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
 知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
@@ -12,8 +12,6 @@
 ^https\:\/\/api\.zhihu\.com\/v4\/questions\/\d+\/answers
 知乎回答下的广告
 ^https\:\/\/www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations
-知乎评论广告
-^https\:\/\/api\.zhihu\.com\/comment_v5\/answers\/\d+\/root_comment
 起点开屏页正则
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
 起点强制跳转精选页面修改为不跳转
@@ -119,19 +117,6 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         body.paging = null;
         body.data = null;
         console.log('成功');
-    }
-} else if (url.indexOf("api.zhihu.com/comment_v5/answers") != -1 && method == getMethod) {
-    console.log('知乎-评论广告');
-    if (body.ad_info === undefined) {
-        console.log('评论无广告');
-    } else {
-        if (body.ad_info.position === undefined || body.ad_info.adjson === undefined) {
-            console.log("body:" + $response.body);
-            $notification.post(notifiTitle, '知乎-评论广告', "ad_info下的字段错误");
-        } else {
-            delete body.ad_info;
-            console.log('成功');
-        }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点-开屏页');
