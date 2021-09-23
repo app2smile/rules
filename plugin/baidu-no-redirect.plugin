@@ -3,4 +3,4 @@
 hostname = boxer.baidu.com
 
 [Script]
-http-response ^https\:\/\/boxer\.baidu\.com\/scheme script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/baidu-no-redirect.js, timeout=10, tag=百度防跳转
+http-response ^https\:\/\/boxer\.baidu\.com\/scheme\?scheme script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/baidu-no-redirect.js, timeout=10, tag=百度防跳转
