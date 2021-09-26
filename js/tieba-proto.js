@@ -21,7 +21,7 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
     if(FrsPageResIdlJsonObj.data.hasOwnProperty("threadList")){
         FrsPageResIdlJsonObj.data.threadList = removeLive(FrsPageResIdlJsonObj.data.threadList);
     }
-    body = FrsPageResIdl.encode(FrsPageResIdl.create(FrsPageResIdlJsonObj)).finish();
+    body = FrsPageResIdl.encode(FrsPageResIdlJsonObj).finish();
 } else if (url.indexOf("pb/page") != -1 && method == postMethod) {
     console.log('贴吧-PbPage');
     let PbPageResIdl = tiebaRoot.lookupType("com.smile.tieba.model.pb.PbPageResIdl");
@@ -42,7 +42,7 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
            PbPageResIdlJsonObj.data.recomAlaInfo = null;
        }
     }
-    body = PbPageResIdl.encode(PbPageResIdl.create(PbPageResIdlJsonObj)).finish();
+    body = PbPageResIdl.encode(PbPageResIdlJsonObj).finish();
 } else if (url.indexOf("excellent/personalized") != -1 && method == postMethod) {
     console.log('贴吧-personalized');
     let PersonalizedResIdl = tiebaRoot.lookupType("com.smile.tieba.model.personalized.PersonalizedResIdl");
@@ -51,7 +51,7 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
         PersonalizedResIdlJsonObj.data.threadList = removeLive(PersonalizedResIdlJsonObj.data.threadList);
     }
 
-    body = PersonalizedResIdl.encode(PersonalizedResIdl.create(PersonalizedResIdlJsonObj)).finish();
+    body = PersonalizedResIdl.encode(PersonalizedResIdlJsonObj).finish();
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
