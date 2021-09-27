@@ -11,7 +11,6 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const isQuanX = typeof $task != "undefined";
-console.log(`isQuanX:${isQuanX}`);
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let body;
 
