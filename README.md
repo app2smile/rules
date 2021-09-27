@@ -18,7 +18,7 @@
             </td>
         </tr>
         <tr>
-            <td rowspan="2">
+            <td rowspan="3">
                 <p>
                     tieba
                 </p>
@@ -43,6 +43,19 @@
             <td>
                 <p>
                     iOS15 &amp; Loon
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Filter:https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad-qx.list
+                    Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/tieba-qx.conf
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Quantumult X
                 </p>
             </td>
         </tr>
