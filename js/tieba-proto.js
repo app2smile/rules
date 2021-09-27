@@ -16,18 +16,18 @@ let body;
 if (url.indexOf("frs/page") != -1 && method == postMethod) {
     console.log('贴吧-FrsPage');
     let FrsPageResIdl = tiebaRoot.lookupType("com.smile.tieba.model.frs.FrsPageResIdl");
-    let FrsPageResIdlJsonObj = FrsPageResIdl.decode($response.body).toJSON();
+    let FrsPageResIdlMessage = FrsPageResIdl.decode($response.body);
 
-    if(FrsPageResIdlJsonObj.data.hasOwnProperty("threadList")){
-        FrsPageResIdlJsonObj.data.threadList = removeLive(FrsPageResIdlJsonObj.data.threadList);
+    if(FrsPageResIdlMessage.data.hasOwnProperty("threadList")){
+        FrsPageResIdlMessage.data.threadList = removeLive(FrsPageResIdlMessage.data.threadList);
     }
-    body = FrsPageResIdl.encode(FrsPageResIdlJsonObj).finish();
+    body = FrsPageResIdl.encode(FrsPageResIdlMessage).finish();
 } else if (url.indexOf("pb/page") != -1 && method == postMethod) {
     console.log('贴吧-PbPage');
     let PbPageResIdl = tiebaRoot.lookupType("com.smile.tieba.model.pb.PbPageResIdl");
-    let PbPageResIdlJsonObj = PbPageResIdl.decode($response.body).toJSON();
-    if(PbPageResIdlJsonObj.data.hasOwnProperty("postList")){
-        let postList = PbPageResIdlJsonObj.data.postList;
+    let PbPageResIdlMessage = PbPageResIdl.decode($response.body);
+    if(PbPageResIdlMessage.data.hasOwnProperty("postList")){
+        let postList = PbPageResIdlMessage.data.postList;
         for(let i = 0; i < postList.length; i++){
             let post = postList[i];
             if(post.hasOwnProperty("outerItem") && post.outerItem != null){
@@ -36,22 +36,22 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
             }
         }
     }
-    if(PbPageResIdlJsonObj.data.hasOwnProperty("recomAlaInfo")){
-       if(PbPageResIdlJsonObj.data.recomAlaInfo.liveId != 0){
+    if(PbPageResIdlMessage.data.hasOwnProperty("recomAlaInfo")){
+       if(PbPageResIdlMessage.data.recomAlaInfo.liveId != 0){
            console.log('帖子详情页推荐的直播广告去除');
-           PbPageResIdlJsonObj.data.recomAlaInfo = null;
+           PbPageResIdlMessage.data.recomAlaInfo = null;
        }
     }
-    body = PbPageResIdl.encode(PbPageResIdlJsonObj).finish();
+    body = PbPageResIdl.encode(PbPageResIdlMessage).finish();
 } else if (url.indexOf("excellent/personalized") != -1 && method == postMethod) {
     console.log('贴吧-personalized');
     let PersonalizedResIdl = tiebaRoot.lookupType("com.smile.tieba.model.personalized.PersonalizedResIdl");
-    let PersonalizedResIdlJsonObj = PersonalizedResIdl.decode($response.body).toJSON();
-    if(PersonalizedResIdlJsonObj.data.hasOwnProperty("threadList")){
-        PersonalizedResIdlJsonObj.data.threadList = removeLive(PersonalizedResIdlJsonObj.data.threadList);
+    let PersonalizedResIdlMessage = PersonalizedResIdl.decode($response.body);
+    if(PersonalizedResIdlMessage.data.hasOwnProperty("threadList")){
+        PersonalizedResIdlMessage.data.threadList = removeLive(PersonalizedResIdlMessage.data.threadList);
     }
 
-    body = PersonalizedResIdl.encode(PersonalizedResIdlJsonObj).finish();
+    body = PersonalizedResIdl.encode(PersonalizedResIdlMessage).finish();
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
