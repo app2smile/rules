@@ -9,14 +9,16 @@ const $Reader=$protobuf.Reader,$Writer=$protobuf.Writer,$util=$protobuf.util;con
 
 const url = $request.url;
 const method = $request.method;
-const notifiTitle = "贴吧proto去广告脚本错误";
 const postMethod = "POST";
+const isQuanX = typeof $task != "undefined";
+console.log(`isQuanX:${isQuanX}`);
+const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let body;
 
 if (url.indexOf("frs/page") != -1 && method == postMethod) {
     console.log('贴吧-FrsPage');
     let FrsPageResIdl = com.smile.tieba.model.frs.FrsPageResIdl;
-    let FrsPageResIdlMessage = FrsPageResIdl.decode($response.body);
+    let FrsPageResIdlMessage = FrsPageResIdl.decode(binaryBody);
 
     if(FrsPageResIdlMessage.data.hasOwnProperty("threadList")){
         FrsPageResIdlMessage.data.threadList = removeLive(FrsPageResIdlMessage.data.threadList);
@@ -25,7 +27,7 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
 } else if (url.indexOf("pb/page") != -1 && method == postMethod) {
     console.log('贴吧-PbPage');
     let PbPageResIdl = com.smile.tieba.model.pb.PbPageResIdl;
-    let PbPageResIdlMessage = PbPageResIdl.decode($response.body);
+    let PbPageResIdlMessage = PbPageResIdl.decode(binaryBody);
     if(PbPageResIdlMessage.data.hasOwnProperty("postList")){
         let postList = PbPageResIdlMessage.data.postList;
         for(let i = 0; i < postList.length; i++){
@@ -46,18 +48,20 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
 } else if (url.indexOf("excellent/personalized") != -1 && method == postMethod) {
     console.log('贴吧-personalized');
     let PersonalizedResIdl = com.smile.tieba.model.personalized.PersonalizedResIdl;
-    let PersonalizedResIdlMessage = PersonalizedResIdl.decode($response.body);
+    let PersonalizedResIdlMessage = PersonalizedResIdl.decode(binaryBody);
     if(PersonalizedResIdlMessage.data.hasOwnProperty("threadList")){
         PersonalizedResIdlMessage.data.threadList = removeLive(PersonalizedResIdlMessage.data.threadList);
     }
 
     body = PersonalizedResIdl.encode(PersonalizedResIdlMessage).finish();
 } else {
-    $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
+    $notification.post('贴吧proto去广告脚本错误', "路径/请求方法匹配错误:", method + "," + url);
 }
-
-$done({body});
-
+if(isQuanX){
+    $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
+} else {
+    $done({body});
+}
 
 function removeLive(threadList) {
     return threadList.filter(item => {
