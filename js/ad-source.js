@@ -116,8 +116,6 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             && item.target.attachment.video.video_info.hasOwnProperty('video_id')) {
             item.target.attachment.video.video_info.video_id = item.target.attachment.attachment_id;
             console.log('video_id处理成功');
-        } else {
-            console.log('无需处理video_id');
         }
         return true;
     });
