@@ -3,13 +3,13 @@
 去广告surge脚本
 
 多合一正则:
-^(https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|v4\/questions\/\d+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|popup\/getlist))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|app\.bilibili\.com\/x\/v2\/splash\/list|us\.l\.qq\.com\/exapp)|http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
+^(https\:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|questions\/\d+\/answers)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|popup\/getlist))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsSpecialListItemsV2|getTopicSelectList)|app\.bilibili\.com\/x\/v2\/splash\/list|us\.l\.qq\.com\/exapp)|http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json)
 知乎开屏页正则
 ^https\:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https\:\/\/api\.zhihu\.com\/topstory\/recommend
 知乎问题回答列表广告
-^https\:\/\/api\.zhihu\.com\/v4\/questions\/\d+\/answers
+^https\:\/\/api\.zhihu\.com\/questions\/\d+\/answers
 知乎回答下的广告
 ^https\:\/\/www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations
 起点开屏页正则
@@ -99,7 +99,7 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             console.log('成功');
         }
     }
-} else if (url.indexOf("api.zhihu.com/v4/questions") != -1 && method == getMethod) {
+} else if (url.indexOf("api.zhihu.com/questions") != -1 && method == getMethod) {
     console.log('知乎-问题回答列表');
     if (body.ad_info === undefined) {
         // 个别问题回答列表无广告
