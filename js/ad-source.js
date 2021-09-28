@@ -108,6 +108,19 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         body.ad_info = null;
         console.log('成功');
     }
+    body.data = body.data.filter(item => {
+        if (item.hasOwnProperty("target_type") && item.target_type === 'answer'
+            && item.hasOwnProperty("target") && item.target.hasOwnProperty('attachment')
+            && item.target.attachment.hasOwnProperty('type') && item.target.attachment.type === 'video'
+            && item.target.attachment.hasOwnProperty('video') && item.target.attachment.video.hasOwnProperty('video_info')
+            && item.target.attachment.video.video_info.hasOwnProperty('video_id')) {
+            item.target.attachment.video.video_info.video_id = item.target.attachment.attachment_id;
+            console.log('video_id处理成功');
+        } else {
+            console.log('无需处理video_id');
+        }
+        return true;
+    });
 } else if (url.indexOf("www.zhihu.com/api/v4/answers") != -1 && method == getMethod) {
     console.log('知乎-回答下的广告');
     if (body.paging === undefined || body.data === undefined) {
