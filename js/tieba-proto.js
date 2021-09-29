@@ -52,6 +52,8 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
 } else {
     $notification.post('贴吧proto去广告脚本错误', "路径/请求方法匹配错误:", method + "," + url);
 }
+// body.byteLength 和 body.buffer.byteLength 不一定相同 (如帖子没有回复/少量回复时)
+console.log(`${body.byteLength}---${body.buffer.byteLength}`);
 if(isQuanX){
     $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
 } else {
