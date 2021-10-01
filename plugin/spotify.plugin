@@ -1,5 +1,5 @@
 # Spotify-iOS15
-# 解锁premium,建议重新登录
+# 部分解锁premium,建议重新登录
 
 [Mitm]
 hostname =spclient.wg.spotify.com
