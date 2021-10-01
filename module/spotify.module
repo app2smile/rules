@@ -1,5 +1,5 @@
 #!name=Spotify(iOS15)
-#!desc=部分解锁premium,建议重新登录
+#!desc=部分解锁premium,建议重新登录,音质不能设置为超高
 
 [MITM]
 hostname = %APPEND% spclient.wg.spotify.com

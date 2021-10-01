@@ -1,5 +1,5 @@
 # Spotify-iOS15
-# 部分解锁premium,建议重新登录
+# 部分解锁premium,建议重新登录,音质不能设置为超高
 
 [Mitm]
 hostname =spclient.wg.spotify.com
