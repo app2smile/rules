@@ -20,6 +20,47 @@
         <tr>
             <td rowspan="3">
                 <p>
+                    spotify
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.module
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Surge
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/spotify.plugin
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Loon
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Quantumult X
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">
+                <p>
                     tieba
                 </p>
             </td>
@@ -30,7 +71,7 @@
             </td>
             <td>
                 <p>
-                    iOS15 &amp; Surge TF
+                    iOS15 &amp; Surge
                 </p>
             </td>
         </tr>
