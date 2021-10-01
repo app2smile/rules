@@ -54,6 +54,21 @@ function processMap(accountAttributesMap){
 
     accountAttributesMap['shuffle-eligible'] = deepCopy(accountAttributesMap['unrestricted']);
 
+    // accountAttributesMap['payments-initial-campaign'] = deepCopy(accountAttributesMap['unrestricted']);
+    // accountAttributesMap['payments-initial-campaign']['boolValue'] = false;
+    // accountAttributesMap['payments-initial-campaign']['longValue'] = 0;
+    // accountAttributesMap['payments-initial-campaign']['stringValue'] = 'default';
+    //
+    // accountAttributesMap['loudness-levels'] = deepCopy(accountAttributesMap['unrestricted']);
+    // accountAttributesMap['loudness-levels']['boolValue'] = false;
+    // accountAttributesMap['loudness-levels']['longValue'] = 0;
+    // accountAttributesMap['loudness-levels']['stringValue'] = '1:-9.0,0.0,3.0:-2.0';
+    //
+    // accountAttributesMap['mobile-login']['boolValue'] = true;
+    // accountAttributesMap['mobile']['boolValue'] = true;
+
+    accountAttributesMap['nft-disabled']['stringValue'] = '1';
+
     accountAttributesMap['streaming-rules']['stringValue'] = '';
 
     delete accountAttributesMap['ad-catalogues'];
