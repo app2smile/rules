@@ -54,6 +54,8 @@ function processMap(accountAttributesMap){
 
     accountAttributesMap['shuffle-eligible'] = deepCopy(accountAttributesMap['unrestricted']);
 
+    accountAttributesMap['com.spotify.madprops.use.ucs.product.state']['boolValue'] = true;
+
     // accountAttributesMap['payments-initial-campaign'] = deepCopy(accountAttributesMap['unrestricted']);
     // accountAttributesMap['payments-initial-campaign']['boolValue'] = false;
     // accountAttributesMap['payments-initial-campaign']['longValue'] = 0;
