@@ -42,7 +42,6 @@ function processMap(accountAttributesMap){
     accountAttributesMap['name']['stringValue'] ='Spotify Premium';
     accountAttributesMap['catalogue']['stringValue'] ='premium';
     accountAttributesMap['player-license']['stringValue'] ='premium';
-    // accountAttributesMap['financial-product']['stringValue'] ='pr:premium,tc:0,rt:v2_TW_2021-q3-campaign_winback-3m-for-1-3m_149_TWD_default';
     accountAttributesMap['shuffle']['boolValue'] =false;
     accountAttributesMap['ads']['boolValue'] =false;
     accountAttributesMap['on-demand']['boolValue'] =true; // 新增
@@ -61,10 +60,10 @@ function processMap(accountAttributesMap){
     // accountAttributesMap['payments-initial-campaign']['longValue'] = 0;
     // accountAttributesMap['payments-initial-campaign']['stringValue'] = 'default';
     //
-    // accountAttributesMap['loudness-levels'] = deepCopy(accountAttributesMap['unrestricted']);
-    // accountAttributesMap['loudness-levels']['boolValue'] = false;
-    // accountAttributesMap['loudness-levels']['longValue'] = 0;
-    // accountAttributesMap['loudness-levels']['stringValue'] = '1:-9.0,0.0,3.0:-2.0';
+    accountAttributesMap['loudness-levels'] = deepCopy(accountAttributesMap['unrestricted']);
+    accountAttributesMap['loudness-levels']['boolValue'] = false;
+    accountAttributesMap['loudness-levels']['longValue'] = 0;
+    accountAttributesMap['loudness-levels']['stringValue'] = '1:-9.0,0.0,3.0:-2.0';
     //
     // accountAttributesMap['mobile-login']['boolValue'] = true;
     // accountAttributesMap['mobile']['boolValue'] = true;
