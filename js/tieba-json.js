@@ -74,6 +74,14 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
+    if(body.ad_sdk_priority != "0"){
+        console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
+        body.ad_sdk_priority = "0";
+    }
+    if(body.bear_sid_type != ""){
+        console.log(`bear_sid_type:${body.bear_sid_type}`);
+        body.bear_sid_type = "";
+    }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
