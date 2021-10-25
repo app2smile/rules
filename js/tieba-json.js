@@ -1,12 +1,3 @@
-/*
-^(http\:\/\/c\.tieba\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync)|https\:\/\/afd\.baidu\.com\/afd\/entry)
-* 贴吧开屏页正则
-^https\:\/\/afd\.baidu\.com\/afd\/entry
-贴吧sync正则
-^http\:\/\/c\.tieba\.baidu\.com\/c\/s\/sync
-贴吧看图模式下面出现的picbanner广告
-^http\:\/\/c\.tieba\.baidu\.com\/tiebaads\/commonbatch
-* */
 const url = $request.url;
 const method = $request.method;
 const getMethod = "GET";
@@ -25,6 +16,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log('成功');
     }
 } else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") != -1 && method == postMethod) {
+    // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
     if (adCmd == null) {
         console.log("url:" + url);
@@ -74,13 +66,28 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
-    if(body.ad_sdk_priority != "0"){
-        console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
-        body.ad_sdk_priority = "0";
+    // 程序化广告屏蔽开启 防止加载穿山甲等广告
+    if (body.hasOwnProperty('ad_sdk_priority')) {
+        if (body.ad_sdk_priority != "0") {
+            console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
+            body.ad_sdk_priority = "0";
+        } else {
+            console.log('无需处理ad_sdk_priority');
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无ad_sdk_priority字段");
     }
-    if(body.bear_sid_type != ""){
-        console.log(`bear_sid_type:${body.bear_sid_type}`);
-        body.bear_sid_type = "";
+    if (body.hasOwnProperty('bear_sid_type')) {
+        if (body.bear_sid_type != "") {
+            console.log(`bear_sid_type:${body.bear_sid_type}`);
+            body.bear_sid_type = "";
+        } else {
+            console.log('无需处理bear_sid_type');
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无bear_sid_type字段");
     }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
