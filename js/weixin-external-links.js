@@ -28,6 +28,8 @@ if (cgiData === undefined || cgiData === null) {
                 console.log(`获取url失败,html:${htmlStr}`);
                 $notification.post('微信外链跳转', "newgray获取url失败", "");
             }
+        } else if (cgiData.type === 'block') {
+            // 不做处理
         } else {
             console.log(`未匹配到type,html:${htmlStr}`);
             $notification.post('微信外链跳转', "未匹配到type", "");
