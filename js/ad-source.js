@@ -70,8 +70,8 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
                     // 部分获取不到videoId并且视频可以播放
                     //$notification.post(notifiTitle, "知乎推荐列表视频", "videoID获取错误");
                 } else {
-                    item.common_card.feed_content.video.id = videoID;
                     console.log(`videoID处理成功,原始:${item.common_card.feed_content.video.id},修改为:${videoID}`);
+                    item.common_card.feed_content.video.id = videoID;
                 }
             } else if (item.hasOwnProperty("type") && item.type == 'market_card'
                 && item.hasOwnProperty("fields") && item.fields.hasOwnProperty("header")
@@ -82,16 +82,16 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
                     console.log("body:" + $response.body);
                     $notification.post(notifiTitle, "知乎推荐列表视频", "videoID获取错误");
                 } else {
-                    item.fields.body.video.id = videoID;
                     console.log(`market_card-videoID处理成功,原始:${item.fields.body.video.id},修改为:${videoID}`);
+                    item.fields.body.video.id = videoID;
                 }
             } else if (item.hasOwnProperty("common_card") && item.common_card.hasOwnProperty("feed_content")
                 && item.common_card.feed_content.hasOwnProperty("video") && item.common_card.feed_content.video.hasOwnProperty("id")) {
                 let search = '"feed_content":{"video":{"id":';
                 let str = $response.body.substring($response.body.indexOf(search) + search.length);
                 let videoID = str.substring(0, str.indexOf(','));
-                item.common_card.feed_content.video.id = videoID;
                 console.log(`其他-videoID处理成功,原始:${item.common_card.feed_content.video.id},修改为:${videoID}`);
+                item.common_card.feed_content.video.id = videoID;
             }
             return item.type != 'feed_advert';
         });
@@ -118,16 +118,16 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             && item.target.attachment.hasOwnProperty('video') && item.target.attachment.video.hasOwnProperty('video_info')
             && item.target.attachment.video.video_info.hasOwnProperty('video_id')) {
             let videoID = item.target.attachment.attachment_id;
-            item.target.attachment.video.video_info.video_id = videoID;
             console.log(`feeds-video_id处理成功,原始:${item.target.attachment.video.video_info.video_id},修改为:${videoID}`);
+            item.target.attachment.video.video_info.video_id = videoID;
         } else if (item.hasOwnProperty("answer_type") && item.answer_type === 'normal'
             && item.hasOwnProperty("attachment") && item.attachment.hasOwnProperty('type')
             && item.attachment.type === 'video' && item.attachment.hasOwnProperty('attachment_id')
             && item.attachment.hasOwnProperty('video') && item.attachment.video.hasOwnProperty('video_info')
             && item.attachment.video.video_info.hasOwnProperty('video_id')) {
             let videoID = item.attachment.attachment_id;
-            item.attachment.video.video_info.video_id = videoID;
             console.log(`v4-answers-video_id处理成功,原始:${item.attachment.video.video_info.video_id},修改为:${videoID}`);
+            item.attachment.video.video_info.video_id = videoID;
         }
         return true;
     });
