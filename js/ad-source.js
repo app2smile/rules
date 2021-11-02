@@ -289,8 +289,13 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     }
 } else if (url.indexOf("r.inews.qq.com/getTopicSelectList") != -1 && method == postMethod) {
     qqNewsAdList(body, '腾讯新闻-话题列表');
-} else if (url.indexOf("app.bilibili.com/x/v2/splash/list") != -1 && method == getMethod) {
+} else if (url.indexOf("app.bilibili.com/x/v2/splash") !== -1 && method === getMethod) {
     console.log('bilibili-开屏页');
+    if (url.indexOf("splash/show") !== -1) {
+        console.log('show');
+    } else {
+        console.log('list');
+    }
     if (body.data === undefined) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "bilibili开屏", "data字段错误");
