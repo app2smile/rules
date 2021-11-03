@@ -16,8 +16,6 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v2\/deeplink\/geturl
 起点客户端getconf
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/client\/getconf
-起点一本书最新章节看完之后的页面弹窗
-^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/popup\/getlist
 起点去除下方(精选 发现 中间的)活动tab
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/adv\/getadvlistbatch\?positions=iOS_tab
 穿山甲正则(如vgtime调用了)
@@ -34,6 +32,7 @@ vgtime开屏页正则
 ^https\:\/\/r\.inews\.qq\.com\/getTopicSelectList
 哔哩哔哩bilibili开屏广告
 ^https\:\/\/app\.bilibili\.com\/x\/v2\/splash\/list
+^https\:\/\/app\.bilibili\.com\/x\/v2\/splash\/show
 QQ音乐开屏广告
 ^https\:\/\/us\.l\.qq\.com\/exapp
 */
@@ -167,39 +166,6 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         } else {
             body.Data.iOS_tab = [];
             console.log('成功');
-        }
-    }
-} else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/popup/getlist?") != -1 && method == getMethod) {
-    if (body.Data === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "起点-popup", "Data字段错误");
-    } else {
-        let locationValue = getUrlParamValue(url, 'location');
-        if (locationValue == 100) {
-            // 一本书最新章节看完之后的页面弹窗
-            console.log('起点-书籍最新章节看完弹窗');
-            if (body.Data.length == 0) {
-                console.log('无弹窗数据');
-            } else if (body.Data.length == 1 && body.Data[0].Source == 'BOSSAD') {
-                body.Data = [];
-                console.log('成功');
-            } else {
-                console.log("body:" + $response.body);
-                $notification.post(notifiTitle, "起点-书籍弹窗", "Data/Source字段错误");
-            }
-        } else if (getUrlParamValue(url, 'roleId') != null && locationValue == 101) {
-            // 排行-角色榜-点击具体角色出现
-            console.log('起点-书籍角色弹窗');
-            if (body.Data === undefined || body.Data.length !== 0) {
-                console.log("body:" + $response.body);
-                $notification.post(notifiTitle, "起点-书籍角色弹窗", "Data字段错误");
-            } else {
-                console.log('无弹窗数据');
-            }
-        } else {
-            // 出现未知
-            console.log("body:" + $response.body);
-            $notification.post(notifiTitle, "起点-popup", "未知匹配");
         }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/client/getconf") != -1 && method == postMethod) {
