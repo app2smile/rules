@@ -20,6 +20,8 @@
 ^https\:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/adv\/getadvlistbatch\?positions=iOS_tab
 穿山甲正则(如vgtime调用了)
 ^https\:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads
+优量汇广告
+^https\:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg\?
 vgtime开屏页正则
 ^http\:\/\/app02\.vgtime\.com\:8080\/vgtime-app\/api\/v2\/init\/ad\.json
 腾讯新闻开屏页正则
@@ -286,6 +288,19 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         }
         // 冷启动有一条广告 热启动有多条
         console.log('成功count:' + count);
+    }
+} else if (url.indexOf('mi.gdt.qq.com') !== -1 && method === getMethod) {
+    console.log('优量汇');
+    if (body.hasOwnProperty('ret')) {
+        if (body.ret === 0) {
+            // https://developers.adnet.qq.com/doc/android/union/union_debug#sdk%20%E9%94%99%E8%AF%AF%E7%A0%81
+            body.ret = 102006;
+        } else {
+            console.log(`ret不为0,不处理`);
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "优量汇", "无ret");
     }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
