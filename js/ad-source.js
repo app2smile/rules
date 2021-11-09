@@ -322,7 +322,8 @@ function qqNewsAdList(body, name) {
     console.log(name);
     if (body.adList === undefined) {
         // 部分专题列表无广告,没有adList字段
-        console.log(`adList字段为undefined,body:${$response.body}`);
+        console.log('无广告');
+        // console.log(`adList字段为undefined,body:${$response.body}`);
         // $notification.post(notifiTitle, name, "adList字段为undefined");
     } else {
         body.adList = null;
