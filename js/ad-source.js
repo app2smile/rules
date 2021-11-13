@@ -101,6 +101,11 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     }
 } else if ((url.indexOf("api.zhihu.com/questions") !== -1 || url.indexOf("api.zhihu.com/v4/questions") !== -1)
     && method === getMethod) {
+    if(url.indexOf("v4/questions") !== -1){
+        console.log('v4/questions');
+    }else {
+        console.log('questions');
+    }
     console.log('知乎-问题回答列表');
     if (body.ad_info === undefined) {
         // 个别问题回答列表无广告
