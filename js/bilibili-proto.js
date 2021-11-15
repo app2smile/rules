@@ -45,7 +45,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     //     viewReplyMessage.cms = [];
     // }
     console.log(111);
-    viewReplyType.encode(viewReplyMessage).finish();
+    viewReplyType.encode(viewReplyType.create(viewReplyMessage.toJSON())).finish();
     console.log(222);
     body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
 } else {
