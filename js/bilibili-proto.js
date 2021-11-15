@@ -25,7 +25,7 @@ if(url.indexOf("/DynAll") !== -1 && method === postMethod){
     const endCount = dynAllReplyMessage.dynamicList.list.length;
 
     if(endCount !== startCount){
-        console.log(`广告数量:${endCount - startCount}`);
+        console.log(`广告数量:${startCount - endCount}`);
     } else {
         console.log('无广告');
     }
