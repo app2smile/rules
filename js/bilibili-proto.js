@@ -38,15 +38,19 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
     let viewReplyMessage = viewReplyType.decode(unGzipBody);
-    // if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
-    //     console.log('cms为空');
-    // } else {
-    //     console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
-    //     viewReplyMessage.cms = [];
-    // }
-    console.log(111);
-    viewReplyType.encode(viewReplyType.create(viewReplyMessage.toJSON())).finish();
-    console.log(222);
+    if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
+        console.log('cms为空');
+    } else {
+        console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
+        viewReplyMessage.cms = [];
+    }
+    let tIconMap = viewReplyMessage.tIcon;
+    for (const i in tIconMap) {
+        if(tIconMap[i] === null){
+            console.log(`解决tIcon null is not an object问题:${i}`);
+            delete tIconMap[i];
+        }
+    }
     body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
 } else {
     $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
