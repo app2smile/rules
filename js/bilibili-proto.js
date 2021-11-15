@@ -44,8 +44,8 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         let adCount = 0;
         for(let i = 0; i < viewReplyMessage.cms.length; i++){
             let item = viewReplyMessage.cms[i];
-            console.log(item);
-            if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('requestId')){
+            if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
+                // 注意这里虽然proto没有属性value  但是viewReplyMessage解析的有
                 adCount++;
             }
         }
