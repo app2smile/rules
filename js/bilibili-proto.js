@@ -38,12 +38,12 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
     let viewReplyMessage = viewReplyType.decode(unGzipBody);
-    if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
-        console.log('cms为空');
-    } else {
-        console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
-        viewReplyMessage.cms = [];
-    }
+    // if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
+    //     console.log('cms为空');
+    // } else {
+    //     console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
+    //     viewReplyMessage.cms = [];
+    // }
     console.log(111);
     viewReplyType.encode(viewReplyMessage).finish();
     console.log(222);
