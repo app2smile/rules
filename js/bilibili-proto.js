@@ -44,7 +44,9 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
         viewReplyMessage.cms = [];
     }
-
+    console.log(111);
+    viewReplyType.encode(viewReplyMessage).finish();
+    console.log(222);
     body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
 } else {
     $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
