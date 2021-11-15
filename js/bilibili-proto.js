@@ -42,7 +42,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         console.log('cms为空');
     } else {
         console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
-        viewReplyMessage.cms = null;
+        viewReplyMessage.cms = [];
     }
 
     body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
