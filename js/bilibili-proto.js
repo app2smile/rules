@@ -41,13 +41,20 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
         console.log('cms为空');
     } else {
-        console.log(`up主推荐广告数量:${viewReplyMessage.cms.length}`);
+        let adCount = 0;
+        for(let i = 0; i < viewReplyMessage.cms.length; i++){
+            let item = viewReplyMessage.cms[i];
+            if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('requestId')){
+                adCount++;
+            }
+        }
         viewReplyMessage.cms = [];
+        console.log(`up主推荐广告数量:${adCount}`);
     }
     let tIconMap = viewReplyMessage.tIcon;
     for (const i in tIconMap) {
         if(tIconMap[i] === null){
-            console.log(`解决tIcon null is not an object问题:${i}`);
+            console.log(`解决tIcon的null is not an object问题:${i}`);
             delete tIconMap[i];
         }
     }
