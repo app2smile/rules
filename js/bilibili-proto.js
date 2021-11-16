@@ -55,12 +55,13 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
             }
         }
         viewReplyMessage.cms = [];
-        console.log(`up主推荐广告数量:${adCount}`);
+        console.log(`up主推荐广告:${adCount}`);
     }
     let tIconMap = viewReplyMessage.tIcon;
     for (const i in tIconMap) {
         if(tIconMap[i] === null){
-            console.log(`解决tIcon的null is not an object问题:${i}`);
+            // 解决tIcon的null is not an object问题
+            console.log(`tIconMap:${i}`);
             delete tIconMap[i];
         }
     }
