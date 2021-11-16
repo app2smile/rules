@@ -1,5 +1,5 @@
 # bilibili去广告(iOS15)
-# 开屏页广告,推荐页广告,动态Tab页(推荐话题和列表广告),视频播放页面(up主推荐广告)
+# 开屏页广告,推荐页广告,动态(推荐话题和列表广告),视频播放页面(up主推荐广告)
 [Mitm]
 hostname = app.bilibili.com, grpc.biliapi.net
 
