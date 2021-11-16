@@ -61,6 +61,47 @@
         <tr>
             <td rowspan="3">
                 <p>
+                    bilibili
+                </p>
+            </td>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili.sgmodule
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Surge
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/bilibili.plugin
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Loon
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili-qx.conf
+                </p>
+            </td>
+            <td>
+                <p>
+                    iOS15 &amp; Quantumult X
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">
+                <p>
                     tieba
                 </p>
             </td>
