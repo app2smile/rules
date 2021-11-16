@@ -19,6 +19,40 @@ if (!body.hasOwnProperty('data')) {
             delete body.data.show;
             console.log('成功');
         }
+    } else if (url.indexOf("resource/show/tab/v2") !== -1 && method === getMethod) {
+        console.log('tab修改');
+        // 顶部右上角
+        if (!body.data.hasOwnProperty('top')) {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, 'tab', "top字段错误");
+        } else {
+            body.data.top = body.data.top.filter(item => {
+                if (item.name === '游戏中心') {
+                    console.log('去除右上角游戏中心');
+                    return false;
+                }
+                return true;
+            });
+            fixPos(body.data.top);
+        }
+
+        // 底部tab栏
+        if (!body.data.hasOwnProperty('bottom')) {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, 'tab', "bottom字段错误");
+        } else {
+            body.data.bottom = body.data.bottom.filter(item => {
+                if (item.name === '发布') {
+                    console.log('去除发布');
+                    return false;
+                } else if (item.name === '会员购') {
+                    console.log('去除会员购');
+                    return false;
+                }
+                return true;
+            });
+            fixPos(body.data.bottom);
+        }
     } else if (url.indexOf("x/v2/feed/index") !== -1 && method === getMethod) {
         console.log('推荐页');
         if (!body.data.hasOwnProperty('items')) {
@@ -71,3 +105,11 @@ body = JSON.stringify(body);
 $done({
     body
 });
+
+
+function fixPos(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        // 修复pos
+        arr[i].pos = i + 1;
+    }
+}
