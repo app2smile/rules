@@ -42,7 +42,6 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         console.log('cms为空');
     } else {
         let adCount = 0;
-        // 这里不能用for (const i in viewReplyMessage.cms) {
         const sourceContentDtoType = biliRoot.lookupType("bilibili.ad.v1.SourceContentDto");
         for(let i = 0; i < viewReplyMessage.cms.length; i++){
             let item = viewReplyMessage.cms[i];
