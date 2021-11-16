@@ -32,9 +32,6 @@ vgtime开屏页正则
 ^https:\/\/r\.inews\.qq\.com\/getQQNewsMixedList
 腾讯新闻话题新闻列表正则
 ^https:\/\/r\.inews\.qq\.com\/getTopicSelectList
-哔哩哔哩bilibili开屏广告
-^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/list
-^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/show
 QQ音乐开屏广告
 ^https:\/\/us\.l\.qq\.com\/exapp
 */
@@ -101,9 +98,9 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     }
 } else if ((url.indexOf("api.zhihu.com/questions") !== -1 || url.indexOf("api.zhihu.com/v4/questions") !== -1)
     && method === getMethod) {
-    if(url.indexOf("v4/questions") !== -1){
+    if (url.indexOf("v4/questions") !== -1) {
         console.log('v4/questions');
-    }else {
+    } else {
         console.log('questions');
     }
     console.log('知乎-问题回答列表');
@@ -250,25 +247,6 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     qqNewsAdList(body, '腾讯新闻-专题列表-MixedList');
 } else if (url.indexOf("r.inews.qq.com/getTopicSelectList") != -1 && method == postMethod) {
     qqNewsAdList(body, '腾讯新闻-话题列表');
-} else if (url.indexOf("app.bilibili.com/x/v2/splash") !== -1 && method === getMethod) {
-    console.log('bilibili-开屏页');
-    if (url.indexOf("splash/show") !== -1) {
-        console.log('show');
-    } else {
-        console.log('list');
-    }
-    if (body.data === undefined) {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "bilibili开屏", "data字段错误");
-    } else {
-        if (body.data.show === undefined) {
-            // 有时候返回的数据没有show字段
-            console.log('数据无show字段');
-        } else {
-            delete body.data.show;
-            console.log('成功');
-        }
-    }
 } else if (url.indexOf('us.l.qq.com/exapp?') != -1 && method == getMethod) {
     console.log('qq音乐-开屏页');
     if (body.data === undefined) {
