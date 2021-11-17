@@ -5,8 +5,7 @@
 ^https:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https:\/\/api\.zhihu\.com\/topstory\/recommend
-知乎问题回答列表广告(不同手机观察接口不一样)
-^https:\/\/api\.zhihu\.com\/v4\/questions\/\d+\/answers\?
+知乎问题回答列表广告
 ^https:\/\/api\.zhihu\.com\/questions\/\d+\/feeds\?
 知乎回答下的广告
 ^https:\/\/www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations
@@ -96,13 +95,7 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             console.log('成功');
         }
     }
-} else if ((url.indexOf("api.zhihu.com/questions") !== -1 || url.indexOf("api.zhihu.com/v4/questions") !== -1)
-    && method === getMethod) {
-    if (url.indexOf("v4/questions") !== -1) {
-        console.log('v4/questions');
-    } else {
-        console.log('questions');
-    }
+} else if (url.indexOf("api.zhihu.com/questions") !== -1 && method === getMethod) {
     console.log('知乎-问题回答列表');
     if (body.ad_info === undefined) {
         // 个别问题回答列表无广告
