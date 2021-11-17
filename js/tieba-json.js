@@ -48,7 +48,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
                 && body.floating_icon.homepage.icon_url !== null && body.floating_icon.homepage.icon_url !== '') {
                 console.log('homepage悬浮去除');
             } else {
-                console.log('无需去除homepage悬浮-' + body.floating_icon.homepage);
+                console.log('无需去除homepage悬浮');
             }
             if (body.floating_icon.hasOwnProperty('pb')
                 && body.floating_icon.pb !== null
@@ -56,7 +56,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
                 && body.floating_icon.pb.icon_url !== null && body.floating_icon.pb.icon_url !== '') {
                 console.log('pb悬浮去除');
             } else {
-                console.log('无需去除pb悬浮-' + body.floating_icon.pb);
+                console.log('无需去除pb悬浮');
             }
             body.floating_icon = null;
         } else {
