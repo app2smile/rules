@@ -16,6 +16,7 @@
 #   -   优量汇广告屏蔽
 
 # 7.更新日志:
+#   2021-11-17 知乎v4/questions删除
 #   2021-11-16 bilibili去广告独立成单独模块,从此模块删除
 #   2021-11-03 不再去除起点最新章节看完后的页面广告弹窗(现在无弹框)
 #   2021-11-02 bilibili开屏页广告变更,腾讯新闻专题广告接口变更
@@ -41,4 +42,4 @@ RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/ad.list,R
 hostname = %APPEND% magev6.if.qidian.com, api.zhihu.com, www.zhihu.com, api-access.pangolin-sdk-toutiao.com, news.ssp.qq.com, r.inews.qq.com, us.l.qq.com, mi.gdt.qq.com
 
 [Script]
-去广告 = type=http-response,pattern=^(https:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|questions\/\d+\/feeds\?|v4\/questions\/\d+\/answers\?)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsMixedList|getTopicSelectList)|us\.l\.qq\.com\/exapp|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?)|http:\/\/app02\.vgtime\.com:8080\/vgtime-app\/api\/v2\/init\/ad\.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/ad.js,script-update-interval=0
+去广告 = type=http-response,pattern=^(https:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/real_time_launch_v2|questions\/\d+\/feeds\?)|magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab))|news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getQQNewsMixedList|getTopicSelectList)|us\.l\.qq\.com\/exapp|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?)|http:\/\/app02\.vgtime\.com:8080\/vgtime-app\/api\/v2\/init\/ad\.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/ad.js,script-update-interval=0
