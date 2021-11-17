@@ -11,6 +11,8 @@
 ^https:\/\/www\.zhihu\.com\/api\/v4\/answers\/\d+\/recommendations
 起点开屏页正则
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen
+起点每日导读
+^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/dailyrecommend\/getdailyrecommend
 起点强制跳转精选页面修改为不跳转
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v2\/deeplink\/geturl
 起点客户端getconf
@@ -165,6 +167,15 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             console.log('成功');
         }
     }
+} else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/dailyrecommend/getdailyrecommend") !== -1 && method === getMethod) {
+    // 需全新应用?
+    console.log('起点-每日导读');
+    if (body.hasOwnProperty('Data') && body.Data !== null && body.Data.length !== 0) {
+        body.Data = [];
+        console.log('成功');
+    } else {
+        console.log('每日导读无数据');
+    }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/client/getconf") != -1 && method == postMethod) {
     console.log('起点-getconf');
     if (body.Data === undefined) {
@@ -204,6 +215,18 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         } else {
             body.Data.EnableSearchUser = "1";
             console.log('允许搜索用户成功');
+        }
+
+        if (body.Data.hasOwnProperty('EnableClipboardReading')) {
+            if (body.Data.EnableClipboardReading === 1) {
+                body.Data.EnableClipboardReading = 0;
+                console.log('不允许读取剪切板');
+            } else {
+                console.log('无需修改剪切板配置');
+            }
+        } else {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, "起点-getconf", "EnableClipboardReading字段错误");
         }
         // QDReader://UserCenter   我
         // QDReader://Bookshelf    书架
