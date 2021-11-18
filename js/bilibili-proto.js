@@ -56,6 +56,21 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         viewReplyMessage.cms = [];
         console.log(`up主推荐广告:${adCount}`);
     }
+
+    if(!viewReplyMessage.hasOwnProperty('relates') || viewReplyMessage.relates === null || viewReplyMessage.relates.length === 0){
+        console.log('relates相关推荐为空');
+    } else {
+        let adCount = 0;
+        viewReplyMessage.relates = viewReplyMessage.relates.filter(item => {
+            if(item.goto === 'cm'){
+                adCount++;
+                return false;
+            }
+            return true;
+        });
+        console.log(`相关推荐广告:${adCount}`);
+    }
+
     let tIconMap = viewReplyMessage.tIcon;
     for (const i in tIconMap) {
         if(tIconMap[i] === null){
