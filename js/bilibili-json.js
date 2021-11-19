@@ -79,14 +79,9 @@ if (!body.hasOwnProperty('data')) {
                                 }
                             }
                         }
-                    } else if (cardType === 'cm_v2') {
-                        if (cardGoto === 'ad_web_s') {
-                            console.log('广告');
-                            return false;
-                        } else if (cardGoto === 'ad_av') {
-                            console.log('创作推广广告');
-                            return false;
-                        }
+                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif'].includes(cardGoto)) {
+                        console.log(`${cardGoto}广告去除)`);
+                        return false;
                     }
                 } else {
                     console.log("body:" + $response.body);
