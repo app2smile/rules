@@ -79,7 +79,8 @@ if (!body.hasOwnProperty('data')) {
                                 }
                             }
                         }
-                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif'].includes(cardGoto)) {
+                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player'].includes(cardGoto)) {
+                        // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告
                         console.log(`${cardGoto}广告去除)`);
                         return false;
                     }
