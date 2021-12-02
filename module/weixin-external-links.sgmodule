@@ -1,5 +1,5 @@
 #!name=微信外链直接访问
-#!desc=微信内点击外链时,去除微信外链提示页面,直接访问外链
+#!desc=不再支持
 
 [MITM]
 hostname = %APPEND% weixin110.qq.com
