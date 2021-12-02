@@ -64,9 +64,9 @@ function processMap(accountAttributesMap){
     accountAttributesMap['loudness-levels']['boolValue'] = false;
     accountAttributesMap['loudness-levels']['longValue'] = 0;
     accountAttributesMap['loudness-levels']['stringValue'] = '1:-9.0,0.0,3.0:-2.0';
-    //
-    // accountAttributesMap['mobile-login']['boolValue'] = true;
-    // accountAttributesMap['mobile']['boolValue'] = true;
+
+    accountAttributesMap['mobile-login']['boolValue'] = true;
+    accountAttributesMap['mobile']['boolValue'] = true;
 
     accountAttributesMap['nft-disabled']['stringValue'] = '1';
 
@@ -74,6 +74,7 @@ function processMap(accountAttributesMap){
 
     delete accountAttributesMap['ad-catalogues'];
     delete accountAttributesMap['ad-use-adlogic'];
+    // delete accountAttributesMap['filter-explicit-content'];
 
     accountAttributesMap['high-bitrate']['boolValue'] =true; // 新增
     accountAttributesMap['libspotify']['boolValue'] =true; // 新增
