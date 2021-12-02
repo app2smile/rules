@@ -144,35 +144,6 @@
         <tr>
             <td rowspan="2">
                 <p>
-                    weixin-external-links
-                </p>
-            </td>
-            <td>
-                <p>
-                    https://raw.githubusercontent.com/app2smile/rules/master/module/weixin-external-links.sgmodule
-                </p>
-            </td>
-            <td>
-                <p>
-                    Surge
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>
-                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/weixin-external-links.plugin
-                </p>
-            </td>
-            <td>
-                <p>
-                    Loon
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2">
-                <p>
                     baidu-search-no-redirect
                 </p>
             </td>
