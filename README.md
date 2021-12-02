@@ -142,35 +142,6 @@
             </td>
         </tr>
         <tr>
-            <td rowspan="2">
-                <p>
-                    baidu-search-no-redirect
-                </p>
-            </td>
-            <td>
-                <p>
-                    https://raw.githubusercontent.com/app2smile/rules/master/module/baidu-no-redirect.sgmodule
-                </p>
-            </td>
-            <td>
-                <p>
-                    Surge
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>
-                    https://raw.githubusercontent.com/app2smile/rules/master/plugin/baidu-no-redirect.plugin
-                </p>
-            </td>
-            <td>
-                <p>
-                    Loon
-                </p>
-            </td>
-        </tr>
-        <tr>
             <td>
                 <p>
                     app-ads
