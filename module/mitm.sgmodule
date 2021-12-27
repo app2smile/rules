@@ -2,4 +2,4 @@
 #!desc=443端口,已排除部分域名
 
 [MITM]
-hostname = -*.apple.com, -*.icloud.com, -*.mzstatic.com, -*.crashlytics.com, -*.facebook.com, -*.instagram.com, -*.ap.spotify.com, *
+hostname = -*.apple.com, -*.icloud.com, -*.mzstatic.com, -*.facebook.com, -*.instagram.com, -*.ap.spotify.com, *
