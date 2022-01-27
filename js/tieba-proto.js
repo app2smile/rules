@@ -48,10 +48,9 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
     if(personalizedResIdlMessage.data.hasOwnProperty("threadList")){
         personalizedResIdlMessage.data.threadList = removeLive(personalizedResIdlMessage.data.threadList);
     }
-    let liveAnswer = personalizedResIdlMessage.data.liveAnswer;
-    if(liveAnswer != null){
+    if(personalizedResIdlMessage.data.liveAnswer != null){
         console.log('去除推荐页上方的banner广告');
-        liveAnswer = null;
+        personalizedResIdlMessage.data.liveAnswer = null;
     }
     body = personalizedResIdlType.encode(personalizedResIdlMessage).finish();
 } else if (url.indexOf("frs/generalTabList") != -1 && method == postMethod) {
