@@ -5,6 +5,8 @@
 ^https:\/\/api\.zhihu\.com\/commercial_api\/real_time_launch_v2
 知乎推荐列表正则
 ^https:\/\/api\.zhihu\.com\/topstory\/recommend
+知乎配置
+^https:\/\/appcloud2\.zhihu\.com\/v3\/config$
 知乎问题回答列表广告(不同手机观察接口不一样)
 ^https:\/\/api\.zhihu\.com\/v4\/questions\/\d+\/answers\?
 ^https:\/\/api\.zhihu\.com\/questions\/\d+\/feeds\?
@@ -144,6 +146,16 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         body.paging = null;
         body.data = null;
         console.log('成功');
+    }
+} else if (url.indexOf("appcloud2.zhihu.com/v3/config") != -1 && method == getMethod) {
+    console.log('知乎-appcloud2 config配置');
+    if (body.hasOwnProperty('config') && body.config.hasOwnProperty('zhcnh_thread_sync')) {
+        if (body.config.zhcnh_thread_sync.hasOwnProperty('ZHBackUpIP_Switch_Open')) {
+            if (body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open === '1') {
+                body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open = '0';
+                console.log('ZHBackUpIP_Switch_Open改为0');
+            }
+        }
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点-开屏页');
