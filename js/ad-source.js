@@ -7,6 +7,8 @@
 ^https:\/\/api\.zhihu\.com\/topstory\/recommend
 知乎配置
 ^https:\/\/appcloud2\.zhihu\.com\/v3\/config$
+知乎首页右下角悬浮
+^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer$
 知乎问题回答列表广告(不同手机观察接口不一样)
 ^https:\/\/api\.zhihu\.com\/v4\/questions\/\d+\/answers\?
 ^https:\/\/api\.zhihu\.com\/questions\/\d+\/feeds\?
@@ -156,6 +158,14 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
                 console.log('ZHBackUpIP_Switch_Open改为0');
             }
         }
+    }
+} else if (url.indexOf("api.zhihu.com/commercial_api/app_float_layer") != -1 && method == getMethod) {
+    console.log('知乎-首页右下角悬浮框');
+    if (body.hasOwnProperty('feed_egg')) {
+        console.log('成功');
+        body = {};
+    } else {
+        console.log('无需处理');
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v4/client/getsplashscreen") != -1 && method == getMethod) {
     console.log('起点-开屏页');
