@@ -49,9 +49,8 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         let adCount = 0;
         for(let i = 0; i < viewReplyMessage.cms.length; i++){
             let item = viewReplyMessage.cms[i];
-            console.log(JSON.stringify(item.sourceContent.value))
             if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
-                const sourceContentDtoMessage =Any.unpack(item.sourceContent,SourceContentDto);
+                const sourceContentDtoMessage = SourceContentDto.fromBinary(item.sourceContent.value,{readUnknownField: true});
                 if(sourceContentDtoMessage.hasOwnProperty('adContent')){
                     adCount++;
                 }
@@ -73,15 +72,6 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
             return true;
         });
         console.log(`相关推荐广告:${adCount}`);
-    }
-
-    let tIconMap = viewReplyMessage.tIcon;
-    for (const i in tIconMap) {
-        if(tIconMap[i] === null){
-            // 解决tIcon的null is not an object问题
-            console.log(`tIconMap:${i}`);
-            delete tIconMap[i];
-        }
     }
     body = processNewBody(ViewReply.toBinary(viewReplyMessage));
 } else {
