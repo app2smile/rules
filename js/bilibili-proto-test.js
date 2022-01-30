@@ -48,15 +48,15 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         console.log('cms为空');
     } else {
         let adCount = 0;
-        for(let i = 0; i < viewReplyMessage.cms.length; i++){
-            let item = viewReplyMessage.cms[i];
-            if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
-                const sourceContentDtoMessage = SourceContentDto.fromBinary(item.sourceContent.value,{readUnknownField: true});
-                if(sourceContentDtoMessage.hasOwnProperty('adContent')){
-                    adCount++;
-                }
-            }
-        }
+//         for(let i = 0; i < viewReplyMessage.cms.length; i++){
+//             let item = viewReplyMessage.cms[i];
+//             if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
+//                 const sourceContentDtoMessage = SourceContentDto.fromBinary(item.sourceContent.value,{readUnknownField: true});
+//                 if(sourceContentDtoMessage.hasOwnProperty('adContent')){
+//                     adCount++;
+//                 }
+//             }
+//         }
         viewReplyMessage.cms = [];
         console.log(`up主推荐广告:${adCount}`);
     }
