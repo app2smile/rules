@@ -49,7 +49,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         let adCount = 0;
         for(let i = 0; i < viewReplyMessage.cms.length; i++){
             let item = viewReplyMessage.cms[i];
-            console.log(JSON.stringify(item.sourceContent))
+            console.log(JSON.stringify(item.sourceContent.value))
             if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
                 const sourceContentDtoMessage =Any.unpack(item.sourceContent,SourceContentDto);
                 if(sourceContentDtoMessage.hasOwnProperty('adContent')){
