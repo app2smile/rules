@@ -73,7 +73,10 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         });
         console.log(`相关推荐广告:${adCount}`);
     }
-    body = processNewBody(ViewReply.toBinary(viewReplyMessage));
+    
+    let binaryData = ViewReply.toBinary(viewReplyMessage);
+    console.log('binaryData');
+    body = processNewBody(binaryData);
 } else {
     $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
 }
@@ -86,9 +89,11 @@ if(isQuanX){
 
 function processNewBody(unGzipBody){
     const gzipBody = pako.gzip(unGzipBody);
+    console.log('gzip');
     const length = gzipBody.length;
     let merge = new Uint8Array(5 + length);
     merge.set(Uint8Array.from([...binaryBody.slice(0, 2), (length >> 16) & 0xff, (length >> 8) & 0xff, length & 0xff]));
     merge.set(gzipBody,5);
+    console.log('merge');
     return merge;
 }
