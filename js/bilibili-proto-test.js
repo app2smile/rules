@@ -18,7 +18,7 @@ console.log("start decode");
 // 解码
 let message = ViewReply.fromBinary(data, {readUnknownField: true});
 // 修改数据后编码
-//console.log(message.cms);
+console.log(message.cms);
 for (let element of message.relates){
     if (element.goto==="cm")
         console.log(element);
