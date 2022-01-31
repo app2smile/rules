@@ -59,6 +59,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
 //         }
         viewReplyMessage.cms = [];
         console.log(`up主推荐广告:${adCount}`);
+        console.log( viewReplyMessage.cms)
     }
 
     if(!viewReplyMessage.hasOwnProperty('relates') || viewReplyMessage.relates === null || viewReplyMessage.relates.length === 0){
@@ -66,6 +67,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     } else {
         let adCount = 0;
         viewReplyMessage.relates = viewReplyMessage.relates.filter(item => {
+            console.log(item.goto);
             if(item.goto === 'cm'){
                 adCount++;
                 return false;
