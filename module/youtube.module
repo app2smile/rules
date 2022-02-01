@@ -1,8 +1,0 @@
-#!name=YouTube去广告(iOS15)
-#!desc=首页广告
-
-[MITM]
-hostname = %APPEND% youtubei.googleapis.com
-
-[Script]
-youtube-proto = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/youtube.js,script-update-interval=0
