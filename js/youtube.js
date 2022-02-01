@@ -12,6 +12,7 @@ let body;
 if(url.indexOf("/v1/browse") !== -1 && method === postMethod){
     console.log('v1/browse');
     let browseMessage = browse.fromBinary(binaryBody);
+    console.log(browseMessage)
     for (const item of browseMessage.n10.n49399797.n1) {
         item.n50195462.a1 = item.n50195462.a1.filter(el => {
             if(el.a153515154.a172660663.c2.c183314536.d.includes('ads_video_with_context.eml')){
