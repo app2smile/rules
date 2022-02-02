@@ -95,7 +95,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         if (body.advertisement_config == null) {
             console.log('无需处理advertisement_config');
         } else {
-            console.log(body.advertisement_config.advertisement_str);
+            console.log("advertisement_str:" + body.advertisement_config.advertisement_str);
             body.advertisement_config = null;
         }
     } else {
