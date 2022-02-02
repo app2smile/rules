@@ -89,6 +89,20 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无bear_sid_type字段");
     }
+
+    // 回帖栏的广告
+    if (body.hasOwnProperty('advertisement_config')) {
+        if (body.advertisement_config == null) {
+            console.log('无需处理advertisement_config');
+        } else {
+            console.log(body.advertisement_config.advertisement_str);
+            body.advertisement_config = null;
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无advertisement_config字段");
+    }
+
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
