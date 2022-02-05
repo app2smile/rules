@@ -22,20 +22,17 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         console.log("url:" + url);
         $notification.post(notifiTitle, "贴吧-tiebaads/commonbatch", "adCmd参数为null");
     } else {
-        console.log(adCmd);
+        console.log('commonbatch: ' + adCmd);
         if (body.error_code == 0) {
             if (body.res.ad === undefined) {
                 console.log('ad字段为undefined');
             } else if (body.res.ad.length == 0) {
                 console.log('ad字段为空');
             } else {
-                // ad不为空也不一定显示广告,因为pos字段为null也不展示
-                let adLength = body.res.ad.filter(el => el.hasOwnProperty('adInfo') && el.adInfo.hasOwnProperty('lego_card')
-                    && el.adInfo.lego_card.hasOwnProperty('ad_common') && el.adInfo.lego_card.ad_common.hasOwnProperty('id')
-                    && el.adInfo.lego_card.ad_common.hasOwnProperty('pos') && el.adInfo.lego_card.ad_common.id !== null
-                    && el.adInfo.lego_card.ad_common.pos !== null).length;
-                console.log(`显示的广告数量:${adLength}`);
                 body.res.ad = [];
+                // 即使ad有内容 也不一定显示广告
+                // 因为如果服务器下发的数据少了一些字段同样是无广告的
+                console.log('成功');
             }
         } else {
             console.log('error_code不为0:' + body.error_code);
