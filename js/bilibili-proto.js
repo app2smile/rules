@@ -97,8 +97,9 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
 } else {
     $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
 }
-console.log(`${body.byteLength}---${body.buffer.byteLength}`);
+
 if(needProcessFlag){
+    console.log(`${body.byteLength}---${body.buffer.byteLength}`);
     if(isQuanX){
         $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
     } else {
