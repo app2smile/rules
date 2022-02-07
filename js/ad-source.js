@@ -40,6 +40,8 @@ vgtime开屏页正则
 ^https:\/\/r\.inews\.qq\.com\/getTopicSelectList
 腾讯新闻专题-视频精选
 ^https:\/\/r\.inews\.qq\.com\/getQQNewsSpecialListItemsV2
+腾讯新闻-热点精选(财经-查看更多精选内容)
+^https:\/\/r\.inews\.qq\.com\/getTwentyFourHourNews
 QQ音乐开屏广告
 ^https:\/\/us\.l\.qq\.com\/exapp
 */
@@ -296,6 +298,8 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     qqNewsAdList(body, '腾讯新闻-话题列表');
 } else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") != -1 && method == postMethod) {
     qqNewsAdList(body, '腾讯新闻-视频精选(专题)');
+} else if (url.indexOf("r.inews.qq.com/getTwentyFourHourNews") != -1 && method == postMethod) {
+    qqNewsAdList(body, '腾讯新闻-热点精选');
 } else if (url.indexOf('us.l.qq.com/exapp?') != -1 && method == getMethod) {
     console.log('qq音乐-开屏页');
     if (body.data === undefined) {
