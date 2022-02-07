@@ -86,6 +86,9 @@ if (!body.hasOwnProperty('data')) {
                     } else if (cardType === 'small_cover_v10' && cardGoto === 'game') {
                         console.log('游戏广告去除');
                         return false;
+                    } else if (cardType === 'cm_double_v9' && cardGoto === 'ad_inline_av') {
+                        console.log('创作推广-大视频广告');
+                        return false;
                     }
                 } else {
                     console.log("body:" + $response.body);
