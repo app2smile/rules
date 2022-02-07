@@ -13,6 +13,7 @@ const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.bod
 const unGzipBody = pako.ungzip(binaryBody.slice(5));
 let body;
 const biliRoot = protobuf.Root.fromJSON(biliJson);
+let needProcessFlag = false;
 if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
@@ -20,6 +21,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     if(!dynAllReplyMessage.hasOwnProperty('topicList') || dynAllReplyMessage.topicList === null){
         console.log('topicList为空');
     } else {
+        needProcessFlag = true;
         dynAllReplyMessage.topicList = null;
         console.log('推荐话题topicList去除');
     }
@@ -29,11 +31,15 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     } else {
         const startCount = dynAllReplyMessage.dynamicList.list.length;
         dynAllReplyMessage.dynamicList.list = dynAllReplyMessage.dynamicList.list.filter(item => item.cardType !== 15);
-        const endCount = dynAllReplyMessage.dynamicList.list.length;
-        console.log(`动态列表广告数量:${startCount - endCount}`);
+        const adCount = dynAllReplyMessage.dynamicList.list.length - startCount;
+        if(adCount !== 0){
+            needProcessFlag = true;
+        }
+        console.log(`动态列表广告数量:${adCount}`);
     }
-
-    body = processNewBody(dynAllReplyType.encode(dynAllReplyMessage).finish());
+    if(needProcessFlag){
+        body = processNewBody(dynAllReplyType.encode(dynAllReplyMessage).finish());
+    }
 } else if(url.indexOf("View/View") !== -1 && method === postMethod){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
@@ -55,6 +61,9 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
         }
         viewReplyMessage.cms = [];
         console.log(`up主推荐广告:${adCount}`);
+        if(adCount !== 0){
+            needProcessFlag = true;
+        }
     }
 
     if(!viewReplyMessage.hasOwnProperty('relates') || viewReplyMessage.relates === null || viewReplyMessage.relates.length === 0){
@@ -69,6 +78,9 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
             return true;
         });
         console.log(`相关推荐广告:${adCount}`);
+        if(adCount !== 0){
+            needProcessFlag = true;
+        }
     }
 
     let tIconMap = viewReplyMessage.tIcon;
@@ -79,15 +91,21 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
             delete tIconMap[i];
         }
     }
-    body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
+    if(needProcessFlag){
+        body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
+    }
 } else {
     $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
 }
 console.log(`${body.byteLength}---${body.buffer.byteLength}`);
-if(isQuanX){
-    $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
+if(needProcessFlag){
+    if(isQuanX){
+        $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
+    } else {
+        $done({body});
+    }
 } else {
-    $done({body});
+    $done();
 }
 
 function processNewBody(unGzipBody){
