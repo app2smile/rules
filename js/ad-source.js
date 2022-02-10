@@ -153,13 +153,17 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
     }
 } else if (url.indexOf("appcloud2.zhihu.com/v3/config") != -1 && method == getMethod) {
     console.log('知乎-appcloud2 config配置');
-    if (body.hasOwnProperty('config') && body.config.hasOwnProperty('zhcnh_thread_sync')) {
-        if (body.config.zhcnh_thread_sync.hasOwnProperty('ZHBackUpIP_Switch_Open')) {
-            if (body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open === '1') {
-                body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open = '0';
-                console.log('ZHBackUpIP_Switch_Open改为0');
-            }
+    if (body.hasOwnProperty('config') && body.config.hasOwnProperty('zhcnh_thread_sync')
+        && body.config.zhcnh_thread_sync.hasOwnProperty('ZHBackUpIP_Switch_Open')) {
+        if (body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open === '1') {
+            body.config.zhcnh_thread_sync.ZHBackUpIP_Switch_Open = '0';
+            console.log('ZHBackUpIP_Switch_Open改为0');
+        } else {
+            console.log('无需更改ZHBackUpIP_Switch_Open');
         }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, '知乎-appcloud2 config配置', "字段错误");
     }
 } else if (url.indexOf("api.zhihu.com/commercial_api/app_float_layer") != -1 && method == getMethod) {
     console.log('知乎-首页右下角悬浮框');
