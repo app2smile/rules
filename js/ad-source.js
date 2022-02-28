@@ -183,13 +183,12 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         console.log('成功');
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v2/deeplink/geturl") != -1 && method == getMethod) {
-    console.log('起点-不跳转精选');
-    if (body.Data == undefined || body.Data.ActionUrl == undefined || body.Data.ActionUrl != 'QDReader://Bookstore') {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "起点", "Data/ActionUrl字段为undefined或者不为QDReader://Bookstore");
-    } else {
+    console.log('起点-不跳转精选页');
+    if (body.hasOwnProperty('Data') && body.Data.hasOwnProperty('ActionUrl') && body.Data.ActionUrl === 'QDReader://Bookstore') {
         body.Data = null;
         console.log('成功');
+    } else {
+        console.log('无需处理,body:' + $response.body);
     }
 } else if (url.indexOf("magev6.if.qidian.com/argus/api/v1/adv/getadvlistbatch?positions=iOS_tab") != -1 && method == getMethod) {
     console.log('起点-iOS_tab');
