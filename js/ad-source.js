@@ -226,10 +226,12 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
             body.Data.ActivityPopup = null;
             console.log('ActivityPopup(活动弹窗)成功');
         }
-        if(body.Data.hasOwnProperty('WolfEye') && body.Data.WolfEye === 1){
+        if (body.Data.hasOwnProperty('WolfEye') && body.Data.WolfEye === 1) {
             // 使5.9.196版本 tcp强制走https
             console.log('WolfEye修改为0');
             body.Data.WolfEye = 0;
+        } else {
+            console.log('无需修改WolfEye');
         }
 
         // QDReader://Bookshelf 书架右下角悬浮活动
