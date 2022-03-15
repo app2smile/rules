@@ -69,6 +69,8 @@ if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
         $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
     // 程序化广告屏蔽开启 防止加载穿山甲等广告
+    console.log('ad_origin_config_switch' + body.ad_origin_config_switch);
+    body.ad_origin_config_switch = '0';
     if (body.hasOwnProperty('ad_sdk_priority')) {
         if (body.ad_sdk_priority != "0") {
             console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
