@@ -44,6 +44,8 @@ vgtime开屏页正则
 ^https:\/\/r\.inews\.qq\.com\/getTwentyFourHourNews
 QQ音乐开屏广告
 ^https:\/\/us\.l\.qq\.com\/exapp
+快手联盟广告
+^https:\/\/open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$
 */
 
 let url = $request.url;
@@ -341,12 +343,22 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") != -1 && met
         if (body.ret === 0) {
             // https://developers.adnet.qq.com/doc/android/union/union_debug#sdk%20%E9%94%99%E8%AF%AF%E7%A0%81
             body.ret = 102006;
+            console.log('修改ret成功');
         } else {
             console.log(`ret不为0,不处理`);
         }
     } else {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "优量汇", "无ret");
+    }
+} else if (url.indexOf('open.e.kuaishou.com') !== -1 && method === postMethod) {
+    console.log('快手联盟');
+    if (body.result === 1){
+        // 错误码: https://u.kuaishou.com/home/detail/1158
+        body.result = 40003;
+        console.log('修改result成功');
+    } else {
+        console.log('无需修改result');
     }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
