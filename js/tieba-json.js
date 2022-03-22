@@ -6,7 +6,7 @@ const notifiTitle = "去广告脚本错误";
 
 let body = JSON.parse($response.body);
 
-if (url.indexOf("afd.baidu.com/afd/entry") != -1 && method == getMethod) {
+if (url.indexOf("afd.baidu.com/afd/entry") != -1) {
     console.log('贴吧-开屏页');
     if (body.res == undefined || body.res.splash == undefined) {
         console.log("body:" + $response.body);
