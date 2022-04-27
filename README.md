@@ -1,8 +1,19 @@
 # 目录
+- [腾讯新闻](#腾讯新闻)
 - [起点](#起点)
 - [Spotify](#spotify)
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
+
+## 腾讯新闻
+> 不支持qx,脚本在qx上执行有问题,未解决
+> 去开屏广告需要全新应用
+
+| 软件 | 链接 |
+| :-----| :---- |
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/qqnews.sgmodule |
+| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/qqnews.plugin |
+
 
 ## 起点
 > 代理软件需全程开启,否则会出现去广告脚本始终无效的情况
