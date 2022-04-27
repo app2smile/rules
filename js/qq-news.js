@@ -5,9 +5,9 @@ let body = JSON.parse($response.body);
 const postMethod = "POST";
 let name = "";
 if (url.indexOf("news.ssp.qq.com/app") !== -1 && method === postMethod) {
-    name = '腾讯新闻-开屏页';
+    name = '开屏页';
 } else if (url.indexOf("r.inews.qq.com/getQQNewsUnreadList") !== -1 && method === postMethod) {
-    name = '腾讯新闻-要闻/财经等';
+    name = '要闻/财经等';
 // } else if (url.indexOf("r.inews.qq.com/getQQNewsMixedList") !== -1 && method === postMethod) {
 //     qqNewsAdList(body, '腾讯新闻-专题列表-MixedList');
 // } else if (url.indexOf("r.inews.qq.com/getTopicSelectList") !== -1 && method === postMethod) {
@@ -15,7 +15,10 @@ if (url.indexOf("news.ssp.qq.com/app") !== -1 && method === postMethod) {
 // } else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") !== -1 && method === postMethod) {
 //     qqNewsAdList(body, '腾讯新闻-视频精选(专题)');
 } else if (url.indexOf("r.inews.qq.com/getTwentyFourHourNews") !== -1 && method === postMethod) {
-    name = '腾讯新闻-热点精选';
+    name = '热点精选';
+} else if (url.indexOf("r.inews.qq.com/getTagFeedList") !== -1 && method === postMethod) {
+    // 如地方专区下的 XX旅游 XX美食列表广告
+    name = 'getTagFeedList';
 } else {
     $notification.post('腾讯新闻App脚本错误', "路径/请求方法匹配错误:", method + "," + url);
 }
