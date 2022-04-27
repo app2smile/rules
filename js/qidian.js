@@ -93,17 +93,17 @@ if (!body.Data) {
             console.log('允许搜索用户成功');
         }
 
-        if (body.Data.hasOwnProperty('EnableClipboardReading')) {
-            if (body.Data.EnableClipboardReading === 0) {
-                body.Data.EnableClipboardReading = 1;
-                console.log('不允许读取剪切板');
-            } else {
-                console.log('无需修改剪切板配置');
-            }
-        } else {
-            console.log("body:" + $response.body);
-            $notification.post(notifiTitle, "起点-getconf", "EnableClipboardReading字段错误");
-        }
+        // if (body.Data.hasOwnProperty('EnableClipboardReading')) {
+        //     if (body.Data.EnableClipboardReading === 1) {
+        //         body.Data.EnableClipboardReading = 0;
+        //         console.log('不允许读取剪切板');
+        //     } else {
+        //         console.log('无需修改剪切板配置');
+        //     }
+        // } else {
+        //     console.log("body:" + $response.body);
+        //     $notification.post(notifiTitle, "起点-getconf", "EnableClipboardReading字段错误");
+        // }
         // QDReader://UserCenter   我
         // QDReader://Bookshelf    书架
         // QDReader://Bookstore    精选
