@@ -1,0 +1,15 @@
+#!name=起点App去广告
+#!desc=需要代理软件保持全程开启状态,如果去广告无效,请点开链接查看解决办法
+#   目前支持:
+#       开屏页广告,每日导读去除(需全新应用),冷启动强制跳转精选页去除,去除点击发现页弹出的活动弹窗,
+#       去除下方(精选 发现 中间的)活动时的tab,去除书架右下角的活动/广告的悬浮icon,搜索页可以搜索用户
+
+#   无法去广告的解决办法(因起点版本更新,原https接口会走tcp链接, 若在使用起点App的过程中代理软件没有始终开启,容易出现起点去广告失效的情况):
+#           方式1(推荐):打开surge ->mitm的配置根证书 -> 用于TCP链接 (保持开启状态), 然后杀掉起点app后台再重新打开一次即可. 然后就可以关闭Surge的用于TCP链接开关)
+#           方式2: 删除起点app,重新下载安装即可
+
+[MITM]
+hostname = %APPEND% magev6.if.qidian.com
+
+[Script]
+起点json = type=http-response,pattern=^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/(v4\/client\/getsplashscreen|v2\/deeplink\/geturl|v1\/(client\/getconf|adv\/getadvlistbatch\?positions=iOS_tab|dailyrecommend\/getdailyrecommend)),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/qidian.js
