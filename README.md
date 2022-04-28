@@ -1,11 +1,32 @@
 # 目录
+- [广告联盟](#广告联盟)
+- [vgTime](#vgtime)
 - [腾讯新闻](#腾讯新闻)
 - [起点](#起点)
 - [Spotify](#spotify)
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
 
-**点击各自链接,查看能去哪些广告**
+**_点击各自链接,查看能去哪些广告_**
+
+## 广告联盟
+> 快手联盟,优量汇,穿山甲
+
+| 软件 | 链接 |
+| :-----| :---- |
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.sgmodule |
+| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/adsense.plugin |
+| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.conf |
+
+## vgTime
+> 去开屏广告(需全新应用)  
+> 若要去新闻列表穿山甲的广告需要搭配`广告联盟`模块
+
+| 软件 | 链接 |
+| :-----| :---- |
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/vgtime.sgmodule |
+| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/vgtime.plugin |
+| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/vgtime.conf |
 
 ## 腾讯新闻
 > 不支持qx,脚本在qx上执行有问题,未解决  
