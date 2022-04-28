@@ -1,6 +1,9 @@
 #!name=知乎App去广告
 #!desc=开屏页广告,首页右下角悬浮框,推荐列表广告,问题回答列表广告,具体回答下广告
 
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/zhihu-ad.list,REJECT-DROP
+
 [MITM]
 hostname = %APPEND% api.zhihu.com, www.zhihu.com, appcloud2.zhihu.com
 
