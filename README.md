@@ -1,5 +1,6 @@
 # 目录
 - [广告联盟](#广告联盟)
+- [知乎](#知乎)
 - [vgTime](#vgtime)
 - [腾讯新闻](#腾讯新闻)
 - [起点](#起点)
@@ -7,7 +8,7 @@
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
 
-**_点击各自链接,查看能去哪些广告_**
+**_点击下方各自链接,查看能去哪些广告_**
 
 ## 广告联盟
 > 快手联盟,优量汇,穿山甲
@@ -18,8 +19,15 @@
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/adsense.plugin |
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.conf |
 
+## 知乎
+| 软件 | 链接 |
+| :-----| :---- |
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/zhihu.sgmodule |
+| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/zhihu.plugin |
+| qx | Filter:https://raw.githubusercontent.com/app2smile/rules/master/rule/zhihu-ad-qx.list  <br> Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/zhihu.conf |
+
 ## vgTime
-> 去开屏广告(需全新应用)  
+> 去开屏广告需要全新应用  
 > 若要去新闻列表穿山甲的广告需要搭配`广告联盟`模块
 
 | 软件 | 链接 |
