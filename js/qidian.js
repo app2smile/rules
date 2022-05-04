@@ -17,8 +17,20 @@ if (!body.Data) {
             $notification.post(noticeTitle, "起点", "List字段空");
         } else {
             body.Data.List = null;
-            console.log('成功');
+            console.log('List成功');
         }
+        if (body.Data.hasOwnProperty('EnableGDT')) {
+            if (body.Data.EnableGDT === 1) {
+                body.Data.EnableGDT = 0;
+                console.log('EnableGDT成功');
+            } else {
+                console.log('无需修改EnableGDT');
+            }
+        } else {
+            console.log("body:" + $response.body);
+            $notification.post(noticeTitle, "起点", "EnableGDT字段为空");
+        }
+
     } else if (url.indexOf("v2/deeplink/geturl") !== -1 && method === getMethod) {
         console.log('起点-不跳转精选页');
         if (body.Data.hasOwnProperty('ActionUrl') && body.Data.ActionUrl === 'QDReader://Bookstore') {
