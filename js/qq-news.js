@@ -14,6 +14,8 @@ if (url.indexOf("news.ssp.qq.com/app") !== -1 && method === postMethod) {
 //     qqNewsAdList(body, '腾讯新闻-话题列表');
 // } else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") !== -1 && method === postMethod) {
 //     qqNewsAdList(body, '腾讯新闻-视频精选(专题)');
+} else if (url.indexOf("r.inews.qq.com/gw/event/list") !== -1 && method === postMethod) {
+    name = '专题gw/event/list';
 } else if (url.indexOf("r.inews.qq.com/getTwentyFourHourNews") !== -1 && method === postMethod) {
     name = '热点精选getTwentyFourHourNews';
 } else if (url.indexOf("r.inews.qq.com/getQQNewsListItems") !== -1 && method === postMethod) {
