@@ -6,4 +6,4 @@
 hostname = %APPEND% news.ssp.qq.com, r.inews.qq.com
 
 [Script]
-腾讯新闻json = type=http-response,pattern=^https:\/\/(news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getTwentyFourHourNews|getTagFeedList)),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/qq-news.js
+腾讯新闻json = type=http-response,pattern=^https:\/\/(news\.ssp\.qq\.com\/app|r\.inews\.qq\.com\/(getQQNewsUnreadList|getTwentyFourHourNews|getQQNewsListItems|getTagFeedList)),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/qq-news.js

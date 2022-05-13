@@ -15,7 +15,9 @@ if (url.indexOf("news.ssp.qq.com/app") !== -1 && method === postMethod) {
 // } else if (url.indexOf("r.inews.qq.com/getQQNewsSpecialListItemsV2") !== -1 && method === postMethod) {
 //     qqNewsAdList(body, '腾讯新闻-视频精选(专题)');
 } else if (url.indexOf("r.inews.qq.com/getTwentyFourHourNews") !== -1 && method === postMethod) {
-    name = '热点精选';
+    name = '热点精选getTwentyFourHourNews';
+} else if (url.indexOf("r.inews.qq.com/getQQNewsListItems") !== -1 && method === postMethod) {
+    name = '热点精选getQQNewsListItems';
 } else if (url.indexOf("r.inews.qq.com/getTagFeedList") !== -1 && method === postMethod) {
     // 如地方专区下的 XX旅游 XX美食列表广告
     name = 'getTagFeedList';
