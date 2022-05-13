@@ -1,6 +1,5 @@
 #!name=腾讯新闻App去广告
 #!desc=开屏页广告有缓存,需要全新应用
-#!author=app2smile
 #!openUrl=https://github.com/app2smile/rules
 # 腾讯新闻开屏广告(须全新应用),新闻列表(要闻/财经等),热点精选,xx旅游列表等广告去除
 

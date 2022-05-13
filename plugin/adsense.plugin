@@ -1,6 +1,5 @@
 #!name=广告联盟去广告
 #!desc=快手联盟,优量汇,穿山甲
-#!author=app2smile
 #!openUrl=https://github.com/app2smile/rules
 
 [Mitm]

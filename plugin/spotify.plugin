@@ -1,6 +1,5 @@
 #!name=Spotify(iOS15)
 #!desc=部分解锁premium,建议重新登录,音质不能设置为超高
-#!author=app2smile
 #!openUrl=https://github.com/app2smile/rules
 # 1. 搜索界面 歌单/歌曲可以随意切换完全播放  2. 音乐库已点赞歌曲随意切换完全播放
 

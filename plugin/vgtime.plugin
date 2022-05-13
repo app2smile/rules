@@ -1,6 +1,5 @@
 #!name=vgTimeApp去广告
 #!desc=去开屏广告(需全新应用). 若要去新闻列表广告需要搭配广告联盟模块
-#!author=app2smile
 #!openUrl=https://github.com/app2smile/rules
 
 [Script]
