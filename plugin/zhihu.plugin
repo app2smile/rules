@@ -1,5 +1,7 @@
 #!name=知乎App去广告
 #!desc=开屏页广告,首页右下角悬浮框,推荐列表广告,问题回答列表广告,具体回答下广告
+#!author=app2smile
+#!openUrl=https://github.com/app2smile/rules
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT
