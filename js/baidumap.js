@@ -42,7 +42,7 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
         const parseMd5 = md5(binaryBody.slice(currentOffset));
         console.log(`解析出的md5和原始md5相同?:${parseMd5 === originMd5}`);
         newResult = resultType.encode(resultMessage).finish();
-        console.log(`解析出的Result:${JSON.stringify(newResult)}`);
+        console.log(`解析出的Result:${JSON.stringify(resultMessage)}`);
     }else if(name === 'Ads'){
         // 对Ads进行修改
         const adsType = baiduMapRoot.lookupType(name);
@@ -61,6 +61,10 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
 }
 
 // 生成新RepHead
+console.log(`newResult.byteLength:${newResult.byteLength}`);
+console.log(`newResult.length:${newResult.length}`);
+console.log(`newAds.byteLength:${newAds.byteLength}`);
+console.log(`newAds.length:${newAds.length}`);
 const mergeResultAndAds = new Uint8Array(newResult.byteLength, newAds.byteLength);
 mergeResultAndAds.set(newResult);
 mergeResultAndAds.set(newAds, newResult.byteLength);
