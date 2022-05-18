@@ -49,10 +49,11 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
         let adsMessage = adsType.decode(targetData);
         for(let j = 0; j < adsMessage.content.length; j++) {
             let item = adsMessage.content[j];
+            console.log(`item.type:${item.type}`);
             if((item.type.indexOf('_banner') !== -1 || item.type.indexOf('splash_screen1040'))
                 && item.hasOwnProperty('start') && item.hasOwnProperty('end')){
-                item.start = 1648746061;
-                item.start = 1648832461;
+                adsMessage.content[j].start = 1648746061;
+                adsMessage.content[j].start = 1648832461;
                 console.log(`设置${item.type}时间为过期`);
             }
         }
