@@ -61,14 +61,7 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
 }
 
 // 生成新RepHead
-console.log(`newResult.byteLength:${newResult.byteLength}`);
-console.log(`newResult.length:${newResult.length}`);
-console.log(`newAds.byteLength:${newAds.byteLength}`);
-console.log(`newAds.length:${newAds.length}`);
-const mergeResultAndAds = new Uint8Array(newResult.byteLength, newAds.byteLength);
-mergeResultAndAds.set(newResult);
-mergeResultAndAds.set(newAds, newResult.byteLength);
-
+const mergeResultAndAds = Uint8Array.from([...newResult,...newAds]);
 const newMd5 = md5(mergeResultAndAds);
 console.log(`新md5:${newMd5}`);
 repHeadMessage.md5 = newMd5;
