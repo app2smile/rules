@@ -7,19 +7,19 @@ const baiduMapRoot = protobuf.Root.fromJSON(baiduMapJson);
 
 const isQuanX = typeof $task != "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
-console.log(`原始数据总长度:${binaryBody.byteLength}`);
+//console.log(`原始数据总长度:${binaryBody.byteLength}`);
 
 const beginOffset = 4;
 const prefixLength = new DataView(binaryBody.slice(0, beginOffset).buffer).getInt32(0);
-console.log(`前缀给定的RepHead长度:${prefixLength}`);
+//console.log(`前缀给定的RepHead长度:${prefixLength}`);
 
 // 解析RepHead
 const repHeadData = binaryBody.slice(beginOffset, beginOffset + prefixLength);
 const repHeadType = baiduMapRoot.lookupType("RepHead");
 const repHeadMessage = repHeadType.decode(repHeadData);
 const originMd5 = repHeadMessage.md5;
-console.log(`解析出的原始repHead长度:${repHeadType.encode(repHeadMessage).finish().length}`);
-console.log("repHead:" + JSON.stringify(repHeadMessage));
+//console.log(`解析出的原始repHead长度:${repHeadType.encode(repHeadMessage).finish().length}`);
+//console.log("repHead:" + JSON.stringify(repHeadMessage));
 
 let newResult = null;
 let newAds = null;
@@ -28,11 +28,11 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
     let messageHead = repHeadMessage.messageHead[i];
     const name = messageHead.name;
     const targetDataLength = messageHead.length;
-    console.log("messageHead:" + JSON.stringify(messageHead));
+    //console.log("messageHead:" + JSON.stringify(messageHead));
 
     // 开始解析 Result和Ads
     const currentOffset = dataBeginOffset + messageHead.offset;
-    console.log(`开始解析${name}数据,起始offset:${currentOffset},读取长度为:${targetDataLength}`);
+    //console.log(`开始解析${name}数据,起始offset:${currentOffset},读取长度为:${targetDataLength}`);
     const targetData = binaryBody.slice(currentOffset, currentOffset + targetDataLength);
 
     if(name === 'Result'){
@@ -42,14 +42,13 @@ for(let i = 0; i < repHeadMessage.messageHead.length; i++) {
         const parseMd5 = md5(binaryBody.slice(currentOffset));
         console.log(`解析出的md5和原始md5相同?:${parseMd5 === originMd5}`);
         newResult = resultType.encode(resultMessage).finish();
-        console.log(`解析出的Result:${JSON.stringify(resultMessage)}`);
+        //console.log(`解析出的Result:${JSON.stringify(resultMessage)}`);
     }else if(name === 'Ads'){
         // 对Ads进行修改
         const adsType = baiduMapRoot.lookupType(name);
         let adsMessage = adsType.decode(targetData);
         for(let j = 0; j < adsMessage.content.length; j++) {
             let item = adsMessage.content[j];
-            console.log(`item.type:${item.type}`);
             if((item.type.indexOf('_banner') !== -1 || item.type.indexOf('splash_screen1040') !== -1)
                 && item.hasOwnProperty('start') && item.hasOwnProperty('end')){
                 adsMessage.content[j].start = 1648746061;
@@ -76,7 +75,7 @@ const newRepHead = repHeadType.encode(repHeadMessage).finish();
 
 
 const totalLength = beginOffset + newRepHead.byteLength + newResult.byteLength + newAds.byteLength;
-console.log(`totalLength:${totalLength}`);
+//console.log(`totalLength:${totalLength}`);
 let body = new Uint8Array(totalLength);
 body.set(Uint8Array.from([(newRepHead.byteLength >> 24) & 0xff, (newRepHead.byteLength >> 16) & 0xff, (newRepHead.byteLength >> 8) & 0xff, newRepHead.byteLength & 0xff]));
 body.set(newRepHead,beginOffset);
