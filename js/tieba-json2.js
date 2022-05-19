@@ -133,13 +133,14 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         if (body.config == null) {
             console.log('无需处理config');
         } else {
-            console.log('处理config');
-            for (let i = 0; i < body.config.length; i++) {
-                let item = body.config[i];
-                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
-                    body.config[i].type = '0';
-                    // 禁止初始化穿山甲/广点通/快手
-                    console.log(`禁止初始化${item.name}`);
+            if (body.config.hasOwnProperty('switch')) {
+                for (let i = 0; i < body.config.switch.length; i++) {
+                    let item = body.config.switch[i];
+                    if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
+                        body.config.switch[i].type = '0';
+                        // 禁止初始化穿山甲/广点通/快手
+                        console.log(`禁止初始化${item.name}`);
+                    }
                 }
             }
         }
