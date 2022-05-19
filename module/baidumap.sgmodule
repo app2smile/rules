@@ -1,5 +1,5 @@
 #!name=百度地图去广告(iOS15)
-#!desc=
+#!desc=测试中,贴吧模块的afd也适用于百度地图的开屏广告?
 
 [MITM]
 hostname = %APPEND% newclient.map.baidu.com
