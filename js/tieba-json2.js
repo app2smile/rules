@@ -118,10 +118,10 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         } else {
             body.ubs_abtest_config = body.ubs_abtest_config.filter(item => {
                 if (item.sid.indexOf("screen_fill_Ad_experiment") === -1) {
-                    console.log('开屏不使用新策略');
-                    return false;
+                    return true;
                 }
-                return true;
+                console.log('开屏不使用新策略');
+                return false;
             });
 
         }
