@@ -111,7 +111,8 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无advertisement_config字段");
     }
 
-
+    // 可搜索参考 UbsABTestHelper类 中的 newSplashStrategy, InitBearTask类 中的 isNeedPlgSplash
+    // 或直接全局搜索 @Modify( 更方便
     if (body.hasOwnProperty('ubs_abtest_config')) {
         if (body.ubs_abtest_config == null) {
             console.log('无需处理ubs_abtest_config');
@@ -123,13 +124,28 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
                 console.log('开屏不使用新策略');
                 return false;
             });
-
         }
     } else {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无ubs_abtest_config字段");
     }
-
+    if (body.hasOwnProperty('config')) {
+        if (body.config == null) {
+            console.log('无需处理config');
+        } else {
+            for (let i = 0; i < body.config.length; i++) {
+                let item = body.config[i];
+                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
+                    body.config[i].type = '0';
+                    // 禁止初始化穿山甲/广点通/快手
+                    console.log(`禁止初始化${item.name}`);
+                }
+            }
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无config字段");
+    }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
