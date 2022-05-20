@@ -8,19 +8,19 @@ let body = JSON.parse($response.body);
 
 if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
     console.log('贴吧-开屏页');
-    // if (body.hasOwnProperty('res') && body.res !== null) {
-    //     if (body.res.hasOwnProperty('ad') && body.res.ad !== null) {
-    //         body.res.ad = [];
-    //         console.log('ad成功');
-    //     }
-    //     if (body.res.hasOwnProperty('splash') && body.res.splash !== null) {
-    //         body.res.splash = null;
-    //         console.log('splash成功');
-    //     }
-    // } else {
-    //     console.log("body:" + $response.body);
-    //     $notification.post(notifiTitle, "贴吧-afd", "res字段为空");
-    // }
+    if (body.hasOwnProperty('res') && body.res !== null) {
+        if (body.res.hasOwnProperty('ad') && body.res.ad !== null) {
+            body.res.ad = [];
+            console.log('ad成功');
+        }
+        if (body.res.hasOwnProperty('splash') && body.res.splash !== null) {
+            body.res.splash = null;
+            console.log('splash成功');
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-afd", "res字段为空");
+    }
 } else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
     // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
@@ -149,41 +149,41 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无config字段");
     }
 
-    if (body.hasOwnProperty('screen_fill_data_result')) {
-        if (body.screen_fill_data_result.screen_fill_advertisement_bear_switch === "1") {
-            body.screen_fill_data_result.screen_fill_advertisement_bear_switch = '0';
-            console.log('开屏不展示小熊广告');
-        } else {
-            console.log('无需修改screen_fill_advertisement_bear_switch');
-        }
-        if (body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch === "1") {
-            body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch = '0';
-            console.log('开屏不展示序章CPC');
-        } else {
-            console.log('无需修改screen_fill_advertisement_plj_cpc_switch');
-        }
-        if (body.screen_fill_data_result.screen_fill_advertisement_plj_switch === "1") {
-            body.screen_fill_data_result.screen_fill_advertisement_plj_switch = '0';
-            console.log('开屏不展示序章');
-        } else {
-            console.log('无需修改screen_fill_advertisement_plj_switch');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无screen_fill_data_result字段");
-    }
-
-    if (body.hasOwnProperty('ad_stlog_switch')) {
-        if (body.ad_stlog_switch === '1') {
-            body.ad_stlog_switch = '0';
-            console.log('修改ad_stlog_switch');
-        } else {
-            console.log('无需修改ad_stlog_switch');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无ad_stlog_switch字段");
-    }
+    // if (body.hasOwnProperty('screen_fill_data_result')) {
+    //     if (body.screen_fill_data_result.screen_fill_advertisement_bear_switch === "1") {
+    //         body.screen_fill_data_result.screen_fill_advertisement_bear_switch = '0';
+    //         console.log('开屏不展示小熊广告');
+    //     } else {
+    //         console.log('无需修改screen_fill_advertisement_bear_switch');
+    //     }
+    //     if (body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch === "1") {
+    //         body.screen_fill_data_result.screen_fill_advertisement_plj_cpc_switch = '0';
+    //         console.log('开屏不展示序章CPC');
+    //     } else {
+    //         console.log('无需修改screen_fill_advertisement_plj_cpc_switch');
+    //     }
+    //     if (body.screen_fill_data_result.screen_fill_advertisement_plj_switch === "1") {
+    //         body.screen_fill_data_result.screen_fill_advertisement_plj_switch = '0';
+    //         console.log('开屏不展示序章');
+    //     } else {
+    //         console.log('无需修改screen_fill_advertisement_plj_switch');
+    //     }
+    // } else {
+    //     console.log("body:" + $response.body);
+    //     $notification.post(notifiTitle, "贴吧-sync", "无screen_fill_data_result字段");
+    // }
+    //
+    // if (body.hasOwnProperty('ad_stlog_switch')) {
+    //     if (body.ad_stlog_switch === '1') {
+    //         body.ad_stlog_switch = '0';
+    //         console.log('修改ad_stlog_switch');
+    //     } else {
+    //         console.log('无需修改ad_stlog_switch');
+    //     }
+    // } else {
+    //     console.log("body:" + $response.body);
+    //     $notification.post(notifiTitle, "贴吧-sync", "无ad_stlog_switch字段");
+    // }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
