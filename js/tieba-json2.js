@@ -176,7 +176,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
     if (body.hasOwnProperty('ad_stlog_switch')) {
         if (body.ad_stlog_switch === '1') {
             body.ad_stlog_switch = '0';
-            console.log();
+            console.log('修改ad_stlog_switch');
         } else {
             console.log('无需修改ad_stlog_switch');
         }
