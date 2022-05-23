@@ -7,20 +7,20 @@ const notifiTitle = "贴吧json脚本错误";
 let body = JSON.parse($response.body);
 
 if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
-    console.log('贴吧-开屏页');
-    if (body.hasOwnProperty('res') && body.res !== null) {
-        if (body.res.hasOwnProperty('ad') && body.res.ad !== null) {
-            body.res.ad = [];
-            console.log('ad成功');
-        }
-        if (body.res.hasOwnProperty('splash') && body.res.splash !== null) {
-            body.res.splash = null;
-            console.log('splash成功');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-afd", "res字段为空");
-    }
+//     console.log('贴吧-开屏页');
+//     if (body.hasOwnProperty('res') && body.res !== null) {
+//         if (body.res.hasOwnProperty('ad') && body.res.ad !== null) {
+//             body.res.ad = [];
+//             console.log('ad成功');
+//         }
+//         if (body.res.hasOwnProperty('splash') && body.res.splash !== null) {
+//             body.res.splash = null;
+//             console.log('splash成功');
+//         }
+//     } else {
+//         console.log("body:" + $response.body);
+//         $notification.post(notifiTitle, "贴吧-afd", "res字段为空");
+//     }
 } else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
     // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
