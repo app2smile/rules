@@ -111,8 +111,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无advertisement_config字段");
     }
 
-    // 可搜索参考 UbsABTestHelper类 中的 newSplashStrategy, InitBearTask类 中的 isNeedPlgSplash
-    // 或直接全局搜索 @Modify( 更方便
+    // 直接全局搜索 @Modify(
     if (body.hasOwnProperty('ubs_abtest_config')) {
         if (body.ubs_abtest_config == null) {
             console.log('无需处理ubs_abtest_config');
