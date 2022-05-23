@@ -75,28 +75,28 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
     // 程序化广告屏蔽开启 防止加载穿山甲等广告
-    if (body.hasOwnProperty('ad_sdk_priority')) {
-        if (body.ad_sdk_priority != "0") {
-            console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
-            body.ad_sdk_priority = "0";
-        } else {
-            console.log('无需处理ad_sdk_priority');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无ad_sdk_priority字段");
-    }
-    if (body.hasOwnProperty('bear_sid_type')) {
-        if (body.bear_sid_type != "") {
-            console.log(`bear_sid_type:${body.bear_sid_type}`);
-            body.bear_sid_type = "";
-        } else {
-            console.log('无需处理bear_sid_type');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无bear_sid_type字段");
-    }
+//     if (body.hasOwnProperty('ad_sdk_priority')) {
+//         if (body.ad_sdk_priority != "0") {
+//             console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
+//             body.ad_sdk_priority = "0";
+//         } else {
+//             console.log('无需处理ad_sdk_priority');
+//         }
+//     } else {
+//         console.log("body:" + $response.body);
+//         $notification.post(notifiTitle, "贴吧-sync", "无ad_sdk_priority字段");
+//     }
+//     if (body.hasOwnProperty('bear_sid_type')) {
+//         if (body.bear_sid_type != "") {
+//             console.log(`bear_sid_type:${body.bear_sid_type}`);
+//             body.bear_sid_type = "";
+//         } else {
+//             console.log('无需处理bear_sid_type');
+//         }
+//     } else {
+//         console.log("body:" + $response.body);
+//         $notification.post(notifiTitle, "贴吧-sync", "无bear_sid_type字段");
+//     }
 
     // 回帖栏的广告
     if (body.hasOwnProperty('advertisement_config')) {
