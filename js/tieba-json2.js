@@ -112,22 +112,22 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
     }
 
     // 直接全局搜索 @Modify(
-    if (body.hasOwnProperty('ubs_abtest_config')) {
-        if (body.ubs_abtest_config == null) {
-            console.log('无需处理ubs_abtest_config');
-        } else {
-            body.ubs_abtest_config = body.ubs_abtest_config.filter(item => {
-                if (item.sid.indexOf("screen_fill_Ad_experiment") === -1) {
-                    return true;
-                }
-                console.log('开屏不使用新策略');
-                return false;
-            });
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无ubs_abtest_config字段");
-    }
+//     if (body.hasOwnProperty('ubs_abtest_config')) {
+//         if (body.ubs_abtest_config == null) {
+//             console.log('无需处理ubs_abtest_config');
+//         } else {
+//             body.ubs_abtest_config = body.ubs_abtest_config.filter(item => {
+//                 if (item.sid.indexOf("screen_fill_Ad_experiment") === -1) {
+//                     return true;
+//                 }
+//                 console.log('开屏不使用新策略');
+//                 return false;
+//             });
+//         }
+//     } else {
+//         console.log("body:" + $response.body);
+//         $notification.post(notifiTitle, "贴吧-sync", "无ubs_abtest_config字段");
+//     }
     if (body.hasOwnProperty('config')) {
         if (body.config == null) {
             console.log('无需处理config');
