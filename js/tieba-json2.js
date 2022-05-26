@@ -183,6 +183,25 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无ad_stlog_switch字段");
     }
+
+    if (body.hasOwnProperty('https_switch_strategy_info')) {
+        if (body.https_switch_strategy_info.hasOwnProperty('https_whitelist_url')) {
+            if (body.https_switch_strategy_info.https_whitelist_url == null) {
+                console.log('https_whitelist_url为空');
+            } else {
+                console.log(`https_whitelist_url数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
+                body.https_switch_strategy_info.https_whitelist_url = filterObj(body.https_switch_strategy_info.https_whitelist_url, ['/c/s/newlog']);
+            }
+        } else {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, "贴吧-sync", "无https_whitelist_url字段");
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无https_switch_strategy_info字段");
+    }
+
+
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
@@ -193,6 +212,22 @@ $done({
     body
 });
 
+
+/**
+ * [过滤对象]
+ * @param  obj [过滤前数据]
+ * @param  arr [过滤条件，要求为数组]
+ */
+function filterObj(obj, arr) {
+    if (typeof (obj) !== "object" || !Array.isArray(arr)) {
+        throw new Error("参数格式不正确")
+    }
+    const result = {}
+    Object.keys(obj).filter((key) => arr.includes(key)).forEach((key) => {
+        result[key] = obj[key]
+    })
+    return result;
+}
 
 /**
  * 根据参数名称获取url地址中的参数值
