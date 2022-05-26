@@ -191,6 +191,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
             } else {
                 console.log(`https_whitelist_url数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
                 body.https_switch_strategy_info.https_whitelist_url = filterObj(body.https_switch_strategy_info.https_whitelist_url, ['/c/s/newlog']);
+                console.log(`修改后数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
             }
         } else {
             console.log("body:" + $response.body);
