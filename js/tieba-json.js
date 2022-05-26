@@ -7,20 +7,7 @@ const notifiTitle = "贴吧json脚本错误";
 let body = JSON.parse($response.body);
 
 if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
-    console.log('贴吧-开屏页');
-    if (body.hasOwnProperty('res') && body.res !== null) {
-        if (body.res.hasOwnProperty('ad') && body.res.ad !== null) {
-            body.res.ad = [];
-            console.log('ad成功');
-        }
-        if (body.res.hasOwnProperty('splash') && body.res.splash !== null) {
-            body.res.splash = null;
-            console.log('splash成功');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-afd", "res字段为空");
-    }
+    //
 } else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
     // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
@@ -74,29 +61,6 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无floating_icon字段");
     }
-    // 程序化广告屏蔽开启 防止加载穿山甲等广告
-    if (body.hasOwnProperty('ad_sdk_priority')) {
-        if (body.ad_sdk_priority != "0") {
-            console.log(`ad_sdk_priority:${body.ad_sdk_priority}`);
-            body.ad_sdk_priority = "0";
-        } else {
-            console.log('无需处理ad_sdk_priority');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无ad_sdk_priority字段");
-    }
-    if (body.hasOwnProperty('bear_sid_type')) {
-        if (body.bear_sid_type != "") {
-            console.log(`bear_sid_type:${body.bear_sid_type}`);
-            body.bear_sid_type = "";
-        } else {
-            console.log('无需处理bear_sid_type');
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无bear_sid_type字段");
-    }
 
     // 回帖栏的广告
     if (body.hasOwnProperty('advertisement_config')) {
@@ -111,23 +75,6 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无advertisement_config字段");
     }
 
-    // 直接全局搜索 @Modify(
-    if (body.hasOwnProperty('ubs_abtest_config')) {
-        if (body.ubs_abtest_config == null) {
-            console.log('无需处理ubs_abtest_config');
-        } else {
-            body.ubs_abtest_config = body.ubs_abtest_config.filter(item => {
-                if (item.sid.indexOf("screen_fill_Ad_experiment") === -1) {
-                    return true;
-                }
-                console.log('开屏不使用新策略');
-                return false;
-            });
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无ubs_abtest_config字段");
-    }
     if (body.hasOwnProperty('config')) {
         if (body.config == null) {
             console.log('无需处理config');
