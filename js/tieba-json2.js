@@ -184,23 +184,23 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
         $notification.post(notifiTitle, "贴吧-sync", "无ad_stlog_switch字段");
     }
 
-    if (body.hasOwnProperty('https_switch_strategy_info')) {
-        if (body.https_switch_strategy_info.hasOwnProperty('https_whitelist_url')) {
-            if (body.https_switch_strategy_info.https_whitelist_url == null) {
-                console.log('https_whitelist_url为空');
-            } else {
-                console.log(`https_whitelist_url数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
-                body.https_switch_strategy_info.https_whitelist_url = filterObj(body.https_switch_strategy_info.https_whitelist_url, ['/c/s/newlog']);
-                console.log(`修改后数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
-            }
-        } else {
-            console.log("body:" + $response.body);
-            $notification.post(notifiTitle, "贴吧-sync", "无https_whitelist_url字段");
-        }
-    } else {
-        console.log("body:" + $response.body);
-        $notification.post(notifiTitle, "贴吧-sync", "无https_switch_strategy_info字段");
-    }
+    // if (body.hasOwnProperty('https_switch_strategy_info')) {
+    //     if (body.https_switch_strategy_info.hasOwnProperty('https_whitelist_url')) {
+    //         if (body.https_switch_strategy_info.https_whitelist_url == null) {
+    //             console.log('https_whitelist_url为空');
+    //         } else {
+    //             console.log(`https_whitelist_url数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
+    //             body.https_switch_strategy_info.https_whitelist_url = filterObj(body.https_switch_strategy_info.https_whitelist_url, ['/c/s/newlog']);
+    //             console.log(`修改后数量为:${Object.keys(body.https_switch_strategy_info.https_whitelist_url).length}`);
+    //         }
+    //     } else {
+    //         console.log("body:" + $response.body);
+    //         $notification.post(notifiTitle, "贴吧-sync", "无https_whitelist_url字段");
+    //     }
+    // } else {
+    //     console.log("body:" + $response.body);
+    //     $notification.post(notifiTitle, "贴吧-sync", "无https_switch_strategy_info字段");
+    // }
 
 
 } else {
