@@ -126,7 +126,7 @@ function processNewBody(unGzipBody){
     const gzipBody = pako.gzip(unGzipBody);
     const length = gzipBody.length;
     let merge = new Uint8Array(5 + length);
-    merge.set(Uint8Array.from([...binaryBody.slice(0, 2), (length >> 16) & 0xff, (length >> 8) & 0xff, length & 0xff]));
+    merge.set(Uint8Array.from([...binaryBody.slice(0, 1), (length >> 24) & 0xff, (length >> 16) & 0xff, (length >> 8) & 0xff, length & 0xff]));
     merge.set(gzipBody,5);
     return merge;
 }
