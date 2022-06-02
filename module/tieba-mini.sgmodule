@@ -5,8 +5,6 @@
 [Rule]
 RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad.list,REJECT-DROP
 
-[MITM]
-hostname = %APPEND% afd.baidu.com
 
 [Script]
 贴吧json = type=http-response,pattern=^http:\/\/c\.tieba\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json2.js,script-update-interval=0
