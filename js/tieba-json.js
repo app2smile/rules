@@ -5,7 +5,9 @@ const notifiTitle = "贴吧json脚本错误";
 
 let body = JSON.parse($response.body);
 
-if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
+if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
+    //
+} else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
     // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
     if (adCmd == null) {
