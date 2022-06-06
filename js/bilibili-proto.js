@@ -126,7 +126,15 @@ function processNewBody(unGzipBody){
     const gzipBody = pako.gzip(unGzipBody);
     const length = gzipBody.length;
     let merge = new Uint8Array(5 + length);
-    merge.set(Uint8Array.from([...binaryBody.slice(0, 1), (length >> 24) & 0xff, (length >> 16) & 0xff, (length >> 8) & 0xff, length & 0xff]));
-    merge.set(gzipBody,5);
+    merge.set(binaryBody.slice(0, 1), 0);
+    merge.set(intToUint8Array(length), 1);
+    merge.set(gzipBody, 5);
     return merge;
+}
+
+function intToUint8Array (num) {
+    let arr = new ArrayBuffer(4); // an Int32 takes 4 bytes
+    let view = new DataView(arr);
+    view.setUint32(0, num, false); // byteOffset = 0; litteEndian = false
+    return new Uint8Array(arr);
 }
