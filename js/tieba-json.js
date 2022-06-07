@@ -5,9 +5,7 @@ const notifiTitle = "贴吧json脚本错误";
 
 let body = JSON.parse($response.body);
 
-if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
-    //
-} else if (url.indexOf("c.tieba.baidu.com/tiebaads/commonbatch") !== -1 && method === postMethod) {
+if (url.indexOf("tiebaads/commonbatch") !== -1 && method === postMethod) {
     // 看图模式下的广告
     let adCmd = getUrlParamValue(url, "adcmd");
     if (adCmd == null) {
@@ -30,7 +28,7 @@ if (url.indexOf("afd.baidu.com/afd/entry") !== -1) {
             console.log('error_code不为0:' + body.error_code);
         }
     }
-} else if (url.indexOf('c.tieba.baidu.com/c/s/sync') !== -1) {
+} else if (url.indexOf('c/s/sync') !== -1) {
     // get post(贴吧使用了post)均可访问
     console.log('贴吧-sync');
     if (body.hasOwnProperty('floating_icon')) {
