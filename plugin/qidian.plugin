@@ -1,5 +1,5 @@
 #!name=起点App去广告
-#!desc=
+#!desc=Loon已支持tcp mitm,可以完美去广告
 #!openUrl=https://github.com/app2smile/rules
 #   目前支持:
 #       开屏页广告,每日导读去除(需全新应用),冷启动强制跳转精选页去除,去除发现页弹出的活动弹窗,
