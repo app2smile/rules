@@ -21,11 +21,11 @@ if (url.indexOf("frs/page") != -1 && method == postMethod) {
     if(frsPageResIdlMessage.data.hasOwnProperty("threadList")){
         frsPageResIdlMessage.data.threadList = removeLive(frsPageResIdlMessage.data.threadList);
     }
-    if(frsPageResIdlMessage.data.hasOwnProperty('activityhead') && frsPageResIdlMessage.data.activityhead != null){
+    if(frsPageResIdlMessage.data.hasOwnProperty('activityhead')
+        && frsPageResIdlMessage.data.activityhead != null
+        && frsPageResIdlMessage.data.activityhead.hasOwnProperty('isAd')
+        && frsPageResIdlMessage.data.activityhead.isAd){
         console.log('frs去除吧内header图片广告');
-        if(frsPageResIdlMessage.data.activityhead.hasOwnProperty('isAd') && !frsPageResIdlMessage.data.activityhead.isAd){
-            console.log('activityhead.isAd不为true');
-        }
         frsPageResIdlMessage.data.activityhead = null;
     }
     body = frsPageResIdlType.encode(frsPageResIdlMessage).finish();
