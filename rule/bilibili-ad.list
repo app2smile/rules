@@ -1,0 +1,2 @@
+# h2下会请求这个,但请求会很慢发出
+DOMAIN,grpc.biliapi.net
