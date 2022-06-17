@@ -1,8 +1,12 @@
 #!name=bilibili去广告(iOS15)
 #!desc=开屏页广告,推荐页广告,动态(最常访问/推荐话题/列表广告),视频播放页面(up主推荐广告,相关推荐广告)
 #!openUrl=https://github.com/app2smile/rules
+
+[Rule]
+DOMAIN,grpc.biliapi.net,REJECT
+
 [Mitm]
-hostname = app.bilibili.com, grpc.biliapi.net
+hostname = app.bilibili.com
 
 [Script]
 http-response ^https:\/\/app\.bilibili\.com\/x\/(v2\/(splash\/(list|show)|feed\/index\?)|resource\/show\/tab\/v2) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/bilibili-json.js, requires-body=true, timeout=10, tag=bili-json
