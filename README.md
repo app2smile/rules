@@ -80,7 +80,7 @@
 | :-----| :---- |
 | Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili.sgmodule |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/bilibili.plugin |
-| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili-qx.conf |
+| qx | Filter:https://raw.githubusercontent.com/app2smile/rules/master/rule/bilibili-ad-qx.list  <br> Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili-qx.conf |
 
 
 ## 贴吧
