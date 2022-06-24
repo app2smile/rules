@@ -19,7 +19,7 @@ if(!headers.hasOwnProperty(gzipStrName)){
 }
 const isGzipCompress = headers[gzipStrName] === 'gzip';
 console.log(`isGzipCompress:${isGzipCompress}`);
-const unGzipBody = isGzipCompress ? pako.ungzip(binaryBody.slice(5)) : binaryBody;
+const unGzipBody = isGzipCompress ? pako.ungzip(binaryBody.slice(5)) : binaryBody.slice(5);
 headers[gzipStrName] = 'identity';
 let body;
 const biliRoot = protobuf.Root.fromJSON(biliJson);
