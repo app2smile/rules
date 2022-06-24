@@ -60,8 +60,8 @@ function processMap(accountAttributesMap){
     accountAttributesMap['payments-initial-campaign'] = {stringValue : 'web'};
     accountAttributesMap['shuffle-eligible'] = {boolValue : true};
     accountAttributesMap['unrestricted'] = {boolValue : true};
-    // 这个不确定
-    accountAttributesMap['filter-explicit-content'] = {boolValue : true};
+    // 儿童不宜
+    // accountAttributesMap['filter-explicit-content'] = {boolValue : true};
     // 决定customize是否有效 有的用户没有此属性
     accountAttributesMap['com.spotify.madprops.use.ucs.product.state'] = {boolValue : true};
 
