@@ -7,10 +7,15 @@ const biliJson = {"nested":{"bilibili":{"nested":{"ad":{"nested":{"v1":{"options
 
 const url = $request.url;
 const method = $request.method;
+let headers = $response.headers;
 const postMethod = "POST";
 const isQuanX = typeof $task != "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
-const unGzipBody = pako.ungzip(binaryBody.slice(5));
+const gzipStrName = 'grpc-encoding';
+const isGzipCompress = headers[gzipStrName] === 'gzip';
+console.log(`isGzipCompress:${isGzipCompress}`);
+const unGzipBody = isGzipCompress ? pako.ungzip(binaryBody.slice(5)) : binaryBody;
+headers[gzipStrName] = 'identity';
 let body;
 const biliRoot = protobuf.Root.fromJSON(biliJson);
 let needProcessFlag = false;
@@ -114,21 +119,27 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
 if(needProcessFlag){
     console.log(`${body.byteLength}---${body.buffer.byteLength}`);
     if(isQuanX){
-        $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
+        $done({
+            bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset),
+            headers: headers
+        });
     } else {
-        $done({body});
+        $done({
+            body: body,
+            headers: headers
+        });
     }
 } else {
+    console.log('无需处理');
     $done({});
 }
 
 function processNewBody(unGzipBody){
-    const gzipBody = pako.gzip(unGzipBody);
-    const length = gzipBody.length;
+    const length = unGzipBody.length;
     let merge = new Uint8Array(5 + length);
-    merge.set(binaryBody.slice(0, 1), 0);
+    merge.set(new Uint8Array(1), 0);
     merge.set(intToUint8Array(length), 1);
-    merge.set(gzipBody, 5);
+    merge.set(unGzipBody, 5);
     return merge;
 }
 
