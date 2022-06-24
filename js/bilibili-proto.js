@@ -11,7 +11,12 @@ let headers = $response.headers;
 const postMethod = "POST";
 const isQuanX = typeof $task != "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
-const gzipStrName = 'grpc-encoding';
+let gzipStrName = 'grpc-encoding';
+if(!headers.hasOwnProperty(gzipStrName)){
+    // Loon做调整
+    console.log('响应头首字母大写');
+    gzipStrName = 'Grpc-Encoding';
+}
 const isGzipCompress = headers[gzipStrName] === 'gzip';
 console.log(`isGzipCompress:${isGzipCompress}`);
 const unGzipBody = isGzipCompress ? pako.ungzip(binaryBody.slice(5)) : binaryBody;
