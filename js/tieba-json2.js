@@ -170,9 +170,9 @@ if (url.indexOf("tiebaads/commonbatch") !== -1 && method === postMethod) {
 
     if (body.hasOwnProperty('lcs_strategy')) {
         // 控制长连接开关 开启时帖子会走socket
-        if (body.conn_conf === '0') {
+        if (body.lcs_strategy.conn_conf === '0') {
             // 关闭
-            body.conn_conf = '1';
+            body.lcs_strategy.conn_conf = '1';
             console.log('修改conn_conf');
         } else {
             console.log('无需修改conn_conf');
