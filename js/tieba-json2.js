@@ -124,6 +124,11 @@ if (url.indexOf("tiebaads/commonbatch") !== -1 && method === postMethod) {
                         // 禁止初始化穿山甲/广点通/快手
                         console.log(`禁止初始化${item.name}`);
                     }
+                    if (['android_use_httpdnssdk_new', 'ios_use_httpdnssdk_new'].includes(item.name)) {
+                        console.log(`item.name:${item.name}`);
+                        console.log(`item.value:${body.config.switch[i].type}`);
+                        body.config.switch[i].type = '0';
+                    }
                 }
             }
         }
