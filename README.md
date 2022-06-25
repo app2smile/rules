@@ -73,8 +73,7 @@
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf |
 
 ## 哔哩哔哩
-> 需要iOS15系统  
-> Surge打开视频播放页面时有概率会出现播放页卡住的情况,返回重新打开视频即可
+> 需要iOS15系统
 
 | 软件 | 链接 |
 | :-----| :---- |
@@ -84,8 +83,7 @@
 
 
 ## 贴吧
-> 需要iOS15系统  
-> 新回复等通知功能不可用,需手动点击App内的消息页查看
+> 需要iOS15系统
 
 | 软件 | 链接 |
 | :-----| :---- |
