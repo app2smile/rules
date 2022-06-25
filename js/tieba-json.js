@@ -127,6 +127,20 @@ if (url.indexOf("tiebaads/commonbatch") !== -1 && method === postMethod) {
         console.log("body:" + $response.body);
         $notification.post(notifiTitle, "贴吧-sync", "无ad_stlog_switch字段");
     }
+
+    if (body.hasOwnProperty('lcs_strategy')) {
+        // 控制长连接开关 开启时帖子会走socket
+        if (body.lcs_strategy.conn_conf === '0') {
+            // 关闭
+            body.lcs_strategy.conn_conf = '1';
+            console.log('修改conn_conf');
+        } else {
+            console.log('无需修改conn_conf');
+        }
+    } else {
+        console.log("body:" + $response.body);
+        $notification.post(notifiTitle, "贴吧-sync", "无lcs_strategy字段");
+    }
 } else {
     $notification.post(notifiTitle, "路径/请求方法匹配错误:", method + "," + url);
 }

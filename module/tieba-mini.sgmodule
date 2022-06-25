@@ -1,10 +1,9 @@
 #!name=贴吧部分去广告
-#!desc=1.开屏页广告 2.帖子看图模式广告去除 3.首页/帖子详情页右下角悬浮广告去除 副作用:新回复等通知功能不可用,需手动进入消息tab页点击查看
+#!desc=1.开屏页广告 2.帖子看图模式广告去除 3.首页/帖子详情页右下角悬浮广告去除
 
 
 [Rule]
-DOMAIN,180.76.76.200,REJECT-DROP
-IP-CIDR,180.76.76.200/32,no-resolve,REJECT-DROP
+RULE-SET,https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad.list,REJECT-DROP
 
 [Script]
 贴吧json = type=http-response,pattern=^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/(tiebaads\/commonbatch|c\/s\/sync),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json2.js,script-update-interval=0
