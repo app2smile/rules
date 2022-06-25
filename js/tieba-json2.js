@@ -125,9 +125,6 @@ if (url.indexOf("tiebaads/commonbatch") !== -1 && method === postMethod) {
                         console.log(`禁止初始化${item.name}`);
                     }
                 }
-                body.config.switch.push({
-                    ios_use_httpdnssdk_new : '0'
-                });
             }
         }
     } else {
