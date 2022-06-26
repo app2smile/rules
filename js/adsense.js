@@ -1,5 +1,6 @@
 const url = $request.url;
 const method = $request.method;
+console.log($response.body)
 let body = JSON.parse($response.body);
 
 const getMethod = "GET";
