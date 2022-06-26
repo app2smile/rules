@@ -19,7 +19,13 @@ if ((url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") !== -1
             console.log('广告为空');
         }
     } else {
-        body.message = null;
+        console.log(Object.keys(body));
+        body = {
+            "request_id": uuidv4(),
+            "status_code":20001,
+            "reason":112,
+            "desc":"该代码位请求量过大且消耗过低，因此填充率控制在10%以内，该策略每日生效，如果当天该代码位的消耗上涨或请求量小于5000，则次日不会命中该策略"
+        };
         console.log('成功');
     }
 } else if (url.indexOf('mi.gdt.qq.com') !== -1 && method === getMethod) {
@@ -54,3 +60,11 @@ body = JSON.stringify(body);
 $done({
     body
 });
+
+
+
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16).toUpperCase()
+    );
+}
