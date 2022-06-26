@@ -1,6 +1,11 @@
 const url = $request.url;
 const method = $request.method;
 //console.log($response.body)
+if($response.body === undefined){
+    // 穿山甲有概率会有此情况
+    console.log('$response.body为undefined');
+    $done({});
+}
 let body = JSON.parse($response.body);
 
 const getMethod = "GET";
@@ -13,7 +18,7 @@ if ((url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") !== -1
     console.log('穿山甲-get_ads');
     if (body.message === undefined) {
         console.log("body:" + $response.body);
-        // 错误码 https://www.pangle.cn/support/doc/5de4cc6d78c8690012a90aa5
+        // 错误码 https://www.csjplatform.com/supportcenter/5421
         if (!body.hasOwnProperty('status_code')) {
             $notification.post(noticeTitle, "穿山甲", "message/status_code字段错误");
         } else {
