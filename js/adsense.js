@@ -6,7 +6,9 @@ const getMethod = "GET";
 const postMethod = "POST";
 const noticeTitle = "广告联盟";
 
-if (url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") !== -1 && method === postMethod) {
+if ((url.indexOf("api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk") !== -1
+    || url.indexOf("is.snssdk.com/api/ad/union/sdk") !== -1 )
+    && method === postMethod) {
     console.log('穿山甲-get_ads');
     if (body.message === undefined) {
         console.log("body:" + $response.body);

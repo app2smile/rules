@@ -2,7 +2,7 @@
 #!desc=快手联盟,优量汇,穿山甲
 
 [MITM]
-hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, mi.gdt.qq.com, open.e.kuaishou.com
+hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, is.snssdk.com, mi.gdt.qq.com, open.e.kuaishou.com
 
 [Script]
-广告联盟json = type=http-response,pattern=^https:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/adsense.js
+广告联盟json = type=http-response,pattern=^https:\/\/((api-access\.pangolin-sdk-toutiao|is\.snssdk)\.com\/api\/ad\/union\/sdk\/get_ads|open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/adsense.js
