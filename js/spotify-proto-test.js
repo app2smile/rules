@@ -68,7 +68,14 @@ function processMap(accountAttributesMap){
     delete accountAttributesMap['ad-use-adlogic'];
     delete accountAttributesMap['ad-catalogues'];
 
+
+    delete accountAttributesMap['explicit-content-setting-hidden'];
     accountAttributesMap['premium-only-market-mobile'] = {boolValue : false};
+    accountAttributesMap['ab-watch-now'] = {boolValue : true};
+    accountAttributesMap['streaming'] = {boolValue : true};
+    accountAttributesMap['arsenal_country'] = {boolValue : true};
+
+
     // ab test
     // accountAttributesMap['ab-test-group'] = {longValue : 67};
     // accountAttributesMap['ab-mobile-discover'] = {longValue : 0};
