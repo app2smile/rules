@@ -70,10 +70,21 @@ function processMap(accountAttributesMap){
 
 
     delete accountAttributesMap['explicit-content-setting-hidden'];
+    delete accountAttributesMap['filter-age-restricted-content'];
+    delete accountAttributesMap['request-time'];
     accountAttributesMap['premium-only-market-mobile'] = {boolValue : false};
     accountAttributesMap['ab-watch-now'] = {boolValue : true};
     accountAttributesMap['streaming'] = {boolValue : true};
     accountAttributesMap['arsenal_country'] = {boolValue : true};
+    accountAttributesMap['shows-collection-jam'] = {boolValue : true};
+    accountAttributesMap['shows-collection'] = {boolValue : true};
+    accountAttributesMap['send-email'] = {boolValue : false};
+    accountAttributesMap['publish-playlist'] = {boolValue : false};
+    accountAttributesMap['payment-state'] = {stringValue : ''};
+    accountAttributesMap['your-episodes-remove-played-episodes'] = {stringValue : 'never'};
+    accountAttributesMap['ab-nft-navigation-menu'] = {stringValue : '2'};
+    accountAttributesMap['ab-sugarpills-sanity-check'] = {stringValue : '1'};
+    accountAttributesMap['ab-mobile-discover'] = {longValue : 1};
 
 
     // ab test
