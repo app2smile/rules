@@ -55,7 +55,7 @@ function processMap(accountAttributesMap){
     accountAttributesMap['can_use_superbird'] = {boolValue : true};
     accountAttributesMap['type'] = {stringValue : 'premium'};
 
-    // 新增的
+    // vip新增的
     accountAttributesMap['loudness-levels'] = {stringValue : '1:-9.0,0.0,3.0:-2.0'};
     accountAttributesMap['payments-initial-campaign'] = {stringValue : 'web'};
     accountAttributesMap['shuffle-eligible'] = {boolValue : true};
@@ -68,16 +68,17 @@ function processMap(accountAttributesMap){
     delete accountAttributesMap['ad-use-adlogic'];
     delete accountAttributesMap['ad-catalogues'];
 
+    accountAttributesMap['premium-only-market-mobile'] = {boolValue : false};
     // ab test
-    accountAttributesMap['ab-test-group'] = {longValue : 67};
-    accountAttributesMap['ab-mobile-discover'] = {longValue : 0};
-    accountAttributesMap['ab-navigation-menu'] = {longValue : 17};
-    accountAttributesMap['ab-sugarpills-sanity-check'] = {stringValue : '0'};
-    accountAttributesMap['ab-nft-navigation-menu'] = {stringValue : '3'};
-    accountAttributesMap['ab-desktop-hide-follow'] = {boolValue : false};
+    // accountAttributesMap['ab-test-group'] = {longValue : 67};
+    // accountAttributesMap['ab-mobile-discover'] = {longValue : 0};
+    // accountAttributesMap['ab-navigation-menu'] = {longValue : 17};
+    // accountAttributesMap['ab-sugarpills-sanity-check'] = {stringValue : '0'};
+    // accountAttributesMap['ab-nft-navigation-menu'] = {stringValue : '3'};
+    // accountAttributesMap['ab-desktop-hide-follow'] = {boolValue : false};
 
     // 不确定的字段
-    accountAttributesMap['social-session'] = {boolValue : true};
-    accountAttributesMap['head-files-url'] = {stringValue : 'https://heads-fa.scdn.co/head/{file_id}'};
-    accountAttributesMap['publish-playlist'] = {boolValue : true};
+    // accountAttributesMap['social-session'] = {boolValue : true};
+    // accountAttributesMap['head-files-url'] = {stringValue : 'https://heads-fa.scdn.co/head/{file_id}'};
+    // accountAttributesMap['publish-playlist'] = {boolValue : true};
 }
