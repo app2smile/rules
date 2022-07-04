@@ -102,6 +102,15 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") !== -1 && me
         body.data = null;
         console.log('成功');
     }
+} else if (url.indexOf("www.zhihu.com/api/v4/articles/") !== -1 && method === getMethod) {
+    console.log('知乎-articles回答下广告(搜索结果点进去回答下的广告)');
+    if (body.ad_info === undefined) {
+        console.log("body:" + $response.body);
+        $notification.post(noticeTitle, name, "articles-ad_info字段为undefined");
+    } else {
+        body.ad_info = null;
+        console.log('成功');
+    }
 } else if (url.indexOf("appcloud2.zhihu.com/v3/config") !== -1 && method === getMethod) {
     console.log('知乎-appcloud2 config配置');
     if (body.hasOwnProperty('config') && body.config.hasOwnProperty('zhcnh_thread_sync')
