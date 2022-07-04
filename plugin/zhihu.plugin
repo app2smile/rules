@@ -11,4 +11,4 @@ IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 hostname = api.zhihu.com, www.zhihu.com, appcloud2.zhihu.com
 
 [Script]
-http-response ^https:\/\/(appcloud2\.zhihu\.com\/v3\/config$|www\.zhihu\.com\/api\/v4\/(answers|articles)\/\d+\/recommendations|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|app_float_layer$)|questions\/\d+\/feeds\?|v4\/questions\/\d+\/answers\?)) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/zhihu.js, requires-body=true, timeout=10, tag=知乎json
+http-response ^https:\/\/(appcloud2\.zhihu\.com\/v3\/config$|www\.zhihu\.com\/api\/v4\/(answers\/\d+\/recommendations|articles\/\d+\/recommendation)|api\.zhihu\.com\/(topstory\/recommend|commercial_api\/(real_time_launch_v2|app_float_layer$)|questions\/\d+\/feeds\?|v4\/questions\/\d+\/answers\?)) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/zhihu.js, requires-body=true, timeout=10, tag=知乎json
