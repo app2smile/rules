@@ -2,6 +2,11 @@ const url = $request.url;
 const method = $request.method;
 const getMethod = "GET";
 const notifiTitle = "bilibili-json";
+if ($response.body === undefined) {
+    // 有undefined的情况
+    console.log(`$response.body为undefined:${url}`);
+    $done({});
+}
 let body = JSON.parse($response.body);
 
 
