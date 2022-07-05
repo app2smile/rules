@@ -24,7 +24,7 @@ headers[gzipStrName] = 'identity';
 let body;
 const biliRoot = protobuf.Root.fromJSON(biliJson);
 let needProcessFlag = false;
-if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
+if(url.includes("Dynamic/DynAll") && method === postMethod){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyMessage = dynAllReplyType.decode(unGzipBody);
@@ -63,7 +63,7 @@ if(url.indexOf("Dynamic/DynAll") !== -1 && method === postMethod){
     if(needProcessFlag){
         body = processNewBody(dynAllReplyType.encode(dynAllReplyMessage).finish());
     }
-} else if(url.indexOf("View/View") !== -1 && method === postMethod){
+} else if(url.includes("View/View") && method === postMethod){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
     let viewReplyMessage = viewReplyType.decode(unGzipBody);
@@ -142,7 +142,6 @@ if(needProcessFlag){
 function processNewBody(unGzipBody){
     const length = unGzipBody.length;
     let merge = new Uint8Array(5 + length);
-    merge.set(new Uint8Array(1), 0);
     merge.set(intToUint8Array(length), 1);
     merge.set(unGzipBody, 5);
     return merge;
