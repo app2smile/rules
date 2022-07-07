@@ -5,6 +5,7 @@
 - [腾讯新闻](#腾讯新闻)
 - [起点](#起点)
 - [Spotify](#spotify)
+- [Spotify歌词翻译](#spotify歌词翻译)
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
 
@@ -71,6 +72,11 @@
 | Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.module |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/spotify.plugin |
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf |
+
+
+## Spotify歌词翻译
+> https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-lyric.js
+
 
 ## 哔哩哔哩
 > 需要iOS15系统
