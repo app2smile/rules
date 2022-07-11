@@ -41,22 +41,22 @@ if (!body.hasOwnProperty('data')) {
             fixPos(body.data.top);
         }
         // 底部tab栏
-        // if (!body.data.hasOwnProperty('bottom')) {
-        //     console.log("body:" + $response.body);
-        //     $notification.post(notifiTitle, 'tab', "bottom字段错误");
-        // } else {
-        //     body.data.bottom = body.data.bottom.filter(item => {
-        //         if (item.name === '发布') {
-        //             console.log('去除发布');
-        //             return false;
-        //         } else if (item.name === '会员购') {
-        //             console.log('去除会员购');
-        //             return false;
-        //         }
-        //         return true;
-        //     });
-        //     fixPos(body.data.bottom);
-        // }
+        if (!body.data.hasOwnProperty('bottom')) {
+            console.log("body:" + $response.body);
+            $notification.post(notifiTitle, 'tab', "bottom字段错误");
+        } else {
+            body.data.bottom = body.data.bottom.filter(item => {
+                if (item.name === '发布') {
+                    console.log('去除发布');
+                    return false;
+                } else if (item.name === '会员购') {
+                    console.log('去除会员购');
+                    return false;
+                }
+                return true;
+            });
+            fixPos(body.data.bottom);
+        }
     } else if (url.indexOf("x/v2/feed/index") !== -1 && method === getMethod) {
         console.log('推荐页');
         if (!body.data.hasOwnProperty('items')) {
