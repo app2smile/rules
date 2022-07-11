@@ -13,7 +13,7 @@ const isQuanX = typeof $task != "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let gzipStrName = 'grpc-encoding';
 if(!headers.hasOwnProperty(gzipStrName)){
-    // Loon做调整
+    // Loon QX做调整
     console.log('响应头首字母大写');
     gzipStrName = 'Grpc-Encoding';
 }
@@ -126,12 +126,12 @@ if(needProcessFlag){
     if(isQuanX){
         $done({
             bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset),
-            headers: headers
+            headers
         });
     } else {
         $done({
-            body: body,
-            headers: headers
+            body,
+            headers
         });
     }
 } else {
