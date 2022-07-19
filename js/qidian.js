@@ -61,6 +61,14 @@ if (!body.Data) {
         } else {
             console.log('每日导读无数据');
         }
+    } else if (url.includes("v1/bookshelf/getHoverAdv") && method === getMethod) {
+        console.log('起点-书架悬浮广告');
+        if (body.Data.hasOwnProperty('ItemList') && body.Data.ItemList.length > 0) {
+            console.log('成功' + body.Data.ItemList.length);
+            body.Data.ItemList = [];
+        } else {
+            console.log('无需处理');
+        }
     } else if (url.indexOf("v1/client/getconf") !== -1 && method === postMethod) {
         console.log('起点-getconf');
         // 精选 和 发现 中间的活动配置
