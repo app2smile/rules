@@ -15,7 +15,7 @@ if (!body.hasOwnProperty('data')) {
     console.log("body:" + $response.body);
     $notification.post(notifiTitle, url, "data字段错误");
 } else {
-    if (url.indexOf("x/v2/splash") !== -1 && method === getMethod) {
+    if (url.includes("x/v2/splash") && method === getMethod) {
         console.log('开屏页' + (url.indexOf("splash/show") !== -1 ? 'show' : 'list'));
         if (!body.data.hasOwnProperty('show')) {
             // 有时候返回的数据没有show字段
@@ -24,7 +24,7 @@ if (!body.hasOwnProperty('data')) {
             delete body.data.show;
             console.log('成功');
         }
-    } else if (url.indexOf("resource/show/tab/v2") !== -1 && method === getMethod) {
+    } else if (url.includes("resource/show/tab/v2") && method === getMethod) {
         console.log('tab修改');
         // 顶部右上角
         if (!body.data.hasOwnProperty('top')) {
@@ -57,7 +57,7 @@ if (!body.hasOwnProperty('data')) {
             });
             fixPos(body.data.bottom);
         }
-    } else if (url.indexOf("x/v2/feed/index") !== -1 && method === getMethod) {
+    } else if (url.includes("x/v2/feed/index") && method === getMethod) {
         console.log('推荐页');
         if (!body.data.hasOwnProperty('items')) {
             console.log("body:" + $response.body);
@@ -84,8 +84,8 @@ if (!body.hasOwnProperty('data')) {
                                 }
                             }
                         }
-                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player'].includes(cardGoto)) {
-                        // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告
+                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player', 'ad_inline_3d'].includes(cardGoto)) {
+                        // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d 上方大的视频3d广告
                         console.log(`${cardGoto}广告去除)`);
                         return false;
                     } else if (cardType === 'small_cover_v10' && cardGoto === 'game') {
