@@ -65,33 +65,13 @@ if (url.indexOf("api.zhihu.com/commercial_api/real_time_launch_v2") !== -1 && me
         console.log('questions');
     }
     console.log('知乎-问题回答列表');
-    if (body.ad_info === undefined) {
+    if (body.data.ad_info === undefined) {
         // 个别问题回答列表无广告
         console.log("问题回答列表无广告");
     } else {
-        body.ad_info = null;
+        body.data.ad_info = null;
         console.log('成功');
     }
-    body.data = body.data.filter(item => {
-        if (item.hasOwnProperty("target_type") && item.target_type === 'answer'
-            && item.hasOwnProperty("target") && item.target.hasOwnProperty('attachment')
-            && item.target.attachment.hasOwnProperty('type') && item.target.attachment.type === 'video'
-            && item.target.attachment.hasOwnProperty('video') && item.target.attachment.video.hasOwnProperty('video_info')
-            && item.target.attachment.video.video_info.hasOwnProperty('video_id')) {
-            let videoID = item.target.attachment.attachment_id;
-            console.log(`feeds-video_id处理成功,原始:${item.target.attachment.video.video_info.video_id},修改为:${videoID}`);
-            item.target.attachment.video.video_info.video_id = videoID;
-        } else if (item.hasOwnProperty("answer_type") && item.answer_type === 'normal'
-            && item.hasOwnProperty("attachment") && item.attachment.hasOwnProperty('type')
-            && item.attachment.type === 'video' && item.attachment.hasOwnProperty('attachment_id')
-            && item.attachment.hasOwnProperty('video') && item.attachment.video.hasOwnProperty('video_info')
-            && item.attachment.video.video_info.hasOwnProperty('video_id')) {
-            let videoID = item.attachment.attachment_id;
-            console.log(`v4-answers-video_id处理成功,原始:${item.attachment.video.video_info.video_id},修改为:${videoID}`);
-            item.attachment.video.video_info.video_id = videoID;
-        }
-        return true;
-    });
 } else if (url.indexOf("www.zhihu.com/api/v4/answers") !== -1 && method === getMethod) {
     console.log('知乎-回答下的广告');
     if (body.paging === undefined || body.data === undefined) {
