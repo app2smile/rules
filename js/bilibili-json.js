@@ -64,7 +64,7 @@ if (!body.data) {
             $notification.post(notifiTitle, '推荐页', "items字段错误");
         } else {
             body.data.items = body.data.items.filter(i => {
-                const {cardType, cardGoto} = i;
+                const {card_type:cardType, card_goto:cardGoto} = i;
                 if (cardType && cardGoto) {
                     if (cardType === 'banner_v8' && cardGoto === 'banner') {
                         if (!i.banner_item) {
