@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const getMethod = "GET";
 const notifiTitle = "bilibili-json";
-if ($response.body === undefined) {
+if (!$response.body) {
     // 有undefined的情况
     console.log(`$response.body为undefined:${url}`);
     $done({});
@@ -10,14 +10,14 @@ if ($response.body === undefined) {
 let body = JSON.parse($response.body);
 
 
-if (!body.hasOwnProperty('data')) {
+if (!body.data) {
     console.log(url);
     console.log("body:" + $response.body);
     $notification.post(notifiTitle, url, "data字段错误");
 } else {
     if (url.includes("x/v2/splash") && method === getMethod) {
         console.log('开屏页' + (url.indexOf("splash/show") !== -1 ? 'show' : 'list'));
-        if (!body.data.hasOwnProperty('show')) {
+        if (!body.data.show) {
             // 有时候返回的数据没有show字段
             console.log('数据无show字段');
         } else {
@@ -27,7 +27,7 @@ if (!body.hasOwnProperty('data')) {
     } else if (url.includes("resource/show/tab/v2") && method === getMethod) {
         console.log('tab修改');
         // 顶部右上角
-        if (!body.data.hasOwnProperty('top')) {
+        if (!body.data.top) {
             console.log("body:" + $response.body);
             $notification.post(notifiTitle, 'tab', "top字段错误");
         } else {
@@ -41,7 +41,7 @@ if (!body.hasOwnProperty('data')) {
             fixPos(body.data.top);
         }
         // 底部tab栏
-        if (!body.data.hasOwnProperty('bottom')) {
+        if (!body.data.bottom) {
             console.log("body:" + $response.body);
             $notification.post(notifiTitle, 'tab', "bottom字段错误");
         } else {
@@ -59,21 +59,20 @@ if (!body.hasOwnProperty('data')) {
         }
     } else if (url.includes("x/v2/feed/index") && method === getMethod) {
         console.log('推荐页');
-        if (!body.data.hasOwnProperty('items')) {
+        if (!body.data.items) {
             console.log("body:" + $response.body);
             $notification.post(notifiTitle, '推荐页', "items字段错误");
         } else {
             body.data.items = body.data.items.filter(i => {
-                if (i.hasOwnProperty('card_type') && i.hasOwnProperty('card_goto')) {
-                    const cardType = i.card_type;
-                    const cardGoto = i.card_goto;
+                const {cardType, cardGoto} = i;
+                if (cardType && cardGoto) {
                     if (cardType === 'banner_v8' && cardGoto === 'banner') {
-                        if (!i.hasOwnProperty('banner_item')) {
+                        if (!i.banner_item) {
                             console.log("body:" + $response.body);
                             $notification.post(notifiTitle, '推荐页', "banner_item错误");
                         } else {
                             for (const v of i.banner_item) {
-                                if (!v.hasOwnProperty('type')) {
+                                if (!v.type) {
                                     console.log("body:" + $response.body);
                                     $notification.post(notifiTitle, '推荐页', "type错误");
                                 } else {

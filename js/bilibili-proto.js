@@ -7,10 +7,10 @@ const url = $request.url;
 const method = $request.method;
 let headers = $response.headers;
 const postMethod = "POST";
-const isQuanX = typeof $task != "undefined";
+const isQuanX = typeof $task !== "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let gzipStrName = 'grpc-encoding';
-if(!headers.hasOwnProperty(gzipStrName)){
+if(!headers[gzipStrName]){
     // Loon QX做调整
     console.log('响应头首字母大写');
     gzipStrName = 'Grpc-Encoding';
@@ -26,7 +26,7 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyMessage = dynAllReplyType.decode(unGzipBody);
-    if(!dynAllReplyMessage.hasOwnProperty('topicList') || dynAllReplyMessage.topicList === null){
+    if(!dynAllReplyMessage.topicList){
         console.log('topicList为空');
     } else {
         needProcessFlag = true;
@@ -34,7 +34,7 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
         console.log('推荐话题topicList去除');
     }
 
-    if(!dynAllReplyMessage.hasOwnProperty('upList') || dynAllReplyMessage.upList === null){
+    if(!dynAllReplyMessage.upList){
         console.log('upList为空');
     } else {
         needProcessFlag = true;
@@ -42,7 +42,7 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
         console.log('最常访问upList去除');
     }
 
-    if(!dynAllReplyMessage.dynamicList.hasOwnProperty('list') || dynAllReplyMessage.dynamicList.list === null || dynAllReplyMessage.dynamicList.list.length === 0){
+    if(!dynAllReplyMessage.dynamicList?.list?.length){
         console.log('动态列表list为空');
     } else {
         let adCount = 0;
@@ -65,17 +65,17 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
     let viewReplyMessage = viewReplyType.decode(unGzipBody);
-    if(!viewReplyMessage.hasOwnProperty('cms') || viewReplyMessage.cms === null || viewReplyMessage.cms.length === 0){
+    if(!viewReplyMessage.cms?.length){
         console.log('cms为空');
     } else {
         let adCount = 0;
         const sourceContentDtoType = biliRoot.lookupType("bilibili.ad.v1.SourceContentDto");
         for(let i = 0; i < viewReplyMessage.cms.length; i++){
             let item = viewReplyMessage.cms[i];
-            if(item.sourceContent !== null && item.sourceContent.hasOwnProperty('value')){
+            if(item.sourceContent?.value){
                 // 注意这里虽然proto没有属性value  但是viewReplyMessage解析的有
                 const sourceContentDtoMessage = sourceContentDtoType.decode(item.sourceContent.value);
-                if(sourceContentDtoMessage.hasOwnProperty('adContent')){
+                if(sourceContentDtoMessage.adContent){
                     adCount++;
                 }
             }
@@ -87,7 +87,7 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
         }
     }
 
-    if(!viewReplyMessage.hasOwnProperty('relates') || viewReplyMessage.relates === null || viewReplyMessage.relates.length === 0){
+    if(!viewReplyMessage.relates?.length){
         console.log('relates相关推荐为空');
     } else {
         let adCount = 0;
