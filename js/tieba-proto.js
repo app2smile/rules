@@ -94,7 +94,7 @@ if(isQuanX){
 function removeLive(threadList) {
     return threadList.filter(item => {
         if(item.alaInfo){
-            console.log('去除推荐的直播帖子)');
+            console.log('去除推荐的直播帖子');
             return false;
         }
         return true;
