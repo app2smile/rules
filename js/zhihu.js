@@ -52,7 +52,7 @@ if (url.includes("api.zhihu.com/commercial_api/real_time_launch_v2")) {
                     console.log(`market_card-videoID处理成功,原始:${item.fields.body.video.id},修改为:${videoID}`);
                     item.fields.body.video.id = videoID;
                 }
-            } else if (item.common_card?.feed_content?.video.id) {
+            } else if (item.common_card?.feed_content?.video?.id) {
                 let search = '"feed_content":{"video":{"id":';
                 let str = $response.body.substring($response.body.indexOf(search) + search.length);
                 let videoID = str.substring(0, str.indexOf(','));
