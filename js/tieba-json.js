@@ -140,9 +140,8 @@ $done({
 
 
 function getUrlParamValue(url, queryName) {
-    return url.substring(url.indexOf("?") + 1)
+    return Object.fromEntries(url.substring(url.indexOf("?") + 1)
         .split("&")
         .map(pair => pair.split("="))
-        .find(([k, v]) => k === queryName)
-        ?.[1];
+    )[queryName];
 }

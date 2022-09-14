@@ -26,32 +26,9 @@ $done({
     headers
 });
 
-/**
- * 根据参数名称获取url地址中的参数值
- * @param {*} url url
- * @param {*} queryName 参数名称
- * @returns 参数值 未获取到返回null
- */
 function getUrlParamValue(url, queryName) {
-    let i = url.indexOf("?");
-    if (i != -1 && i != url.length - 1) {
-        let arr = url.substring(i + 1).split('&');
-        for (let x = 0; x < arr.length; x++) {
-            let pair = arr[x].split('=');
-            if (pair.length == 2) {
-                if (pair[0] == queryName) {
-                    return pair[1];
-                }
-            } else {
-                console.log('url:' + url);
-                $notification.post(notifiTitle, '获取url参数', "pair错误");
-            }
-        }
-    } else {
-        console.log('url:' + url);
-        $notification.post(notifiTitle, '获取url参数', "i错误");
-        return null;
-    }
-    // 未匹配到queryName
-    return null;
+    return Object.fromEntries(url.substring(url.indexOf("?") + 1)
+        .split("&")
+        .map(pair => pair.split("="))
+    )[queryName];
 }

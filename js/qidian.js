@@ -7,19 +7,19 @@ const getMethod = "GET";
 const postMethod = "POST";
 
 if (!body.Data) {
-    console.log("body:" + $response.body);
+    console.log(`body:${$response.body}`);
     $notification.post(noticeTitle, "起点", "Data为空");
 } else {
-    if (url.indexOf("v4/client/getsplashscreen") !== -1 && method === getMethod) {
+    if (url.includes("v4/client/getsplashscreen") && method === getMethod) {
         console.log('起点-开屏页');
         if (!body.Data.List) {
-            console.log("body:" + $response.body);
+            console.log(`body:${$response.body}`);
             $notification.post(noticeTitle, "起点", "List字段空");
         } else {
             body.Data.List = null;
             console.log('List成功');
         }
-        if (body.Data.hasOwnProperty('EnableGDT')) {
+        if ('EnableGDT' in body.Data) {
             if (body.Data.EnableGDT === 1) {
                 body.Data.EnableGDT = 0;
                 console.log('EnableGDT成功');
@@ -27,22 +27,22 @@ if (!body.Data) {
                 console.log('无需修改EnableGDT');
             }
         } else {
-            console.log("body:" + $response.body);
+            console.log(`body:${$response.body}`);
             $notification.post(noticeTitle, "起点", "EnableGDT字段为空");
         }
 
-    } else if (url.indexOf("v2/deeplink/geturl") !== -1 && method === getMethod) {
+    } else if (url.includes("v2/deeplink/geturl") && method === getMethod) {
         console.log('起点-不跳转精选页');
-        if (body.Data.hasOwnProperty('ActionUrl') && body.Data.ActionUrl === 'QDReader://Bookstore') {
+        if (body.Data.ActionUrl === 'QDReader://Bookstore') {
             body.Data = null;
             console.log('成功');
         } else {
             console.log('无需处理,body:' + $response.body);
         }
-    } else if (url.indexOf("v1/adv/getadvlistbatch?positions=iOS_tab") !== -1 && method === getMethod) {
+    } else if (url.includes("v1/adv/getadvlistbatch?positions=iOS_tab") && method === getMethod) {
         console.log('起点-iOS_tab');
         if (!body.Data.iOS_tab) {
-            console.log("body:" + $response.body);
+            console.log(`body:${$response.body}`);
             $notification.post(noticeTitle, "起点-iOS_tab", "iOS_tab字段为空");
         } else {
             if (body.Data.iOS_tab.length === 0) {
@@ -52,10 +52,10 @@ if (!body.Data) {
                 console.log('成功');
             }
         }
-    } else if (url.indexOf("v1/dailyrecommend/getdailyrecommend") !== -1 && method === getMethod) {
+    } else if (url.includes("v1/dailyrecommend/getdailyrecommend") && method === getMethod) {
         // 需全新应用
         console.log('起点-每日导读');
-        if (body.Data.length !== 0) {
+        if (body.Data.length) {
             body.Data = [];
             console.log('成功');
         } else {
@@ -63,17 +63,17 @@ if (!body.Data) {
         }
     } else if (url.includes("v1/bookshelf/getHoverAdv") && method === getMethod) {
         console.log('起点-书架悬浮广告');
-        if (body.Data.hasOwnProperty('ItemList') && body.Data.ItemList.length > 0) {
+        if (body.Data.ItemList?.length) {
             console.log('成功' + body.Data.ItemList.length);
             body.Data.ItemList = [];
         } else {
             console.log('无需处理');
         }
-    } else if (url.indexOf("v1/client/getconf") !== -1 && method === postMethod) {
+    } else if (url.includes("v1/client/getconf") && method === postMethod) {
         console.log('起点-getconf');
         // 精选 和 发现 中间的活动配置
-        if (!body.Data.hasOwnProperty('ActivityPopup') || !body.Data.ActivityPopup.hasOwnProperty('Data')) {
-            console.log("body:" + $response.body);
+        if (!body.Data.ActivityPopup?.Data) {
+            console.log(`body:${$response.body}`);
             $notification.post(noticeTitle, "起点-getconf", "ActivityPopup/Data字段为空");
         } else {
             body.Data.ActivityPopup = null;
@@ -88,8 +88,8 @@ if (!body.Data) {
         }
 
         // QDReader://Bookshelf 书架右下角悬浮活动
-        if (!body.Data.hasOwnProperty('ActivityIcon') || body.Data.ActivityIcon.Type !== 0) {
-            console.log("body:" + $response.body);
+        if (body.Data.ActivityIcon?.Type !== 0) {
+            console.log(`body:${$response.body}`);
             $notification.post(noticeTitle, "起点-getconf", "ActivityIcon/Type字段错误");
         } else {
             // 无活动icon的情况下为{"EndTime":0,"StartTime":0,"Type":0}
@@ -105,12 +105,11 @@ if (!body.Data) {
         }
 
         // 功能增强:搜索页可以搜索用户
-        if (body.Data.EnableSearchUser !== "0") {
-            console.log("body:" + $response.body);
-            $notification.post(noticeTitle, "起点-getconf", "EnableSearchUser字段错误");
+        if (body.Data.EnableSearchUser === "1") {
+            console.log(`无需修改搜索用户配置`);
         } else {
             body.Data.EnableSearchUser = "1";
-            console.log('允许搜索用户成功');
+            console.log(`允许搜索用户成功:${body.Data.EnableSearchUser}`);
         }
 
         // if (body.Data.hasOwnProperty('EnableClipboardReading')) {

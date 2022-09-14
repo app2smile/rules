@@ -48,11 +48,11 @@ const isQX = commonApi.isQuanX();
 const binaryBody = isQX ? new Uint8Array($response.bodyBytes) : $response.body;
 const lyricJson = {"nested":{"ColorLyricsResponse":{"fields":{"lyrics":{"type":"LyricsResponse","id":1},"colors":{"type":"ColorData","id":2},"hasVocalRemoval":{"type":"bool","id":3},"vocalRemovalColors":{"type":"ColorData","id":4}}},"LyricsResponse":{"fields":{"syncType":{"type":"SyncTypeEnum","id":1},"lines":{"rule":"repeated","type":"LyricsLine","id":2},"provider":{"type":"string","id":3},"providerLyricsId":{"type":"string","id":4},"providerDisplayName":{"type":"string","id":5},"syncLyricsUri":{"type":"string","id":7},"isDenseTypeface":{"type":"bool","id":8},"language":{"type":"string","id":10},"isRtlLanguage":{"type":"bool","id":11},"fullscreenAction":{"type":"int32","id":12}}},"LyricsLine":{"fields":{"startTimeMs":{"type":"int64","id":1},"words":{"type":"string","id":2},"syllables":{"rule":"repeated","type":"Syllable","id":3}}},"Syllable":{"fields":{"startTimeMs":{"type":"int64","id":1},"numChars":{"type":"int64","id":2}}},"SyncTypeEnum":{"values":{"UNSYNCED":0,"LINE_SYNCED":1,"SYLLABLE_SYNCED":2}},"ColorData":{"fields":{"background":{"type":"int32","id":1},"text":{"type":"int32","id":2},"highlightText":{"type":"int32","id":3}}}}};
 const colorLyricsResponseType = protobuf.Root.fromJSON(lyricJson).lookupType("ColorLyricsResponse");
-const colorLyricsResponseMessage = colorLyricsResponseType.decode(binaryBody);
-const originLanguage = colorLyricsResponseMessage.lyrics.language;
+const colorLyricsResponseObj = colorLyricsResponseType.decode(binaryBody);
+const originLanguage = colorLyricsResponseObj.lyrics.language;
 if('z1' !== originLanguage){
     console.log(`歌词语言为:${originLanguage}`);
-    if (typeof $argument != 'undefined') {
+    if (typeof $argument !== 'undefined') {
         //console.log($argument);
         try {
           const params = Object.fromEntries(
@@ -68,12 +68,12 @@ if('z1' !== originLanguage){
     const {appid, securityKey} = options;
     //console.log(`appid:${appid},securityKey:${securityKey}`);
 
-    const query = colorLyricsResponseMessage.lyrics.lines
+    const query = colorLyricsResponseObj.lyrics.lines
         .map(x => x.words)
         .filter(words => words !== '♪')
         .filter((v, i, a) => a.indexOf(v) === i)
         .join('\n');
-    const salt = new Date().getTime();
+    const salt = Date.now();
     const queryObj = {
         q: query,
         from: 'auto',
@@ -107,7 +107,7 @@ if('z1' !== originLanguage){
                 $done({});
             } else {
                 console.log('翻译成功');
-                for (const line of colorLyricsResponseMessage.lyrics.lines) {
+                for (const line of colorLyricsResponseObj.lyrics.lines) {
                     baiduResult.trans_result
                         .filter(trans => trans.src === line.words)
                         // 因为采用了批量翻译,如果歌词为多种语言,只会翻译其中的一种语言
@@ -115,7 +115,7 @@ if('z1' !== originLanguage){
                         .map(trans => line.words = line.words + '(' + trans.dst + ')');
                 }
                 // 构造新数据
-                const body = colorLyricsResponseType.encode(colorLyricsResponseMessage).finish();
+                const body = colorLyricsResponseType.encode(colorLyricsResponseObj).finish();
                 if(isQX){
                     $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
                 } else {
