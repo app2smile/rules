@@ -7,7 +7,7 @@ const tiebaJson = {"nested":{"model":{"nested":{"Abstract":{"fields":{"text":{"t
 const tiebaRoot = protobuf.Root.fromJSON(tiebaJson);
 const url = $request.url;
 const method = $request.method;
-const isQuanX = typeof $task != "undefined";
+const isQuanX = typeof $task !== "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let body;
 
@@ -18,61 +18,68 @@ if($request.method !== 'POST'){
 if (url.includes("frs/page")) {
     console.log('贴吧-FrsPage');
     let frsPageResIdlType = tiebaRoot.lookupType("model.frs.FrsPageResIdl");
-    let frsPageResIdlMessage = frsPageResIdlType.decode(binaryBody);
+    let frsPageResIdlObj = frsPageResIdlType.decode(binaryBody);
 
-    if(frsPageResIdlMessage.data.hasOwnProperty("threadList")){
-        frsPageResIdlMessage.data.threadList = removeLive(frsPageResIdlMessage.data.threadList);
+    if(frsPageResIdlObj.data.threadList?.length){
+        frsPageResIdlObj.data.threadList = removeLive(frsPageResIdlObj.data.threadList);
+    } else {
+        console.log('无需处理threadList');
     }
-    if(frsPageResIdlMessage.data.hasOwnProperty('activityhead')
-        && frsPageResIdlMessage.data.activityhead != null
-        && frsPageResIdlMessage.data.activityhead.hasOwnProperty('isAd')
-        && frsPageResIdlMessage.data.activityhead.isAd){
+    if(frsPageResIdlObj.data.activityhead?.isAd){
         console.log('frs去除吧内header图片广告');
-        frsPageResIdlMessage.data.activityhead = null;
+        frsPageResIdlObj.data.activityhead = null;
+    } else {
+        console.log('无需处理activityhead');
     }
-    body = frsPageResIdlType.encode(frsPageResIdlMessage).finish();
+    body = frsPageResIdlType.encode(frsPageResIdlObj).finish();
 } else if (url.includes("frs/threadlist")) {
     console.log('贴吧-threadlist');
     let threadListResIdlType = tiebaRoot.lookupType("model.threadlist.ThreadListResIdl");
-    let threadListResIdlMessage = threadListResIdlType.decode(binaryBody);
+    let threadListResIdlObj = threadListResIdlType.decode(binaryBody);
 
-    body = threadListResIdlType.encode(threadListResIdlMessage).finish();
+    body = threadListResIdlType.encode(threadListResIdlObj).finish();
 } else if (url.includes("pb/page")) {
     console.log('贴吧-PbPage');
     let pbPageResIdlType = tiebaRoot.lookupType("model.pb.PbPageResIdl");
-    let pbPageResIdlMessage = pbPageResIdlType.decode(binaryBody);
-    if(pbPageResIdlMessage.data.hasOwnProperty("postList")){
-        let postList = pbPageResIdlMessage.data.postList;
-        for(let i = 0; i < postList.length; i++){
-            let post = postList[i];
-            if(post.hasOwnProperty("outerItem") && post.outerItem != null){
+    let pbPageResIdlObj = pbPageResIdlType.decode(binaryBody);
+    if(pbPageResIdlObj.data.postList?.length){
+        for (const post of pbPageResIdlObj.data.postList) {
+            if(post.outerItem){
                 console.log('outer_item去除');
                 post.outerItem = null;
             }
         }
+    } else {
+        console.log('无需处理postList中的outer_item');
     }
-    if(pbPageResIdlMessage.data.hasOwnProperty("recomAlaInfo") && pbPageResIdlMessage.data.recomAlaInfo.liveId != 0){
+    if(pbPageResIdlObj.data.recomAlaInfo?.liveId !== 0){
        console.log('帖子详情页推荐的直播广告去除');
-       pbPageResIdlMessage.data.recomAlaInfo = null;
+       pbPageResIdlObj.data.recomAlaInfo = null;
+    } else {
+        console.log('推荐页无直播广告');
     }
-    body = pbPageResIdlType.encode(pbPageResIdlMessage).finish();
+    body = pbPageResIdlType.encode(pbPageResIdlObj).finish();
 } else if (url.includes("excellent/personalized")) {
     console.log('贴吧-personalized');
     let personalizedResIdlType = tiebaRoot.lookupType("model.personalized.PersonalizedResIdl");
-    let personalizedResIdlMessage = personalizedResIdlType.decode(binaryBody);
-    if(personalizedResIdlMessage.data.hasOwnProperty("threadList")){
-        personalizedResIdlMessage.data.threadList = removeLive(personalizedResIdlMessage.data.threadList);
+    let personalizedResIdlObj = personalizedResIdlType.decode(binaryBody);
+    if(personalizedResIdlObj.data.threadList?.length){
+        personalizedResIdlObj.data.threadList = removeLive(personalizedResIdlObj.data.threadList);
+    } else {
+        console.log('无需处理threadList');
     }
-    if(personalizedResIdlMessage.data.liveAnswer != null){
+    if(personalizedResIdlObj.data.liveAnswer){
         console.log('去除推荐页上方的banner广告');
-        personalizedResIdlMessage.data.liveAnswer = null;
+        personalizedResIdlObj.data.liveAnswer = null;
+    } else {
+        console.log('推荐页无banner广告');
     }
-    body = personalizedResIdlType.encode(personalizedResIdlMessage).finish();
+    body = personalizedResIdlType.encode(personalizedResIdlObj).finish();
 } else if (url.includes("frs/generalTabList")) {
     console.log('贴吧-generalTabList');
     let generalTabListResIdlType = tiebaRoot.lookupType("model.generaltablelist.GeneralTabListResIdl");
-    let generalTabListResIdlMessage = generalTabListResIdlType.decode(binaryBody);
-    body = generalTabListResIdlType.encode(generalTabListResIdlMessage).finish();
+    let generalTabListResIdlObj = generalTabListResIdlType.decode(binaryBody);
+    body = generalTabListResIdlType.encode(generalTabListResIdlObj).finish();
 } else {
     $notification.post('贴吧proto去广告脚本错误', "url匹配错误:", url);
 }
@@ -86,8 +93,8 @@ if(isQuanX){
 
 function removeLive(threadList) {
     return threadList.filter(item => {
-        if(item.alaInfo != null){
-            console.log('thread_list去除ala_info不为null(推荐的直播帖子)');
+        if(item.alaInfo){
+            console.log('去除推荐的直播帖子)');
             return false;
         }
         return true;
