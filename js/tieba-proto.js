@@ -52,7 +52,7 @@ if (url.includes("frs/page")) {
     } else {
         console.log('无需处理postList中的outer_item');
     }
-    if(pbPageResIdlObj.data.recomAlaInfo?.liveId !== 0){
+    if(pbPageResIdlObj.data.recomAlaInfo?.liveId){
        console.log('帖子详情页推荐的直播广告去除');
        pbPageResIdlObj.data.recomAlaInfo = null;
     } else {
