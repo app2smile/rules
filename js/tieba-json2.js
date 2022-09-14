@@ -53,7 +53,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
 
     // 回帖栏的广告
     if ('advertisement_config' in body) {
-        if (!body.advertisement_config) {
+        if (!body.advertisement_config?.advertisement_str) {
             console.log('无需处理advertisement_config');
         } else {
             console.log(`advertisement_str:${body.advertisement_config.advertisement_str}`);
