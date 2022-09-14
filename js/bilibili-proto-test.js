@@ -6,7 +6,6 @@ const biliJson = {"nested":{"bilibili":{"nested":{"ad":{"nested":{"v1":{"options
 const url = $request.url;
 const method = $request.method;
 let headers = $response.headers;
-const postMethod = "POST";
 const isQuanX = typeof $task !== "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let gzipStrName = 'grpc-encoding';
@@ -22,76 +21,80 @@ headers[gzipStrName] = 'identity';
 let body;
 const biliRoot = protobuf.Root.fromJSON(biliJson);
 let needProcessFlag = false;
-if(url.includes("Dynamic/DynAll") && method === postMethod){
+if (method !== "POST") {
+    $notification.post(notifyTitle, "method错误:", method);
+}
+
+if(url.includes("Dynamic/DynAll")){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
-    let dynAllReplyMessage = dynAllReplyType.decode(unGzipBody);
-    if(!dynAllReplyMessage.topicList){
+    let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
+    if(!dynAllReplyObj.topicList){
         console.log('topicList为空');
     } else {
         needProcessFlag = true;
-        dynAllReplyMessage.topicList = null;
+        dynAllReplyObj.topicList = null;
         console.log('推荐话题topicList去除');
     }
 
-    if(!dynAllReplyMessage.upList){
+    if(!dynAllReplyObj.upList){
         console.log('upList为空');
     } else {
         needProcessFlag = true;
-        dynAllReplyMessage.upList = null;
+        dynAllReplyObj.upList = null;
         console.log('最常访问upList去除');
     }
 
-    if(!dynAllReplyMessage.dynamicList?.list?.length){
+    if(!dynAllReplyObj.dynamicList?.list?.length){
         console.log('动态列表list为空');
     } else {
         let adCount = 0;
-        dynAllReplyMessage.dynamicList.list = dynAllReplyMessage.dynamicList.list.filter(item => {
+        dynAllReplyObj.dynamicList.list = dynAllReplyObj.dynamicList.list.filter(item => {
             if(item.cardType !== 15){
                 return true;
             }
-            adCount ++;
+            adCount++;
             return false;
         });
-        if(adCount !== 0){
+        if(adCount){
             needProcessFlag = true;
         }
         console.log(`动态列表广告数量:${adCount}`);
     }
     if(needProcessFlag){
-        body = processNewBody(dynAllReplyType.encode(dynAllReplyMessage).finish());
+        body = processNewBody(dynAllReplyType.encode(dynAllReplyObj).finish());
     }
-} else if(url.includes("View/View") && method === postMethod){
+} else if(url.includes("View/View")){
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
-    let viewReplyMessage = viewReplyType.decode(unGzipBody);
-    if(!viewReplyMessage.cms?.length){
+    let viewReplyObj = viewReplyType.decode(unGzipBody);
+    if(!viewReplyObj.cms?.length){
         console.log('cms为空');
     } else {
         let adCount = 0;
         const sourceContentDtoType = biliRoot.lookupType("bilibili.ad.v1.SourceContentDto");
-        for(let i = 0; i < viewReplyMessage.cms.length; i++){
-            let item = viewReplyMessage.cms[i];
+        for(let i = 0; i < viewReplyObj.cms.length; i++){
+            let item = viewReplyObj.cms[i];
             if(item.sourceContent?.value){
                 // 注意这里虽然proto没有属性value  但是viewReplyMessage解析的有
-                const sourceContentDtoMessage = sourceContentDtoType.decode(item.sourceContent.value);
-                if(sourceContentDtoMessage.adContent){
+                const sourceContentDtoObj = sourceContentDtoType.decode(item.sourceContent.value);
+                if(sourceContentDtoObj.adContent){
                     adCount++;
                 }
             }
         }
-        viewReplyMessage.cms = [];
+        viewReplyObj.cms = [];
         console.log(`up主推荐广告:${adCount}`);
-        if(adCount !== 0){
+        if(adCount){
             needProcessFlag = true;
         }
     }
 
-    if(!viewReplyMessage.relates?.length){
+    if(!viewReplyObj.relates?.length){
         console.log('relates相关推荐为空');
     } else {
         let adCount = 0;
-        viewReplyMessage.relates = viewReplyMessage.relates.filter(item => {
+        viewReplyObj.relates = viewReplyObj.relates.filter(item => {
             if(item.goto === 'cm'){
                 adCount++;
                 return false;
@@ -99,12 +102,12 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
             return true;
         });
         console.log(`相关推荐广告:${adCount}`);
-        if(adCount !== 0){
+        if(adCount){
             needProcessFlag = true;
         }
     }
 
-    let tIconMap = viewReplyMessage.tIcon;
+    let tIconMap = viewReplyObj.tIcon;
     for (const i in tIconMap) {
         if(tIconMap[i] === null){
             // 解决tIcon的null is not an object问题
@@ -113,10 +116,10 @@ if(url.includes("Dynamic/DynAll") && method === postMethod){
         }
     }
     if(needProcessFlag){
-        body = processNewBody(viewReplyType.encode(viewReplyMessage).finish());
+        body = processNewBody(viewReplyType.encode(viewReplyObj).finish());
     }
 } else {
-    $notification.post('bilibili-proto', "路径/请求方法匹配错误:", method + "," + url);
+    $notification.post('bilibili-proto', "路径匹配错误:", url);
 }
 
 if(needProcessFlag){
