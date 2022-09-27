@@ -26,11 +26,16 @@ if (url.includes("r.inews.qq.com/gw/page/event_detail")) {
         name = '开屏页';
     } else if (url.includes("r.inews.qq.com/getQQNewsUnreadList")) {
         name = '要闻/财经等';
+    } else if (url.includes("r.inews.qq.com/news_feed/hot_module_list")) {
+        name = '财经精选-更多';
     } else if (url.includes("r.inews.qq.com/gw/event/list")) {
+        // 弃用
         name = '专题gw/event/list';
     } else if (url.includes("r.inews.qq.com/getTwentyFourHourNews")) {
+        // 弃用
         name = '热点精选getTwentyFourHourNews';
     } else if (url.includes("r.inews.qq.com/getQQNewsListItems")) {
+        // 弃用
         name = '热点精选getQQNewsListItems';
     } else if (url.includes("r.inews.qq.com/getTagFeedList")) {
         // 如地方专区下的 XX旅游 XX美食列表广告
