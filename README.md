@@ -38,13 +38,13 @@
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/vgtime.conf |
 
 ## 腾讯新闻
-> 不支持qx,脚本在qx上执行有问题,未解决  
 > 去开屏广告需要全新应用
 
 | 软件 | 链接 |
 | :-----| :---- |
 | Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/qqnews.sgmodule |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/qqnews.plugin |
+| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/qqnews.conf |
 
 
 ## 起点
