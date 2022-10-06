@@ -119,7 +119,7 @@ if(url.includes("Dynamic/DynAll")){
     if(needProcessFlag){
         body = processNewBody(viewReplyType.encode(viewReplyObj).finish());
     }
-} else if(url.includes("PlayURL/PlayView/View")){
+} else if(url.includes("PlayURL/PlayView")){
     console.log('PlayURL/PlayView/View');
     const playViewReplyType = biliRoot.lookupType("bilibili.app.playurl.PlayViewReply");
     let playViewReplyObj = playViewReplyType.decode(unGzipBody);
