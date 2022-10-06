@@ -17,6 +17,7 @@ if($request.method !== 'POST'){
 
 if (url.includes("frs/page")) {
     console.log('贴吧-FrsPage');
+    // model.frs.FrsPageResIdl 并不是json中的完整路径,但可以使用
     let frsPageResIdlType = tiebaRoot.lookupType("model.frs.FrsPageResIdl");
     let frsPageResIdlObj = frsPageResIdlType.decode(binaryBody);
 
