@@ -128,6 +128,18 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log(`body:${$response.body}`);
         $notification.post(notifyTitle, "贴吧-sync", "无lcs_strategy字段");
     }
+
+    if ('wl_config' in body) {
+        if (body.wl_config.ios_thread_proto === '0') {
+            body.wl_config.ios_thread_proto = '1';
+            console.log('修改ios_thread_proto');
+        } else {
+            console.log('无需修改ios_thread_proto');
+        }
+    } else {
+        console.log(`body:${$response.body}`);
+        $notification.post(notifyTitle, "贴吧-sync", "无wl_config字段");
+    }
 } else {
     $notification.post(notifyTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
