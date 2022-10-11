@@ -53,7 +53,7 @@ if (url.includes("frs/page")) {
        console.log('帖子详情页推荐的直播广告去除');
        pbPageResIdlObj.data.recomAlaInfo = null;
     } else {
-        console.log('推荐页无直播广告');
+        console.log('帖子详情页无直播广告');
     }
     body = pbPageResIdlType.encode(pbPageResIdlObj).finish();
 } else if (url.includes("excellent/personalized")) {
