@@ -128,18 +128,62 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log(`body:${$response.body}`);
         $notification.post(notifyTitle, "贴吧-sync", "无lcs_strategy字段");
     }
+} else if (url.includes("frs/page")) {
+    console.log('贴吧-FrsPage');
+    if (body.live_fuse_forum?.length) {
+        body.live_fuse_forum = [];
+        console.log(`去除吧头直播`);
+    } else {
+        console.log(`无需处理吧头直播`);
+    }
 
-    if ('wl_config' in body) {
-        if (body.wl_config.ios_thread_proto === '0') {
-            body.wl_config.ios_thread_proto = '1';
-            console.log('修改ios_thread_proto');
-        } else {
-            console.log('无需修改ios_thread_proto');
+    if (body.activityhead?.is_ad) {
+        body.activityhead = {};
+        console.log('去除吧内header图片广告');
+    } else {
+        console.log('无需处理activityhead');
+    }
+    body.thread_list = removeLive(body.thread_list);
+    if (body.forum?.banner_list?.app?.length) {
+        body.forum.banner_list.app.forEach(item => {
+            if (item.goods_info?.length) {
+                console.log(`去除goods_info`);
+                item.goods_info = [];
+            }
+        })
+    } else {
+        console.log(`无需处理goods_info`);
+    }
+} else if (url.includes("frs/threadlist")) {
+    console.log('贴吧-threadlist');
+    // TODO
+} else if (url.includes("pb/page")) {
+    console.log('贴吧-PbPage');
+    if (body.recom_ala_info?.live_id) {
+        console.log('帖子详情页推荐的直播广告去除');
+        body.recom_ala_info = null;
+    } else {
+        console.log('帖子详情页无直播广告');
+    }
+
+    if (body.post_list?.length) {
+        for (const post of body.post_list) {
+            if (post.outer_item) {
+                console.log('outer_item去除');
+                post.outer_item = null;
+            }
         }
     } else {
-        console.log(`body:${$response.body}`);
-        $notification.post(notifyTitle, "贴吧-sync", "无wl_config字段");
+        console.log('无需处理postList中的outer_item');
     }
+    removeGoodsInfo();
+} else if (url.includes("excellent/personalized")) {
+    console.log('贴吧-personalized');
+    removeGoodsInfo();
+    body.thread_list = removeLive(body.thread_list);
+} else if (url.includes("frs/generalTabList")) {
+    console.log('贴吧-generalTabList');
+    // TODO
 } else {
     $notification.post(notifyTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
@@ -156,4 +200,38 @@ function getUrlParamValue(url, queryName) {
         .split("&")
         .map(pair => pair.split("="))
     )[queryName];
+}
+
+function removeGoodsInfo() {
+    if (body.banner_list?.app?.length) {
+        body.banner_list.app.forEach(item => {
+            if (item.goods_info?.length) {
+                console.log(`去除goods_info`);
+                item.goods_info = [];
+            }
+        })
+    } else {
+        console.log(`无需处理goods_info`);
+    }
+}
+
+
+function removeLive(threadList) {
+    let newThreadList = threadList;
+    const beforeLength = threadList?.length;
+    if (beforeLength) {
+        newThreadList = threadList.filter(item => {
+            if (item.ala_info) {
+                console.log('去除推荐的直播帖子');
+                return false;
+            }
+            return true;
+        });
+        if (beforeLength === newThreadList.length) {
+            console.log("无推荐的直播帖子");
+        }
+    } else {
+        console.log('无需处理threadList');
+    }
+    return newThreadList;
 }

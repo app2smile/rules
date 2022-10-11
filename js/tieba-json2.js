@@ -143,8 +143,17 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     } else {
         console.log('无需处理activityhead');
     }
-    removeGoodsInfo();
     body.thread_list = removeLive(body.thread_list);
+    if (body.forum?.banner_list?.app?.length) {
+        body.forum.banner_list.app.forEach(item => {
+            if (item.goods_info?.length) {
+                console.log(`去除goods_info`);
+                item.goods_info = [];
+            }
+        })
+    } else {
+        console.log(`无需处理goods_info`);
+    }
 } else if (url.includes("frs/threadlist")) {
     console.log('贴吧-threadlist');
     // TODO
