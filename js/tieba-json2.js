@@ -67,15 +67,15 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     if ('config' in body) {
         if (body.config?.switch) {
             for (const item of body.config.switch) {
-                // if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
-                //     item.type = '0';
-                //     // 禁止初始化穿山甲/广点通/快手
-                //     console.log(`禁止初始化${item.name}`);
-                // }
-                if('ios_force_remove_splash_ad_logic' === item.name){
-                    item.type = "0"
-                    console.log(`关闭ios_force_remove_splash_ad_logic`)
+                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
+                    item.type = '0';
+                    // 禁止初始化穿山甲/广点通/快手
+                    console.log(`禁止初始化${item.name}`);
                 }
+                // if('ios_force_remove_splash_ad_logic' === item.name){
+                //     item.type = "0"
+                //     console.log(`关闭ios_force_remove_splash_ad_logic`)
+                // }
             }
         }
     } else {
