@@ -144,16 +144,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log('无需处理activityhead');
     }
     body.thread_list = removeLive(body.thread_list);
-    if (body.forum?.banner_list?.app?.length) {
-        body.forum.banner_list.app.forEach(item => {
-            if (item.goods_info?.length) {
-                console.log(`去除goods_info`);
-                item.goods_info = [];
-            }
-        })
-    } else {
-        console.log(`无需处理goods_info`);
-    }
+    removeGoodsInfo(body.forum?.banner_list?.app);
 } else if (url.includes("frs/threadlist")) {
     console.log('贴吧-threadlist');
     // TODO
@@ -176,10 +167,10 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     } else {
         console.log('无需处理postList中的outer_item');
     }
-    removeGoodsInfo();
+    removeGoodsInfo(body.banner_list?.app);
 } else if (url.includes("excellent/personalized")) {
     console.log('贴吧-personalized');
-    removeGoodsInfo();
+    removeGoodsInfo(body.banner_list?.app);
     body.thread_list = removeLive(body.thread_list);
 } else if (url.includes("frs/generalTabList")) {
     console.log('贴吧-generalTabList');
@@ -202,19 +193,25 @@ function getUrlParamValue(url, queryName) {
     )[queryName];
 }
 
-function removeGoodsInfo() {
-    if (body.banner_list?.app?.length) {
-        body.banner_list.app.forEach(item => {
+function removeGoodsInfo(app) {
+    if (app?.length) {
+        let goodsInfoSize = 0;
+        app.forEach(item => {
             if (item.goods_info?.length) {
-                console.log(`去除goods_info`);
+                goodsInfoSize++;
                 item.goods_info = [];
             }
         })
+        if (goodsInfoSize) {
+            console.log(`去除goods_info:${goodsInfoSize}`);
+        } else {
+            console.log(`app内无goods_info`)
+        }
+
     } else {
-        console.log(`无需处理goods_info`);
+        console.log(`app为空,无需处理`);
     }
 }
-
 
 function removeLive(threadList) {
     let newThreadList = threadList;
