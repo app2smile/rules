@@ -93,8 +93,8 @@ function removeArrAd(tempArr){
             const adStr3 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F456430508?.n12F7?.n13Ff4?.s;
             const videoAd1 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F412326366?.aa1F5?.aa2F2?.aa3F4?.s;
             const videoAd2 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F439968594?.n12F12?.n13F3?.s;
-            const videoAd3 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F376765142?.nnextf1?.s;
-            const existAdStr = adStr || adStr0 || adStr1 || adStr2 || adStr22 || adStr3 || videoAd1 || videoAd2 || videoAd3;
+            // const videoAd3 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F376765142?.nnextf1?.s;
+            const existAdStr = adStr || adStr0 || adStr1 || adStr2 || adStr22 || adStr3 || videoAd1 || videoAd2;
             if(existAdStr){
                 console.log(`ad title:${existAdStr}`);
                 el.n6F153515154.n7F172660663.n8F1.n9F168777401 = null;
