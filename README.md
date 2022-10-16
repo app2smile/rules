@@ -8,6 +8,7 @@
 - [Spotify歌词翻译](#spotify歌词翻译)
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
+- [YouTube首页](#youTube首页)
 
 **_点击下方各自链接,查看能去哪些广告_**
 
@@ -96,4 +97,14 @@
 | Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/tieba.sgmodule |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/tieba.plugin |
 | qx | Filter:https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad-qx.list  <br> Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/tieba-qx.conf |
+
+
+## YouTube首页
+> 需要系统版本>=iOS15
+
+| 软件 | 链接                                                                                                                                                                                  |
+| :-----|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/youtube.sgmodule                                                                                                    |
+| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/youtube.plugin                                                                                                      |
+| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/youtube-qx.conf   |
 
