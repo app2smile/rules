@@ -1,5 +1,6 @@
 #!name=YouTube首页去广告(>=iOS15)
 #!desc=目前只能去首页瀑布流广告
+# 仓库地址 https://github.com/app2smile/rules
 
 [MITM]
 hostname = %APPEND% youtubei.googleapis.com
