@@ -72,7 +72,7 @@ function removeArrAd(tempArr){
                 v.n12F3?.forEach?.(vv => {
                     const tempStr = vv.n13F1?.n14F158796380?.n15F1.s;
                     if(tempStr){
-                        console.log(`主页列表中间的多图广告:${tempStr}`);
+                        console.log(`列表中间的多图广告:${tempStr}`);
                         tempFLag = true;
                     }
                 });
