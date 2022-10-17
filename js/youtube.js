@@ -53,11 +53,12 @@ function removeAds(itemList){
 function removeArrAd(tempArr){
     tempArr?.forEach?.(el => {
         if(el.n6F153515154?.n7F172660663?.n8F1?.n9F168777401){
-            const adStr = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F454362329?.n12F8?.n13F4?.s;
-            const adStr0 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F224457493?.n12Ff2?.s;
-            const adStr2 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F224590612?.n12F2?.s3;
-            const adStr22 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F224590612?.n12F2?.s9;
-            const adStr3 = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5?.n11F394770629?.a12F8?.a13F4?.s;
+            const f5Value = el.n6F153515154.n7F172660663.n8F1.n9F168777401.n10F5;
+            const adStr = f5Value?.n11F454362329?.n12F8?.n13F4?.s;
+            const adStr0 = f5Value?.n11F224457493?.n12Ff2?.s;
+            const adStr2 = f5Value?.n11F224590612?.n12F2?.s3;
+            const adStr22 = f5Value?.n11F224590612?.n12F2?.s9;
+            const adStr3 = f5Value?.n11F394770629?.a12F8?.a13F4?.s;
             const existAdStr = adStr || adStr0  || adStr2 || adStr22 || adStr3;
             if(existAdStr){
                 console.log(`广告:${existAdStr}`);
