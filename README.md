@@ -8,7 +8,7 @@
 - [Spotify歌词翻译](#spotify歌词翻译)
 - [哔哩哔哩](#哔哩哔哩)
 - [贴吧](#贴吧)
-- [YouTube首页](#youTube首页)
+- [YouTube](#youTube)
 
 **_点击下方各自链接,查看能去哪些广告_**
 
@@ -99,7 +99,7 @@
 | qx | Filter:https://raw.githubusercontent.com/app2smile/rules/master/rule/tieba-ad-qx.list  <br> Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/tieba-qx.conf |
 
 
-## YouTube首页
+## YouTube
 > 需要系统版本>=iOS15
 
 | 软件 | 链接                                                                                                                                                                                  |
