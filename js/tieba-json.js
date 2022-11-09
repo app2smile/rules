@@ -2,6 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
+console.log(`贴吧json-2022.11.09`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -25,6 +26,13 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         } else {
             console.log('error_code不为0:' + body.error_code);
         }
+    }
+} else if (url.includes('c/f/pb/picpage')) {
+    console.log(`picpage`);
+    const liveLength = body.recom_live_list?.length;
+    if (liveLength) {
+        console.log(`去除直播:${liveLength}`);
+        body.recom_live_list = [];
     }
 } else if (url.includes('c/s/sync')) {
     // get post(贴吧使用了post)均可访问
@@ -128,7 +136,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log(`body:${$response.body}`);
         $notification.post(notifyTitle, "贴吧-sync", "无lcs_strategy字段");
     }
-} else if (url.includes("frs/page")) {
+} else if (url.includes("c/f/frs/page")) {
     console.log('贴吧-FrsPage');
     if (body.live_fuse_forum?.length) {
         body.live_fuse_forum = [];
@@ -145,10 +153,10 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     }
     body.thread_list = removeLive(body.thread_list);
     removeGoodsInfo(body.forum?.banner_list?.app);
-} else if (url.includes("frs/threadlist")) {
+} else if (url.includes("c/f/frs/threadlist")) {
     console.log('贴吧-threadlist');
     // TODO
-} else if (url.includes("pb/page")) {
+} else if (url.includes("c/f/pb/page")) {
     console.log('贴吧-PbPage');
     if (body.recom_ala_info?.live_id) {
         console.log('帖子详情页推荐的直播广告去除');
@@ -168,11 +176,11 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log('无需处理postList中的outer_item');
     }
     removeGoodsInfo(body.banner_list?.app);
-} else if (url.includes("excellent/personalized")) {
+} else if (url.includes("c/f/excellent/personalized")) {
     console.log('贴吧-personalized');
     removeGoodsInfo(body.banner_list?.app);
     body.thread_list = removeLive(body.thread_list);
-} else if (url.includes("frs/generalTabList")) {
+} else if (url.includes("c/f/frs/generalTabList")) {
     console.log('贴吧-generalTabList');
     // TODO
 } else {
