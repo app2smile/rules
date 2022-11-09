@@ -33,10 +33,10 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log(`去除直播:${liveLength}`);
         body.recom_live_list = [];
     }
-    if (body.show_adsense === '1') {
-        console.log(`不显示广告`);
-        body.show_adsense = '0';
-    }
+    // if (body.show_adsense === '1') {
+    //     console.log(`不显示广告`);
+    //     body.show_adsense = '0';
+    // }
 } else if (url.includes('c/s/sync')) {
     // get post(贴吧使用了post)均可访问
     console.log('贴吧-sync');
