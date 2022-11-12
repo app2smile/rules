@@ -7,24 +7,15 @@ if (method !== "POST") {
 }
 
 if (url.includes("r.inews.qq.com/gw/page/event_detail")) {
-    console.log('专题gw/page/event_detail');
-    if (body.data.widget_list) {
-        body.data.widget_list = body.data.widget_list.filter(item => {
-            if (item.widget_type === 'ad_list') {
-                console.log('去除ad_list广告');
-                return false;
-            }
-            return true;
-        });
-    } else {
-        console.log($response.body);
-        $notification.post('腾讯新闻App脚本错误', "event_detail", '无widget_list字段');
-    }
+    removeAdList('event_detail');
+} else if (url.includes("r.inews.qq.com/gw/page/channel_feed")) {
+    removeAdList('channel_feed');
 } else {
     let name = "";
     if (url.includes("news.ssp.qq.com/app")) {
         name = '开屏页';
     } else if (url.includes("r.inews.qq.com/getQQNewsUnreadList")) {
+        // 是否弃用,还需要验证
         name = '要闻/财经等';
     } else if (url.includes("r.inews.qq.com/news_feed/hot_module_list")) {
         name = '财经精选-更多';
@@ -58,3 +49,19 @@ body = JSON.stringify(body);
 $done({
     body
 });
+
+function removeAdList(name) {
+    console.log(`gw/page/${name}`);
+    if (body.data.widget_list) {
+        body.data.widget_list = body.data.widget_list.filter(item => {
+            if (item.widget_type === 'ad_list') {
+                console.log('去除ad_list广告');
+                return false;
+            }
+            return true;
+        });
+    } else {
+        console.log($response.body);
+        $notification.post('腾讯新闻App脚本错误', name, '无widget_list字段');
+    }
+}
