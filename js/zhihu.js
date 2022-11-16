@@ -1,5 +1,10 @@
 const url = $request.url;
 const method = $request.method;
+if (!$response.body) {
+    console.log(`$response.body为undefined:${url}`);
+    $done({});
+}
+
 const noticeTitle = "知乎去广告脚本错误";
 let body = JSON.parse($response.body);
 

@@ -1,5 +1,10 @@
 let url = $request.url;
 let method = $request.method;
+if (!$response.body) {
+    console.log(`$response.body为undefined:${url}`);
+    $done({});
+}
+
 let body = JSON.parse($response.body);
 
 if (method !== "POST") {
