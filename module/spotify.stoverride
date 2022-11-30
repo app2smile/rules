@@ -1,0 +1,18 @@
+name: Spotify解锁
+desc: 部分解锁premium,建议重新登录,音质不能设置为超高
+
+http:
+  mitm:
+    - 'spclient.wg.spotify.com'
+  script:
+    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+      name: smile_spotify
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
+
+script-providers:
+  smile_spotify:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
+    interval: 86400
