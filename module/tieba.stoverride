@@ -1,0 +1,26 @@
+name: 贴吧去广告
+desc: 开屏广告;推荐和吧内帖子列表的直播及广告;详情页直播/关联商品/广告;看图模式广告;首页和帖子详情页右下角悬浮广告;部分吧内的置顶/最新中间的广告/head图片广告/head直播
+
+http:
+  mitm:
+    - 'tiebac.baidu.com'
+  script:
+    - match: ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/(c\/(s\/sync|f\/(frs\/(page|threadlist|generalTabList)|pb\/(pic)?page|excellent\/personalized))$|tiebaads\/commonbatch\?)
+      name: smile_tieba_json
+      type: response
+      require-body: true
+      timeout: 10
+    - match: ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)\?cmd
+      name: smile_tieba_proto
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
+
+script-providers:
+  smile_tieba_json:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js
+    interval: 86400
+  smile_tieba_proto:
+      url: https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-proto.js
+      interval: 86400
