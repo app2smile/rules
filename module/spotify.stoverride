@@ -1,4 +1,4 @@
-name: Spotify解锁
+name: Spotify解锁(>=iOS15)
 desc: 部分解锁premium,建议重新登录,音质不能设置为超高
 
 http:
