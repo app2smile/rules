@@ -4,6 +4,7 @@ if (!$response.body) {
     console.log(`$response.body为undefined:${url}`);
     $done({});
 }
+console.log(`2022-12.6`)
 
 const noticeTitle = "知乎去广告脚本错误";
 let body = JSON.parse($response.body);
@@ -79,11 +80,12 @@ if (url.includes("api.zhihu.com/commercial_api/real_time_launch_v2")) {
         console.log('questions');
     }
     console.log('知乎-问题回答列表');
-    if (!body.data.ad_info) {
+    if (!body.data.ad_info && !body.ad_info) {
         // 个别问题回答列表无广告
         console.log("问题回答列表无广告");
     } else {
         body.data.ad_info = null;
+        body.ad_info = null;
         console.log('成功');
     }
 } else if (url.includes("www.zhihu.com/api/v4/answers")) {
