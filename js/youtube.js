@@ -60,7 +60,7 @@ function removeAds(itemList){
                     const adStr2 = f5Value?.n11F224590612?.n12F2?.s3;
                     const adStr22 = f5Value?.n11F224590612?.n12F2?.s9;
                     const adStr3 = f5Value?.n11F394770629?.a12F8?.a13F4?.s;
-                    const adStr4 = f5Value?.n11F232954548?.n12F19.s;
+                    const adStr4 = f5Value?.n11F232954548?.n12F19?.s;
                     const existAdStr = adStr || adStr0 || adStr1 || adStr2 || adStr22 || adStr3 || adStr4;
                     if(existAdStr){
                         console.log(`广告:${existAdStr}`);
