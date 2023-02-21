@@ -176,6 +176,11 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         console.log('无需处理postList中的outer_item');
     }
     removeGoodsInfo(body.banner_list?.app);
+    const bannerGoodsInfoLength = body.banner_list?.pb_banner_ad?.goods_info?.length;
+    if (bannerGoodsInfoLength) {
+        console.log(`去除pb_banner_ad的goods_info:${bannerGoodsInfoLength}`)
+        body.banner_list.pb_banner_ad.goods_info = []
+    }
 } else if (url.includes("c/f/excellent/personalized")) {
     console.log('贴吧-personalized');
     removeGoodsInfo(body.banner_list?.app);
