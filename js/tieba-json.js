@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2022.11.09`);
+console.log(`贴吧json-2023.02.21`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
