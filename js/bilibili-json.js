@@ -1,6 +1,7 @@
 const url = $request.url;
 const method = $request.method;
 const notifyTitle = "bilibili-json";
+console.log(`b站json-2023.03.24`);
 if (!$response.body) {
     // 有undefined的情况
     console.log(`$response.body为undefined:${url}`);
@@ -85,8 +86,8 @@ if (!body.data) {
                                 }
                             }
                         }
-                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player', 'ad_inline_3d'].includes(cardGoto)) {
-                        // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d 上方大的视频3d广告
+                    } else if (cardType === 'cm_v2' && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player', 'ad_inline_3d', 'ad_inline_eggs'].includes(cardGoto)) {
+                        // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d  上方大的视频3d广告 ad_inline_eggs 上方大的视频广告
                         console.log(`${cardGoto}广告去除)`);
                         return false;
                     } else if (cardType === 'small_cover_v10' && cardGoto === 'game') {
