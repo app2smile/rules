@@ -1,6 +1,5 @@
 # 目录
 - [广告联盟](#广告联盟)
-- [vgTime](#vgtime)
 - [腾讯新闻](#腾讯新闻)
 - [起点](#起点)
 - [Spotify](#spotify)
@@ -19,16 +18,6 @@
 | Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.sgmodule |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/adsense.plugin |
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.conf |
-
-## vgTime
-> 去开屏广告需要全新应用  
-> 若要去新闻列表穿山甲的广告需要搭配`广告联盟`模块
-
-| 软件 | 链接 |
-| :-----| :---- |
-| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/vgtime.sgmodule |
-| Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/vgtime.plugin |
-| qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/vgtime.conf |
 
 ## 腾讯新闻
 > 去开屏广告需要全新应用
