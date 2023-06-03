@@ -112,7 +112,7 @@ if(url.includes("Dynamic/DynAll")){
     } else {
         let adCount = 0;
         viewReplyObj.relates = viewReplyObj.relates.filter(item => {
-            if(item.goto === 'cm'){
+            if(item.cm){
                 adCount++;
                 return false;
             }
