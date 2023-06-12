@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2023.06.12.1`);
+console.log(`贴吧json-2023.06.12.2`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -193,7 +193,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     }
 } else if (url.includes("c/f/frs/generalTabList")) {
     console.log('贴吧-generalTabList');
-    // TODO
+    removeGoodsInfo(body.app_list);
 } else {
     $notification.post(notifyTitle, "路径/请求方法匹配错误:", method + "," + url);
 }
