@@ -1,5 +1,5 @@
 name: Spotify解锁(>=iOS15)
-desc: 部分解锁premium,建议重新登录,音质不能设置为超高
+desc: 部分解锁premium,建议重新登录,并清除缓存,音质不能设置为超高
 
 http:
   mitm:
@@ -11,8 +11,15 @@ http:
       require-body: true
       binary-mode: true
       timeout: 10
+    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+      name: smile_spotify_json
+      type: request
+      timeout: 10
 
 script-providers:
   smile_spotify:
     url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
+    interval: 86400
+  smile_spotify_json:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
     interval: 86400
