@@ -119,7 +119,7 @@ if('z1' !== originLanguage){
                     }
                 });
                 // 构造新数据
-                const body = ColorLyricsResponse.encode(colorLyricsResponseObj).finish();
+                const body = ColorLyricsResponse.toBinary(colorLyricsResponseObj);
                 if(isQX){
                     $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
                 } else {
