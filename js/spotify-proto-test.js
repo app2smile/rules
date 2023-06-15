@@ -20,6 +20,9 @@ if(url.includes("bootstrap/v1/bootstrap") && method === postMethod){
     console.log('bootstrap');
 } else if(url.includes("user-customization-service/v1/customize") && method === postMethod){
     const ucsResponseWrapperObj = UcsResponseWrapper.fromBinary(binaryBody,{readUnknownField: true});
+    for (let key in ucsResponseWrapperObj) {
+        console.log(`key:${key}`)
+    }
     accountAttributesMapObj = ucsResponseWrapperObj.success.accountAttributesSuccess.accountAttributes;
     processMapObj(accountAttributesMapObj);
     body = UcsResponseWrapper.toBinary(ucsResponseWrapperObj);
