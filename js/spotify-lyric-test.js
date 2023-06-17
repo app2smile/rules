@@ -67,7 +67,7 @@ if('z1' !== originLanguage){
 
     const query = colorLyricsResponseObj.lyrics.lines
         .map(x => x.words)
-        .filter(words => words !== '♪')
+        .filter(words => words && words !== '♪')
         .filter((v, i, a) => a.indexOf(v) === i)
         .join('\n');
     const salt = Date.now();
@@ -108,11 +108,13 @@ if('z1' !== originLanguage){
                 const transArr = baiduResult.trans_result.filter(trans => trans.src !== trans.dst)
                     .map(trans => [trans.src, trans.dst]);
                 const transMap = new Map(transArr);
-                colorLyricsResponseObj.lyrics.lines.forEach(line => {
-                    const dst = transMap.get(line.words);
-                    if(dst){
-                        line.words = `${line.words}(${dst})`;
-                    }
+                if(!colorLyricsResponseObj.lyrics.alternatives){
+                    colorLyricsResponseObj.lyrics.alternatives = [];
+                }
+                colorLyricsResponseObj.lyrics.alternatives.push({
+                    "language" : "z1",
+                    "lines" : colorLyricsResponseObj.lyrics.lines.map(line => line.words)
+                        .map(word => transMap.get(word) || word || '')
                 });
                 // 构造新数据
                 const body = ColorLyricsResponse.toBinary(colorLyricsResponseObj);
