@@ -11,7 +11,7 @@ http:
       type: response
       require-body: true
       timeout: 10
-    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.(view\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll|playurl\.v1\.PlayURL\/PlayView)$
+    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.((view|viewunite)\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll|playurl\.v1\.PlayURL\/PlayView)$
       name: smile_bili_proto
       type: response
       require-body: true
