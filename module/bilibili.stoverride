@@ -1,5 +1,5 @@
-name: bilibili去广告(>=iOS15)
-desc: 解除部分视频后台限制,开屏页广告,推荐页广告,动态(最常访问/推荐话题/列表广告),视频播放页面(up主推荐广告,相关推荐广告)
+name: bilibili去广告8.13(>=iOS15)
+desc: 开屏页广告,推荐页广告,动态(最常访问/推荐话题/列表广告),视频播放页面(up主推荐广告)
 
 http:
   mitm:
@@ -11,7 +11,7 @@ http:
       type: response
       require-body: true
       timeout: 10
-    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.((view|viewunite)\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll|playurl\.v1\.PlayURL\/PlayView)$
+    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.(viewunite\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll)$
       name: smile_bili_proto
       type: response
       require-body: true
