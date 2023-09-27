@@ -51,7 +51,7 @@
 
 | 软件 | 链接 |
 | :-----| :---- |
-| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.module |
+| Surge | https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.sgmodule |
 | Loon | https://raw.githubusercontent.com/app2smile/rules/master/plugin/spotify.plugin |
 | qx | Rewrite:https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf |
 
