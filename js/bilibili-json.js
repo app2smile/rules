@@ -1,7 +1,7 @@
 const url = $request.url;
 const method = $request.method;
 const notifyTitle = "bilibili-json";
-console.log(`b站json-2023.03.24`);
+console.log(`b站json-2023.10.22`);
 if (!$response.body) {
     // 有undefined的情况
     console.log(`$response.body为undefined:${url}`);
@@ -52,7 +52,7 @@ if (!body.data) {
                 if (item.name === '发布') {
                     console.log('去除发布');
                     return false;
-                } else if (item.name === '会员购') {
+                } else if (item.name === '会员购' || item.tab_id === '会员购Bottom') {
                     console.log('去除会员购');
                     return false;
                 }
