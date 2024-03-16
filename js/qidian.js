@@ -57,11 +57,10 @@ if (!body.Data) {
                 console.log('成功');
             }
         }
-    } else if (url.includes("v1/dailyrecommend/getdailyrecommend") && method === getMethod) {
-        // 需全新应用
+    } else if (url.includes("v2/dailyrecommend/getdailyrecommend") && method === getMethod) {
         console.log('起点-每日导读');
-        if (body.Data.length) {
-            body.Data = [];
+        if (body.Data.Items?.length) {
+            body.Data.Items = [];
             console.log('成功');
         } else {
             console.log('每日导读无数据');
