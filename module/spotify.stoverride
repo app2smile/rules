@@ -1,5 +1,5 @@
 name: Spotify解锁(>=iOS15)
-desc: 部分解锁premium,建议重新登录,并清除缓存,音质不能设置为超高
+desc: 2023.10.04部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
 
 http:
   mitm:
