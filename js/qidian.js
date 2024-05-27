@@ -37,12 +37,14 @@ if (!body.Data) {
         }
 
     } else if (url.includes("v2/deeplink/geturl") && method === getMethod) {
-        console.log('起点-不跳转精选页');
-        if (body.Data.ActionUrl === 'QDReader://Bookstore') {
-            body.Data = null;
+        console.log(`起点-不跳转精选页:${body.Data.ActionUrl}`);
+        if (body.Data.ActionUrl) {
+            // QDReader://Bookstore
+            // QDReader://Bookstore?query={"abGroupId": "b", "lastReadBarEnabled": "1"}
             console.log('成功');
+            body.Data.ActionUrl = '';
         } else {
-            console.log('无需处理,body:' + $response.body);
+            console.log('无需处理');
         }
     } else if (url.includes("v1/adv/getadvlistbatch?positions=iOS_tab") && method === getMethod) {
         console.log('起点-iOS_tab');
