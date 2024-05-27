@@ -3,7 +3,7 @@
 #!openUrl=https://github.com/app2smile/rules
 # 功能: 1.去除播放广告 2.歌手/专辑列表正常展示 3.去除随机播放
 
-[URL Rewrite]
+[Rewrite]
 ^https:\/\/spclient\.wg\.spotify\.com\/user-customization-service\/v1\/customize$ header-del if-none-match
 
 [Mitm]
