@@ -1,7 +1,10 @@
 #!name=Spotify(>=iOS15)
-#!desc=2023.10.04部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
+#!desc=2024.05.27 部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
 #!openUrl=https://github.com/app2smile/rules
 # 功能: 1.去除播放广告 2.歌手/专辑列表正常展示 3.去除随机播放
+
+[URL Rewrite]
+^https:\/\/spclient\.wg\.spotify\.com\/user-customization-service\/v1\/customize$ header-del if-none-match
 
 [Mitm]
 hostname =spclient.wg.spotify.com
