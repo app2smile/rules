@@ -75,8 +75,8 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     if ('config' in body) {
         if (body.config?.switch) {
             for (const item of body.config.switch) {
-                // 穿山甲/广点通/快手/HttpDns切换ip
-                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init', 'ios_use_httpdnssdk'].includes(item.name)) {
+                // 穿山甲/广点通/快手
+                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
                     if (item.type !== '0'){
                         item.type = '0';
                         console.log(`禁止初始化${item.name}`);
