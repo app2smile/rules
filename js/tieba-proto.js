@@ -152,13 +152,7 @@ function removeThread(threadList, filterVideo) {
             }
             return true;
         });
-        if(liveCount){
-            console.log(`去除直播帖子:${liveCount}`);
-        } else if(videoCount){
-            console.log(`去除视频帖子:${videoCount}`);
-        } else {
-            console.log("无需处理threadList");
-        }
+        console.log(`去除帖子:直播${liveCount} / 视频${videoCount}`)
     } else {
         console.log('无需处理threadList');
     }
