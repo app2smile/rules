@@ -59,12 +59,6 @@ if (!body.Data) {
                 console.log('成功');
             }
         }
-    } else if (url.includes("v1/young/getconf") && method === getMethod) {
-        console.log('起点-young');
-        // if (body.Data) {
-        //     body.Data = null;
-        //     console.log('去除青少年模式弹框')
-        // }
     } else if (url.includes("v2/dailyrecommend/getdailyrecommend") && method === getMethod) {
         console.log('起点-每日导读');
         if (body.Data.Items?.length) {
@@ -98,7 +92,10 @@ if (!body.Data) {
         } else {
             console.log(`无需修改WolfEye:${body.Data.WolfEye}`);
         }
-        body.Data.CloudSetting.TeenShowFreq = '0';
+        if(body.Data.CloudSetting?.TeenShowFreq === '1'){
+            body.Data.CloudSetting.TeenShowFreq = '0';
+            console.log('去除青少年模式弹框');
+        }
         // QDReader://Bookshelf 书架右下角悬浮活动
         if (body.Data.ActivityIcon?.Type !== 0) {
             console.log(`body:${$response.body}`);
