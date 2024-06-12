@@ -59,6 +59,12 @@ if (!body.Data) {
                 console.log('成功');
             }
         }
+    } else if (url.includes("v1/young/getconf") && method === getMethod) {
+        console.log('起点-young');
+        if (body.Data.TeenShowFreq === 1) {
+            body.Data.TeenShowFreq = 0;
+            console.log('去除青少年模式弹框')
+        }
     } else if (url.includes("v2/dailyrecommend/getdailyrecommend") && method === getMethod) {
         console.log('起点-每日导读');
         if (body.Data.Items?.length) {
@@ -76,7 +82,7 @@ if (!body.Data) {
             console.log('无需处理');
         }
     } else if (url.includes("v1/client/getconf") && method === postMethod) {
-        console.log('起点-getconf');
+        console.log('起点-client/getconf');
         // 精选 和 发现 中间的活动配置
         if (!body.Data.ActivityPopup?.Data) {
             console.log(`body:${$response.body}`);
