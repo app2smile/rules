@@ -61,10 +61,10 @@ if (!body.Data) {
         }
     } else if (url.includes("v1/young/getconf") && method === getMethod) {
         console.log('起点-young');
-        if (body.Data) {
-            body.Data = null;
-            console.log('去除青少年模式弹框')
-        }
+        // if (body.Data) {
+        //     body.Data = null;
+        //     console.log('去除青少年模式弹框')
+        // }
     } else if (url.includes("v2/dailyrecommend/getdailyrecommend") && method === getMethod) {
         console.log('起点-每日导读');
         if (body.Data.Items?.length) {
