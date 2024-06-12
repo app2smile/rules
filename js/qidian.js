@@ -98,7 +98,7 @@ if (!body.Data) {
         } else {
             console.log(`无需修改WolfEye:${body.Data.WolfEye}`);
         }
-
+        body.Data.CloudSetting.TeenShowFreq = '0';
         // QDReader://Bookshelf 书架右下角悬浮活动
         if (body.Data.ActivityIcon?.Type !== 0) {
             console.log(`body:${$response.body}`);
