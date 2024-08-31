@@ -86,7 +86,7 @@ if (!body.data) {
                                 }
                             }
                         }
-                    } else if ((cardType === 'cm_v1' || cardType === 'cm_v2') && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player', 'ad_inline_3d', 'ad_inline_eggs'].includes(cardGoto)) {
+                    } else if ((cardType === 'cm_v1' || cardType === 'cm_v2' || cardType === 'large_cover_v1' || cardType === 'banner_ipad_v8') && ['ad_web_s', 'ad_av', 'ad_web_gif', 'ad_player', 'ad_inline_3d', 'ad_inline_eggs', 'banner'].includes(cardGoto)) {
                         // ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d  上方大的视频3d广告 ad_inline_eggs 上方大的视频广告
                         console.log(`${cardGoto}广告去除)`);
                         return false;
