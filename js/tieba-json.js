@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2024.06.08`);
+console.log(`贴吧json-2024.10.20`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -76,8 +76,9 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         if (body.config?.switch) {
             for (const item of body.config.switch) {
                 // 穿山甲/广点通/快手
-                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init'].includes(item.name)) {
-                    if (item.type !== '0'){
+                if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init',
+                    'platform_baidu_bqt_init', 'platform_jy_init'].includes(item.name)) {
+                    if (item.type !== '0') {
                         item.type = '0';
                         console.log(`禁止初始化${item.name}`);
                     }
@@ -187,7 +188,7 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     console.log('贴吧-personalized');
     removeGoodsInfo(body.banner_list?.app);
     body.thread_list = removeLive(body.thread_list);
-    if(body.live_answer){
+    if (body.live_answer) {
         console.log('去除推荐页上方的banner广告');
         body.live_answer = null;
     } else {
