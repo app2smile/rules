@@ -35,11 +35,13 @@ if(url.includes("viewunite.v1.View/View")){
     console.log('新视频播放页viewunite View');
     const viewReplyObj = ViewReply.fromBinary(unGzipBody,{readUnknownField: true});
     if(viewReplyObj.cm?.sourceContent?.length){
+        console.log('cm.sourceContent');
         viewReplyObj.cm.sourceContent = [];
     }
     if(viewReplyObj.cm?.sourceContentItem?.length){
         viewReplyObj.cm.sourceContentItem.forEach(item => {
             if(item.sourceContent){
+                console.log('sourceContentItem-sourceContent')
                 item.sourceContent = null;
             }
         });
