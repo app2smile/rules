@@ -1,9 +1,8 @@
-#!name=bilibiliTest
-#!desc=Test
+#!name=bilibilitest
 
 [MITM]
 hostname = %APPEND% app.bilibili.com, grpc.biliapi.net
 
 [Script]
 bili-json = type=http-response,pattern=^https:\/\/app\.bilibili\.com\/x\/(v2\/(splash\/(list|show)|feed\/index\?)|resource\/show\/tab\/v2),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/bilibili-json.js,script-update-interval=0
-bili-proto = type=http-response,pattern=^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.((view|viewunite)\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll|playurl\.v1\.PlayURL\/PlayView)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/bilibili-proto-test.js,script-update-interval=0
+bili-proto = type=http-response,pattern=^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.(viewunite\.v1\.View\/View|dynamic\.v2\.Dynamic\/DynAll)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/bilibili-proto-test.js,script-update-interval=0
