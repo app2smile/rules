@@ -97,9 +97,14 @@ if(resStatus !== 200) {
         const argOptions = {
             per_filter_video_thread: 0,
         };
-        if (typeof $argument !== 'undefined') {
-            const params = Object.fromEntries($argument.split('&').map(item => item.split('=')));
-            Object.assign(argOptions, params);
+        switch (typeof $argument) {
+            case 'string':
+                const params = Object.fromEntries($argument.split('&').map(item => item.split('=')));
+                Object.assign(argOptions, params);
+                break;
+            case 'object':
+                Object.assign(argOptions, $argument);
+                break;
         }
 
         const personalizedResIdlObj = PersonalizedResIdl.fromBinary(binaryBody,{readUnknownField: true});
