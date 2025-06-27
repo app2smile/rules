@@ -1,18 +1,18 @@
 name: Spotify解锁(>=iOS15)
-desc: 2025.06.20部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
+desc: 2025.06.27部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
 
 http:
   mitm:
     - 'spclient.wg.spotify.com'
-    - 'guc3-spclient.spotify.com'
+    - '*spclient.spotify.com'
   script:
-    - match: ^https:\/\/(spclient\.wg\.spotify\.com|guc3-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
       name: smile_spotify
       type: response
       require-body: true
       binary-mode: true
       timeout: 10
-    - match: ^https:\/\/(spclient\.wg\.spotify\.com|guc3-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
       name: smile_spotify_json
       type: request
       timeout: 10
