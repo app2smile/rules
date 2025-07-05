@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2025.07.05`);
+console.log(`贴吧json-2025.07.05-1`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -72,6 +72,11 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
         $notification.post(notifyTitle, "贴吧-sync", "无advertisement_config字段");
     }
 
+    // 部分广告配置在abtest中
+    if (body.cloud_control_data_info?.common_config?.external_abtest_switch) {
+        console.log(`去除external_abtest_switch:${body.cloud_control_data_info.common_config.external_abtest_switch}`);
+        body.cloud_control_data_info.common_config.external_abtest_switch = null;
+    }
     if ('config' in body) {
         if (body.config?.switch) {
             for (const item of body.config.switch) {
