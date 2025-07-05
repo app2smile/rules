@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2024.10.20`);
+console.log(`贴吧json-2025.07.05`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -75,9 +75,9 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
     if ('config' in body) {
         if (body.config?.switch) {
             for (const item of body.config.switch) {
-                // 穿山甲/广点通/快手
+                // 穿山甲/广点通/快手/Ubix/百青藤/
                 if (['platform_csj_init', 'platform_ks_init', 'platform_gdt_init',
-                    'platform_baidu_bqt_init', 'platform_jy_init'].includes(item.name)) {
+                    'platform_baidu_bqt_init', 'platform_jy_init', 'platform_ubix_init', 'platform_hw_init'].includes(item.name)) {
                     if (item.type !== '0') {
                         item.type = '0';
                         console.log(`禁止初始化${item.name}`);
