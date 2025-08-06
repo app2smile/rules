@@ -1,0 +1,8 @@
+#!name=JumpApp
+#!desc=2025.08.06
+
+[MITM]
+hostname = %APPEND% switch.jumpvg.com
+
+[Script]
+jump-json = type=http-response,pattern=^https:\/\/switch\.jumpvg\.com\/jump\/mainweb\/v3$,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/jumpvg-json.js,script-update-interval=0
