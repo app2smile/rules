@@ -2,7 +2,7 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2025.07.05-1`);
+console.log(`贴吧json-2025.08.23`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
@@ -86,6 +86,12 @@ if (url.includes("tiebaads/commonbatch") && method === postMethod) {
                     if (item.type !== '0') {
                         item.type = '0';
                         console.log(`禁止初始化${item.name}`);
+                    }
+                }
+                if ('ad_baichuan_open' === item.name) {
+                    if (item.type !== '0') {
+                        item.type = '0';
+                        console.log(`关闭开屏广告`);
                     }
                 }
             }
