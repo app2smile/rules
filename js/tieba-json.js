@@ -2,15 +2,15 @@ const url = $request.url;
 const method = $request.method;
 const postMethod = "POST";
 const notifyTitle = "贴吧json脚本错误";
-console.log(`贴吧json-2025.08.23-1`);
+console.log(`贴吧json-2025.08.28`);
 
 let body = JSON.parse($response.body);
 // 直接全局搜索 @Modify(
 if (url.includes("c/f/ad/getSplashAd")) {
     if (body.error_code === 0) {
+        console.log(`去除开屏广告:${body.error_code}`);
         body.error_code = 2230209;
         body.data = null;
-        console.log(`去除开屏广告:${body.error_code}`);
     } else {
         console.log(`无需处理开屏广告:${body.error_code}`);
     }
