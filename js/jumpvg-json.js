@@ -1,4 +1,4 @@
-console.log(`JumpApp-json-20250806`);
+console.log(`JumpApp-json-20250830`);
 const resStatus = $response.status ? $response.status : $response.statusCode;
 if (resStatus !== 200) {
     console.log(`$response.status不为200:${resStatus}`);
@@ -20,15 +20,22 @@ if (!$response.body) {
     console.log(`$response.body为undefined:${url}`);
     $done({});
 }
-if (url.includes("jump/mainweb/v3")) {
-    console.log('mainweb/v3');
-    if (body.data?.length) {
-        body.data.forEach((item) => {
-            console.log(`去除不需要的菜单栏:${item.webTitle}`);
-        })
-        body.data = [];
+// if (url.includes("jump/mainweb/v3")) {
+//     console.log('mainweb/v3');
+//     if (body.data?.length) {
+//         body.data.forEach((item) => {
+//             console.log(`去除不需要的菜单栏:${item.webTitle}`);
+//         })
+//         body.data = [];
+//     }
+// } else
+    if (url.includes("jump/app/conf")) {
+    console.log('app/conf');
+    if (body.data?.sdkConfig?.length) {
+        console.log(`sdkConfig:${body.data.sdkConfig}`);
+        body.data.sdkConfig = null;
     }
-} else {
+}else {
     $notification.post(notifyTitle, "路径匹配错误:", url);
 }
 body = JSON.stringify(body);
