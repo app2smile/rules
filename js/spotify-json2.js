@@ -1,6 +1,6 @@
 let url = $request.url;
 const method = $request.method;
-console.log(`spotifyjson2-2026.02.26`);
+console.log(`spotifyjson2-2026.03.04`);
 if (!$response.body) {
     console.log(`$response.body为undefined:${url}`);
     $done({});
@@ -19,13 +19,9 @@ if (url.includes("/device-capabilities/v1/capabilities")) {
     }
 }
 
-if (url.includes('com:443')) {
-    url = url.replace(/com:443/, 'com');
-}
 body = JSON.stringify(body);
 $done({
-    body,
-    url
+    body
 });
 
 
